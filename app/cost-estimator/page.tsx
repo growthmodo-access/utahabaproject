@@ -65,7 +65,7 @@ export default function CostEstimatorPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden -mt-16 pt-16 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+      <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-green-400/10 to-green-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
@@ -268,70 +268,80 @@ export default function CostEstimatorPage() {
         )}
 
         <div className="bg-card border border-border rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 sm:mb-6">Understanding ABA Therapy Costs</h2>
-          <div className="prose prose-sm sm:prose max-w-none">
-            <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-              ABA therapy costs can vary significantly based on several factors. Understanding these factors can help you make informed decisions:
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    Location
-                  </h3>
-                  <p className="text-sm text-muted-foreground">Urban areas like Salt Lake City may have higher rates than rural areas.</p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">Understanding ABA Therapy Costs</h2>
+          <p className="text-sm sm:text-base text-gray-700 mb-6 sm:mb-8 leading-relaxed">
+            ABA therapy costs can vary significantly based on several factors. Understanding these factors can help you make informed decisions:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+            <div className="space-y-6">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-gray-700" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <Users className="w-4 h-4" />
-                    Provider Experience
-                  </h3>
-                  <p className="text-sm text-muted-foreground">Board-certified behavior analysts (BCBAs) typically charge more but provide higher quality care.</p>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    Intensity
-                  </h3>
-                  <p className="text-sm text-muted-foreground">More hours per week = higher total cost, but may lead to better outcomes.</p>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Location</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Urban areas like Salt Lake City may have higher rates than rural areas.</p>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div>
-                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <DollarSign className="w-4 h-4" />
-                    Insurance Coverage
-                  </h3>
-                  <p className="text-sm text-muted-foreground">Most insurance plans cover 70-90% of ABA therapy costs. Utah law requires certain plans to cover ABA for autism.</p>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <Users className="w-5 h-5 text-gray-700" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4" />
-                    Age
-                  </h3>
-                  <p className="text-sm text-muted-foreground">Early intervention (ages 2-5) often has better insurance coverage and can be more cost-effective long-term.</p>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Provider Experience</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Board-certified behavior analysts (BCBAs) typically charge more but provide higher quality care.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <Clock className="w-5 h-5 text-gray-700" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2 flex items-center gap-2">
-                    <Info className="w-4 h-4" />
-                    Service Type
-                  </h3>
-                  <p className="text-sm text-muted-foreground">In-home, clinic-based, and school-based services may have different rates.</p>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Intensity</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">More hours per week = higher total cost, but may lead to better outcomes.</p>
                 </div>
               </div>
             </div>
-            
-            <div className="mt-8 pt-8 border-t border-border">
-              <h3 className="font-semibold text-foreground mb-4">Tips for Managing Costs</h3>
-              <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
-                <li>Verify your insurance coverage and benefits before starting therapy</li>
-                <li>Ask providers about payment plans or financial assistance programs</li>
-                <li>Consider starting with fewer hours and increasing as needed</li>
-                <li>Look for providers that accept your insurance to minimize out-of-pocket costs</li>
-                <li>Some providers offer sliding scale fees based on income</li>
-              </ul>
+            <div className="space-y-6">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <DollarSign className="w-5 h-5 text-gray-700" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Insurance Coverage</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Most insurance plans cover 70-90% of ABA therapy costs. Utah law requires certain plans to cover ABA for autism.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-5 h-5 text-gray-700" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Age</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Early intervention (ages 2-5) often has better insurance coverage and can be more cost-effective long-term.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center flex-shrink-0">
+                  <Info className="w-5 h-5 text-gray-700" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 mb-2 text-base sm:text-lg">Service Type</h3>
+                  <p className="text-sm sm:text-base text-gray-600 leading-relaxed">In-home, clinic-based, and school-based services may have different rates.</p>
+                </div>
+              </div>
             </div>
+          </div>
+          
+          <div className="mt-8 sm:mt-10 pt-8 border-t border-gray-200">
+            <h3 className="font-semibold text-gray-900 mb-4 text-lg sm:text-xl">Tips for Managing Costs</h3>
+            <ul className="list-disc list-inside space-y-2.5 text-sm sm:text-base text-gray-600 leading-relaxed">
+              <li>Verify your insurance coverage and benefits before starting therapy</li>
+              <li>Ask providers about payment plans or financial assistance programs</li>
+              <li>Consider starting with fewer hours and increasing as needed</li>
+              <li>Look for providers that accept your insurance to minimize out-of-pocket costs</li>
+              <li>Some providers offer sliding scale fees based on income</li>
+            </ul>
           </div>
         </div>
         </div>
