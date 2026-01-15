@@ -20,13 +20,13 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
       <div className={`group border border-border rounded-xl bg-card hover:shadow-xl hover:border-foreground/20 transition-all duration-300 overflow-hidden ${featured ? 'ring-2 ring-yellow-400/30 bg-gradient-to-br from-card to-yellow-50/20' : ''}`}>
         <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-6 p-5 sm:p-6 min-w-0">
           {/* Rank and Name Section */}
-          <div className="flex-shrink-0 w-full lg:w-auto flex items-start lg:items-center gap-4 lg:gap-6 min-w-0">
+          <div className="flex-shrink-0 w-full lg:w-auto lg:max-w-xs flex items-start lg:items-center gap-4 lg:gap-6 min-w-0">
             {rank && (
               <div className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-16 bg-gradient-to-br ${featured ? 'from-yellow-500 to-yellow-600' : 'from-foreground to-foreground/80'} text-background rounded-xl flex items-center justify-center font-bold text-lg sm:text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                 {rank}
               </div>
             )}
-            <div className="flex-1 lg:flex-none min-w-0 max-w-full">
+            <div className="flex-1 lg:flex-none lg:min-w-[200px] lg:max-w-[280px] min-w-0">
               <div className="flex items-start gap-2 mb-2 flex-wrap">
                 <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground/80 transition-colors break-words">
                   {provider.name}
@@ -56,7 +56,7 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
           </div>
 
           {/* Details Section - Better Organized */}
-          <div className="flex-1 min-w-0 flex flex-col gap-3">
+          <div className="flex-1 min-w-0 flex flex-col gap-3 lg:justify-center">
             {/* Description */}
             {provider.description && (
               <p className="text-sm text-gray-600 leading-relaxed">
