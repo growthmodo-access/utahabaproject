@@ -117,7 +117,7 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
           </div>
 
           {/* CTA Section */}
-          <div className="flex-shrink-0 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto lg:w-48">
+          <div className="flex-shrink-0 flex flex-col gap-2 w-full sm:w-auto lg:w-52">
             {provider.phone && (
               <a
                 href={`tel:${provider.phone}`}
@@ -130,10 +130,10 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
             )}
             <button
               onClick={() => setShowForm(true)}
-              className="group/cta inline-flex items-center justify-center gap-2 border-2 border-border bg-background text-foreground px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-accent transition-all text-sm sm:text-base whitespace-nowrap"
+              className="group/cta inline-flex items-center justify-center gap-2 border-2 border-border bg-background text-foreground px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-accent transition-all text-sm sm:text-base whitespace-nowrap w-full"
             >
               <HelpCircle className="w-4 h-4" />
-              <span>Get Assistance Now</span>
+              <span className="text-center">Get Assistance Now</span>
             </button>
           </div>
         </div>
