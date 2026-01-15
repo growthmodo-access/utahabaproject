@@ -173,14 +173,14 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Featured Post - Sleek Compact Display */}
+          {/* Featured Post - Column Layout */}
           {featuredPost && (
             <div className="mb-10 sm:mb-12">
               <Link href={`/blog/${featuredPost.slug}`}>
                 <article className="group relative bg-white border border-gray-200/80 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:border-gray-300/80 transition-all duration-300">
-                  <div className="flex flex-col lg:flex-row">
-                    {/* Featured Image - Compact */}
-                    <div className="relative w-full lg:w-[280px] xl:w-[320px] h-48 sm:h-56 lg:h-full lg:min-h-[240px] flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                  <div className="flex flex-col">
+                    {/* Featured Image - Top */}
+                    <div className="relative w-full h-48 sm:h-56 md:h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
                       {featuredPost.image && featuredPost.image.trim() !== '' ? (
                         <BlogImage
                           src={featuredPost.image}
@@ -209,32 +209,30 @@ export default async function Home() {
                       </div>
                     </div>
                     
-                    {/* Featured Content - Compact */}
-                    <div className="flex-1 p-5 sm:p-6 lg:p-7 flex flex-col justify-between min-h-[240px]">
-                      <div>
-                        <div className="flex flex-wrap items-center gap-2.5 mb-3">
-                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                            <Calendar className="w-3.5 h-3.5" />
-                            <time dateTime={featuredPost.date}>
-                              {new Date(featuredPost.date).toLocaleDateString('en-US', {
-                                year: 'numeric',
-                                month: 'long',
-                                day: 'numeric'
-                              })}
-                            </time>
-                          </div>
-                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span>{calculateReadingTime(featuredPost.content)} min read</span>
-                          </div>
+                    {/* Featured Content - Bottom */}
+                    <div className="p-5 sm:p-6 flex flex-col">
+                      <div className="flex flex-wrap items-center gap-2.5 mb-3">
+                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                          <Calendar className="w-3.5 h-3.5" />
+                          <time dateTime={featuredPost.date}>
+                            {new Date(featuredPost.date).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })}
+                          </time>
                         </div>
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
-                          {featuredPost.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2">
-                          {featuredPost.excerpt}
-                        </p>
+                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>{calculateReadingTime(featuredPost.content)} min read</span>
+                        </div>
                       </div>
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
+                        {featuredPost.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2">
+                        {featuredPost.excerpt}
+                      </p>
                       
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
                         <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
