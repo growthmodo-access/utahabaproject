@@ -1,7 +1,6 @@
-import Link from 'next/link'
-import { Calendar, User, ArrowRight, BookOpen, Sparkles } from 'lucide-react'
-import BlogImage from '@/components/BlogImage'
+import { BookOpen, Calendar, Sparkles } from 'lucide-react'
 import EmailCapture from '@/components/EmailCapture'
+import BlogListing from '@/components/BlogListing'
 import { getBlogPosts } from '@/lib/blog-data'
 
 export default async function BlogPage() {
@@ -44,84 +43,9 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      {/* Blog Posts Section */}
+      {/* Blog Posts Section with Category Filtering */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-6xl mx-auto">
-
-        <div className="space-y-5 sm:space-y-6 mb-6 sm:mb-8 md:mb-12">
-          {blogPosts.length === 0 ? (
-            <div className="text-center py-16">
-              <BookOpen className="w-12 h-12 text-muted-foreground/40 mx-auto mb-4" />
-              <p className="text-muted-foreground text-lg">No blog posts yet. Check back soon!</p>
-            </div>
-          ) : (
-            blogPosts.map((post) => (
-            <article
-              key={post.id}
-              className="group relative bg-white border border-gray-200/80 rounded-xl overflow-hidden shadow-[0_1px_3px_0_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_0_rgba(0,0,0,0.08)] hover:border-gray-300/80 transition-all duration-300 ease-out"
-            >
-              <Link href={`/blog/${post.slug}`} className="flex flex-col sm:flex-row">
-                {/* Featured Image */}
-                <div className="relative w-full sm:w-[280px] md:w-[320px] lg:w-[360px] h-48 sm:h-56 md:h-64 flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                  <BlogImage
-                    src={post.image || '/blog/placeholder.jpg'}
-                    alt={post.title}
-                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                    fill={true}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute top-3 left-3">
-                    {post.category && (
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm border border-gray-200/50">
-                        {post.category}
-                      </span>
-                    )}
-                  </div>
-                </div>
-                
-                {/* Content */}
-                <div className="flex-1 p-5 sm:p-6 md:p-7 flex flex-col justify-between min-w-0 bg-white">
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2.5 mb-3">
-                      <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-500 font-medium">
-                        <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
-                        <time dateTime={post.date}>
-                          {new Date(post.date).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric'
-                          })}
-                        </time>
-                      </div>
-                    </div>
-                    <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
-                      {post.title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2 sm:line-clamp-3">
-                      {post.excerpt}
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
-                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center border border-blue-100">
-                        <User className="w-3.5 h-3.5 text-blue-600" />
-                      </div>
-                      <span className="font-medium">{post.author}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 text-gray-900 font-semibold text-xs sm:text-sm group-hover:gap-2.5 transition-all">
-                      <span>Read Article</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </article>
-            ))
-          )}
-        </div>
-
-        </div>
+        <BlogListing posts={blogPosts} />
       </section>
 
       {/* Email Capture Section */}

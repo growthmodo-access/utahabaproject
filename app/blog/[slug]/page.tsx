@@ -1,8 +1,11 @@
 import { notFound } from 'next/navigation'
-import { Calendar, User, ArrowLeft } from 'lucide-react'
+import { Calendar, User, ArrowLeft, Clock } from 'lucide-react'
 import Link from 'next/link'
 import EmailCapture from '@/components/EmailCapture'
-import { getBlogPost } from '@/lib/blog-data'
+import BlogImage from '@/components/BlogImage'
+import RelatedPosts from '@/components/RelatedPosts'
+import { getBlogPost, getBlogPosts } from '@/lib/blog-data'
+import { calculateReadingTime, getRelatedPosts } from '@/lib/blog-utils'
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug
@@ -11,6 +14,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   if (!post) {
     notFound()
   }
+
+  const allPosts = await getBlogPosts()
+  const relatedPosts = getRelatedPosts(post, allPosts, 3)
+  const readingTime = calculateReadingTime(post.content)
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
@@ -23,6 +30,19 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           Back to Blog
         </Link>
 
+        {/* Featured Image - Full Width Hero */}
+        {post.image && (
+          <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[500px] mb-8 rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+            <BlogImage
+              src={post.image}
+              alt={post.title}
+              className="object-cover"
+              fill={true}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+          </div>
+        )}
+
         <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12">
           {post.category && (
             <span className="inline-block bg-gray-100 text-gray-700 text-xs font-semibold uppercase tracking-wide px-3 py-1.5 rounded-md mb-4 sm:mb-5">
@@ -34,7 +54,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             {post.title}
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-gray-600 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 text-sm sm:text-base">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-gray-600 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 text-sm sm:text-base">
             <div className="flex items-center gap-2">
               <User className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gray-500" />
               <span className="font-medium">{post.author}</span>
@@ -48,6 +68,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                   day: 'numeric'
                 })}
               </time>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gray-500" />
+              <span className="font-medium">{readingTime} min read</span>
             </div>
           </div>
 
@@ -77,6 +101,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
+
+        {/* Related Posts */}
+        {relatedPosts.length > 0 && (
+          <RelatedPosts posts={relatedPosts} />
+        )}
 
         <div className="mt-8 sm:mt-10 md:mt-12">
           <EmailCapture source={`blog-${post.slug}`} />

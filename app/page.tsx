@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, MapPin, Calculator, HelpCircle, BookOpen, Calendar, User, Star, Award, Sparkles, PhoneCall } from 'lucide-react'
+import { ArrowRight, MapPin, Calculator, HelpCircle, BookOpen, Calendar, User, Star, Award, Sparkles, PhoneCall, Clock } from 'lucide-react'
 import BlogImage from '@/components/BlogImage'
 import BlogRow from '@/components/BlogRow'
 import ProviderRow from '@/components/ProviderRow'
@@ -47,7 +47,11 @@ async function getFeaturedProviders(): Promise<Provider[]> {
 export default async function Home() {
   const featuredProviders = await getFeaturedProviders()
   const blogPosts = await getBlogPosts()
-  const latestPosts = blogPosts.slice(0, 6) // Get latest 6 posts
+  const sortedPosts = [...blogPosts].sort((a, b) => 
+    new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
+  const featuredPost = sortedPosts[0] // Most recent post as featured
+  const latestPosts = sortedPosts.slice(1, 6) // Next 5 posts
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -142,7 +146,7 @@ export default async function Home() {
         </section>
       )}
 
-      {/* Latest Blog Posts Section - Row Style Matching Providers */}
+      {/* Latest Blog Posts Section - Enhanced with Featured Post */}
       <section className="py-16 sm:py-20 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 border-b border-gray-200/50 bg-gradient-to-b from-white via-gray-50/30 to-white">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12 sm:mb-16">
@@ -167,14 +171,99 @@ export default async function Home() {
               </Link>
             </div>
           </div>
+
+          {/* Featured Post - Large Prominent Display */}
+          {featuredPost && (
+            <div className="mb-12 sm:mb-16">
+              <Link href={`/blog/${featuredPost.slug}`}>
+                <article className="group relative bg-white border-2 border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-gray-300 transition-all duration-300">
+                  <div className="flex flex-col lg:flex-row">
+                    {/* Featured Image - Larger */}
+                    <div className="relative w-full lg:w-1/2 h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                      <BlogImage
+                        src={featuredPost.image || '/blog/placeholder.jpg'}
+                        alt={featuredPost.title}
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                        fill={true}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-4 left-4">
+                        {featuredPost.category && (
+                          <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-md border border-gray-200/50">
+                            {featuredPost.category}
+                          </span>
+                        )}
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/95 backdrop-blur-sm text-gray-700 shadow-md">
+                          <Sparkles className="w-3.5 h-3.5 mr-1.5 text-blue-600" />
+                          Featured Article
+                        </span>
+                      </div>
+                    </div>
+                    
+                    {/* Featured Content */}
+                    <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                            <Calendar className="w-4 h-4" />
+                            <time dateTime={featuredPost.date}>
+                              {new Date(featuredPost.date).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                              })}
+                            </time>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                            <Clock className="w-4 h-4" />
+                            <span>{calculateReadingTime(featuredPost.content)} min read</span>
+                          </div>
+                        </div>
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors leading-tight">
+                          {featuredPost.title}
+                        </h3>
+                        <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed line-clamp-3">
+                          {featuredPost.excerpt}
+                        </p>
+                      </div>
+                      
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div className="flex items-center gap-2.5 text-sm text-gray-500">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center border border-blue-100">
+                            <User className="w-4 h-4 text-blue-600" />
+                          </div>
+                          <span className="font-medium">{featuredPost.author}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-900 font-semibold text-sm sm:text-base group-hover:gap-3 transition-all">
+                          <span>Read Full Article</span>
+                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            </div>
+          )}
+
+          {/* Other Latest Posts */}
           <div className="space-y-4 sm:space-y-6">
-            {latestPosts.length === 0 ? (
+            {latestPosts.length === 0 && !featuredPost ? (
               <div className="text-center py-12 col-span-full">
                 <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
               </div>
             ) : (
               latestPosts.map((post, index) => (
-                <BlogRow key={post.id} post={post} index={index} />
+                <BlogRow 
+                  key={post.id} 
+                  post={{
+                    ...post,
+                    readingTime: calculateReadingTime(post.content)
+                  }} 
+                  index={index} 
+                />
               ))
             )}
           </div>

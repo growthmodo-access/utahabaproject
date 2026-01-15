@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Calendar, User, ArrowRight, BookOpen } from 'lucide-react'
+import { Calendar, User, ArrowRight, BookOpen, Clock } from 'lucide-react'
 import BlogImage from '@/components/BlogImage'
 
 interface BlogRowProps {
@@ -14,6 +14,7 @@ interface BlogRowProps {
     slug: string
     category?: string
     image?: string
+    readingTime?: number
   }
   index?: number
 }
@@ -51,6 +52,12 @@ export default function BlogRow({ post, index }: BlogRowProps) {
                   })}
                 </time>
               </div>
+              {post.readingTime && (
+                <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>{post.readingTime} min read</span>
+                </div>
+              )}
             </div>
             <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
               {post.title}
