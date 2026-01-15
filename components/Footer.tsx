@@ -7,14 +7,15 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0">
+            <div className="mb-4">
+              <div className="relative h-10 w-auto flex items-center justify-start mb-3">
                 <Image
                   src="/logo.png"
                   alt="ABA Utah Logo"
-                  width={40}
-                  height={40}
-                  className="object-contain"
+                  width={200}
+                  height={50}
+                  className="object-contain h-full w-auto"
+                  unoptimized
                 />
               </div>
               <h3 className="text-foreground text-lg font-semibold">ABA Utah</h3>

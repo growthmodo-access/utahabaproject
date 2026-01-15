@@ -21,17 +21,18 @@ export default function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3">
-            <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0">
+            <div className="relative h-10 w-auto flex items-center justify-center flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="ABA Utah Logo"
-                width={40}
-                height={40}
-                className="object-contain"
+                width={200}
+                height={50}
+                className="object-contain h-full w-auto"
                 priority
+                unoptimized
               />
             </div>
-            <span className="text-xl font-semibold text-foreground">ABA Utah</span>
+            <span className="text-xl font-semibold text-foreground hidden sm:inline">ABA Utah</span>
           </Link>
           
           {/* Desktop Navigation */}
