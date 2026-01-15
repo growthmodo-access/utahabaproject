@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { X, Send, User, Mail, Phone, MapPin, FileText } from 'lucide-react'
 
 interface AssistanceFormProps {
@@ -21,6 +21,31 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen])
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      return () => document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen, onClose])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -61,41 +86,46 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
   if (!isOpen) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200" onClick={onClose}>
+    <div 
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+      onClick={onClose}
+    >
       <div 
-        className="relative bg-card border border-border rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden flex flex-col animate-in zoom-in-95 duration-200"
+        className="relative bg-white border border-gray-200 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="sticky top-0 bg-card border-b border-border px-6 py-5 flex items-center justify-between z-10">
-          <div className="flex-1 min-w-0">
-            <h2 className="text-2xl font-bold text-foreground">Get Assistance Now</h2>
-            <p className="text-sm text-muted-foreground mt-1 truncate">Request help for: <span className="font-semibold text-foreground">{providerName}</span></p>
+        {/* Header - Sticky */}
+        <div className="flex-shrink-0 bg-white border-b border-gray-200 px-6 py-5 flex items-center justify-between">
+          <div className="flex-1 min-w-0 pr-4">
+            <h2 className="text-2xl font-bold text-gray-900">Get Assistance Now</h2>
+            <p className="text-sm text-gray-600 mt-1 truncate">
+              Request help for: <span className="font-semibold text-gray-900">{providerName}</span>
+            </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-accent rounded-lg transition-colors flex-shrink-0 ml-4"
+            className="flex-shrink-0 p-2 hover:bg-gray-100 rounded-lg transition-colors"
             aria-label="Close form"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-gray-600" />
           </button>
         </div>
 
-        {/* Form */}
-        <div className="overflow-y-auto flex-1">
+        {/* Content - Scrollable */}
+        <div className="flex-1 overflow-y-auto">
           {success ? (
-            <div className="p-8 text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Send className="w-8 h-8 text-green-600" />
+            <div className="p-12 text-center">
+              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Send className="w-10 h-10 text-green-600" />
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Request Submitted!</h3>
-              <p className="text-muted-foreground">We&apos;ll get back to you soon.</p>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">Request Submitted!</h3>
+              <p className="text-gray-600">We&apos;ll get back to you soon.</p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="p-6 space-y-5">
+            <form id="assistance-form" onSubmit={handleSubmit} className="p-6 space-y-5">
               <div>
-                <label htmlFor="name" className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                  <User className="w-4 h-4" />
+                <label htmlFor="name" className="flex items-center gap-2 text-sm font-semibold text-gray-900 mb-2">
+                  <User className="w-4 h-4 text-gray-600" />
                   <span>Full Name *</span>
                 </label>
                 <input
@@ -104,14 +134,14 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background text-foreground"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors bg-white text-gray-900 placeholder-gray-400"
                   placeholder="Enter your full name"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                  <Mail className="w-4 h-4" />
+                <label htmlFor="email" className="flex items-center gap-2 text-sm font-semibold text-gray-900 mb-2">
+                  <Mail className="w-4 h-4 text-gray-600" />
                   <span>Email Address *</span>
                 </label>
                 <input
@@ -120,14 +150,14 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background text-foreground"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors bg-white text-gray-900 placeholder-gray-400"
                   placeholder="your.email@example.com"
                 />
               </div>
 
               <div>
-                <label htmlFor="phone" className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                  <Phone className="w-4 h-4" />
+                <label htmlFor="phone" className="flex items-center gap-2 text-sm font-semibold text-gray-900 mb-2">
+                  <Phone className="w-4 h-4 text-gray-600" />
                   <span>Phone Number *</span>
                 </label>
                 <input
@@ -136,14 +166,14 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
                   required
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background text-foreground"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors bg-white text-gray-900 placeholder-gray-400"
                   placeholder="(801) 555-1234"
                 />
               </div>
 
               <div>
-                <label htmlFor="county" className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                  <MapPin className="w-4 h-4" />
+                <label htmlFor="county" className="flex items-center gap-2 text-sm font-semibold text-gray-900 mb-2">
+                  <MapPin className="w-4 h-4 text-gray-600" />
                   <span>County *</span>
                 </label>
                 <input
@@ -152,14 +182,14 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
                   required
                   value={formData.county}
                   onChange={(e) => setFormData({ ...formData, county: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background text-foreground"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors bg-white text-gray-900 placeholder-gray-400"
                   placeholder="Salt Lake, Utah, Davis, etc."
                 />
               </div>
 
               <div>
-                <label htmlFor="details" className="flex items-center gap-2 text-sm font-medium text-foreground mb-2">
-                  <FileText className="w-4 h-4" />
+                <label htmlFor="details" className="flex items-center gap-2 text-sm font-semibold text-gray-900 mb-2">
+                  <FileText className="w-4 h-4 text-gray-600" />
                   <span>Additional Details</span>
                 </label>
                 <textarea
@@ -167,7 +197,7 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
                   rows={4}
                   value={formData.details}
                   onChange={(e) => setFormData({ ...formData, details: e.target.value })}
-                  className="w-full border border-border rounded-lg px-4 py-3 focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background resize-none text-foreground"
+                  className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-gray-900 focus:border-gray-900 transition-colors bg-white resize-none text-gray-900 placeholder-gray-400"
                   placeholder="Tell us more about what you're looking for..."
                 />
               </div>
@@ -177,36 +207,43 @@ export default function AssistanceForm({ providerName, providerId, isOpen, onClo
                   {error}
                 </div>
               )}
-
-              <div className="flex gap-3 pt-2 border-t border-border sticky bottom-0 bg-card -mx-6 px-6 py-4">
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="flex-1 border-2 border-border bg-background text-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent transition-colors"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="flex-1 bg-foreground text-background px-6 py-3 rounded-lg font-medium hover:bg-foreground/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {loading ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-background border-t-transparent rounded-full animate-spin" />
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Submit Request
-                    </>
-                  )}
-                </button>
-              </div>
             </form>
           )}
         </div>
+
+        {/* Footer - Sticky */}
+        {!success && (
+          <div className="flex-shrink-0 border-t border-gray-200 bg-gray-50 px-6 py-4">
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 border-2 border-gray-300 bg-white text-gray-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                form="assistance-form"
+                disabled={loading}
+                onClick={handleSubmit}
+                className="flex-1 bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-4 h-4" />
+                    Submit Request
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
