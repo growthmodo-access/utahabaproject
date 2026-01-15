@@ -9,34 +9,34 @@ export default async function BlogPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section - Matching Homepage */}
-      <section className="relative overflow-hidden -mt-16 pt-16 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+      <section className="relative overflow-hidden -mt-16 pt-12 sm:pt-16 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-6 lg:px-8 border-b border-border/50">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
         {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-br from-blue-400/10 to-blue-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
         
         <div className="relative max-w-7xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 mb-6 sm:mb-8 shadow-sm">
-            <Sparkles className="w-4 h-4 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-800">Expert Resources</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100 border border-blue-200 mb-4 sm:mb-6 shadow-sm">
+            <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+            <span className="text-xs font-semibold text-blue-800">Expert Resources</span>
           </div>
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-4 sm:mb-6 md:mb-8 leading-tight px-2">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-3 sm:mb-4 md:mb-6 leading-tight px-2">
             ABA Therapy
             <br className="hidden sm:block" />
             <span className="bg-gradient-to-r from-foreground via-blue-600/20 to-foreground bg-clip-text text-transparent">
               Blog & Resources
             </span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-4xl mx-auto px-4 leading-relaxed font-light">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto px-4 leading-relaxed font-light">
             Expert insights, guides, and resources to help you navigate ABA therapy in Utah
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm md:text-base text-muted-foreground px-4">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 text-xs sm:text-sm text-muted-foreground px-4">
             <div className="flex items-center gap-2">
-              <BookOpen className="w-5 h-5 text-blue-500" />
+              <BookOpen className="w-4 h-4 text-blue-500" />
               <span>Expert Articles</span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="w-5 h-5 text-foreground/60" />
+              <Calendar className="w-4 h-4 text-foreground/60" />
               <span>Updated Weekly</span>
             </div>
           </div>
