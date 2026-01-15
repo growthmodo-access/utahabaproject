@@ -27,9 +27,35 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com'
+  
+  const orgData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ABA Therapy Utah",
+    "url": siteUrl,
+    "logo": `${siteUrl}/logo.png`,
+    "description": "Find the best ABA therapy providers in Utah. Expert resources and directory for autism treatment services.",
+    "sameAs": [
+      // Add your social media URLs here when available
+      // "https://www.facebook.com/yourpage",
+      // "https://twitter.com/yourhandle",
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Customer Service",
+      "areaServed": "US-UT",
+      "availableLanguage": "English"
+    }
+  }
+
   return (
     <html lang="en">
       <body className={inter.className}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgData) }}
+        />
         <Header />
         <main className="min-h-screen">{children}</main>
         <Footer />

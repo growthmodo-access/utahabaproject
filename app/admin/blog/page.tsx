@@ -14,6 +14,8 @@ export default function AdminBlogPage() {
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
   const [imagePreview, setImagePreview] = useState<string>('')
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [supabaseConfigured, setSupabaseConfigured] = useState(false)
 
   useEffect(() => {
@@ -29,8 +31,61 @@ export default function AdminBlogPage() {
       setImagePreview(editingPost.image)
     } else if (!isCreating && !editingPost) {
       setImagePreview('')
+      setImageFile(null)
     }
   }, [editingPost, isCreating])
+
+  const handleImageUpload = async (file: File) => {
+    setUploadingImage(true)
+    setMessage('')
+    
+    try {
+      const formData = new FormData()
+      formData.append('file', file)
+      
+      const res = await fetch('/api/blog/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      
+      const data = await res.json()
+      
+      if (res.ok && data.url) {
+        setImagePreview(data.url)
+        setImageFile(null)
+        setMessage('Image uploaded successfully!')
+        setTimeout(() => setMessage(''), 3000)
+      } else {
+        setMessage(data.error || 'Failed to upload image')
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error)
+      setMessage('Error uploading image. Please try again.')
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // Validate file type
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
+      if (!allowedTypes.includes(file.type)) {
+        setMessage('Invalid file type. Please upload an image (JPEG, PNG, WebP, or GIF).')
+        return
+      }
+      
+      // Validate file size (5MB max)
+      if (file.size > 5 * 1024 * 1024) {
+        setMessage('File size too large. Maximum size is 5MB.')
+        return
+      }
+      
+      setImageFile(file)
+      handleImageUpload(file)
+    }
+  }
 
   const fetchPosts = async () => {
     try {
@@ -69,7 +124,9 @@ export default function AdminBlogPage() {
     
     const formData = new FormData(e.currentTarget)
     const categoryValue = formData.get('category') as string
-    const imageValue = formData.get('image') as string
+    
+    // Use imagePreview if available, otherwise use the form field
+    const imageValue = imagePreview || (formData.get('image') as string)
     
     const postData = {
       title: formData.get('title') as string,
@@ -111,6 +168,7 @@ export default function AdminBlogPage() {
         setEditingPost(null)
         setIsCreating(false)
         setImagePreview('')
+        setImageFile(null)
         fetchPosts()
         // Refresh the router to clear Next.js cache
         router.refresh()
@@ -147,6 +205,7 @@ export default function AdminBlogPage() {
               setIsCreating(true)
               setEditingPost(null)
               setImagePreview('')
+              setImageFile(null)
             }}
             className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg active:scale-95"
             type="button"
@@ -199,6 +258,7 @@ export default function AdminBlogPage() {
                     setIsCreating(false)
                     setEditingPost(null)
                     setImagePreview('')
+                    setImageFile(null)
                   }}
                   className="text-gray-500 hover:text-gray-700"
                 >
@@ -294,20 +354,52 @@ export default function AdminBlogPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   <span className="flex items-center gap-2">
                     <ImageIcon className="w-4 h-4" />
-                    Featured Image URL
+                    Featured Image
                   </span>
                   <span className="text-xs font-normal text-gray-500 ml-6">(Recommended for homepage display)</span>
                 </label>
-                <input
-                  type="text"
-                  name="image"
-                  defaultValue={editingPost?.image}
-                  onChange={(e) => setImagePreview(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                  placeholder="/blog/your-image.jpg"
-                />
-                <p className="text-xs text-gray-500 mt-1 mb-3">
-                  Upload your image to <code className="bg-gray-100 px-1 rounded">public/blog/</code> folder, then enter the path (e.g., <code className="bg-gray-100 px-1 rounded">/blog/image.jpg</code>). 
+                
+                {/* File Upload */}
+                <div className="mb-4">
+                  <label className="block w-full">
+                    <div className="flex items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-colors">
+                      {uploadingImage ? (
+                        <div className="flex flex-col items-center gap-2">
+                          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+                          <span className="text-sm text-gray-600">Uploading...</span>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-2">
+                          <ImageIcon className="w-8 h-8 text-gray-400" />
+                          <span className="text-sm font-medium text-gray-700">Click to upload image</span>
+                          <span className="text-xs text-gray-500">JPEG, PNG, WebP, or GIF (Max 5MB)</span>
+                        </div>
+                      )}
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                      onChange={handleFileChange}
+                      disabled={uploadingImage}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+
+                {/* Or use URL */}
+                <div className="mb-3">
+                  <p className="text-xs text-gray-500 mb-2 text-center">or</p>
+                  <input
+                    type="text"
+                    name="image"
+                    value={imagePreview}
+                    onChange={(e) => setImagePreview(e.target.value)}
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                    placeholder="Enter image URL (e.g., /blog/image.jpg or https://example.com/image.jpg)"
+                  />
+                </div>
+                
+                <p className="text-xs text-gray-500 mb-3">
                   Recommended size: 1200x630px for best display on homepage and blog listing.
                 </p>
                 
@@ -321,13 +413,29 @@ export default function AdminBlogPage() {
                         alt="Featured image preview"
                         fill
                         className="object-cover"
-                        onError={() => setImagePreview('')}
+                        onError={() => {
+                          if (!imagePreview.startsWith('http')) {
+                            setImagePreview('')
+                          }
+                        }}
                         unoptimized
                       />
                     </div>
                     <p className="text-xs text-gray-500 mt-2">
                       This is how the featured image will appear on the homepage and blog listing.
                     </p>
+                    {imagePreview && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setImagePreview('')
+                          setImageFile(null)
+                        }}
+                        className="mt-2 text-xs text-red-600 hover:text-red-800 underline"
+                      >
+                        Remove image
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
@@ -346,6 +454,7 @@ export default function AdminBlogPage() {
                     setIsCreating(false)
                     setEditingPost(null)
                     setImagePreview('')
+                    setImageFile(null)
                   }}
                   className="px-6 py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors active:scale-95"
                 >
@@ -392,6 +501,7 @@ export default function AdminBlogPage() {
                             setEditingPost(post)
                             setIsCreating(false)
                             setImagePreview(post.image || '')
+                            setImageFile(null)
                           }}
                             className="text-primary-600 hover:text-primary-900"
                             title="Edit"
