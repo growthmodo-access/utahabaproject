@@ -17,25 +17,55 @@ async function getFeaturedProviders(): Promise<Provider[]> {
       return []
     }
     
-    // Find Golden Touch ABA and put it first
+    // Find Golden Touch ABA and put it first (get the first occurrence)
     const goldenTouch = providers.find((p: Provider) => 
       p.name?.toLowerCase().includes('golden touch')
     )
     
-    // Get other top providers (excluding Golden Touch)
-    const otherProviders = providers
-      .filter((p: Provider) => !p.name?.toLowerCase().includes('golden touch'))
+    // Get unique providers by name (to avoid duplicates from multiple counties)
+    const uniqueProvidersMap = new Map<string, Provider>()
+    
+    providers.forEach((p: Provider) => {
+      if (!p.name) return
+      const nameKey = p.name.toLowerCase().trim()
+      
+      // Skip Golden Touch (we'll add it separately)
+      if (nameKey.includes('golden touch')) return
+      
+      // If we haven't seen this provider name before, add it
+      // Or if this one has better data (rank/rating), replace it
+      if (!uniqueProvidersMap.has(nameKey)) {
+        uniqueProvidersMap.set(nameKey, p)
+      } else {
+        const existing = uniqueProvidersMap.get(nameKey)!
+        // Prefer provider with rank, then rating, then keep first
+        if (p.rank && !existing.rank) {
+          uniqueProvidersMap.set(nameKey, p)
+        } else if (p.rating && !existing.rating) {
+          uniqueProvidersMap.set(nameKey, p)
+        } else if (p.rank && existing.rank && p.rank < existing.rank) {
+          uniqueProvidersMap.set(nameKey, p)
+        } else if (p.rating && existing.rating && p.rating > existing.rating) {
+          uniqueProvidersMap.set(nameKey, p)
+        }
+      }
+    })
+    
+    // Convert map to array and sort
+    const otherProviders = Array.from(uniqueProvidersMap.values())
       .filter((p: Provider) => p.rank || p.rating || p.name)
       .sort((a: Provider, b: Provider) => {
         if (a.rank && b.rank) return a.rank - b.rank
         if (a.rank) return -1
         if (b.rank) return 1
         if (a.rating && b.rating) return b.rating - a.rating
-        return 0
+        if (a.rating) return -1
+        if (b.rating) return 1
+        return a.name.localeCompare(b.name)
       })
       .slice(0, 4)
     
-    // Combine: Golden Touch first, then top 4 others
+    // Combine: Golden Touch first, then top 4 unique others
     const featured = goldenTouch ? [goldenTouch, ...otherProviders] : otherProviders
     
     return featured.slice(0, 5)
