@@ -13,35 +13,35 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   }
 
   return (
-    <div className="min-h-screen bg-white py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white py-8 sm:py-10 md:py-12 px-4 sm:px-6 lg:px-8">
       <article className="max-w-4xl mx-auto">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-2 text-foreground hover:text-foreground/80 mb-4 sm:mb-6 text-sm sm:text-base"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 sm:mb-8 text-sm sm:text-base transition-colors group"
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Blog
         </Link>
 
-        <div className="bg-card border border-border rounded-xl shadow-lg p-4 sm:p-6 md:p-8 lg:p-12">
+        <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12">
           {post.category && (
-            <span className="inline-block bg-accent text-accent-foreground text-xs sm:text-sm font-semibold px-3 py-1 rounded-full mb-3 sm:mb-4">
+            <span className="inline-block bg-gray-100 text-gray-700 text-xs font-semibold uppercase tracking-wide px-3 py-1.5 rounded-md mb-4 sm:mb-5">
               {post.category}
             </span>
           )}
           
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 sm:mb-6 leading-tight">
             {post.title}
           </h1>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-muted-foreground mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-border text-sm sm:text-base">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 text-gray-600 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 text-sm sm:text-base">
             <div className="flex items-center gap-2">
-              <User className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <span>{post.author}</span>
+              <User className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gray-500" />
+              <span className="font-medium">{post.author}</span>
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-              <time dateTime={post.date}>
+              <Calendar className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gray-500" />
+              <time dateTime={post.date} className="font-medium">
                 {new Date(post.date).toLocaleDateString('en-US', {
                   year: 'numeric',
                   month: 'long',
@@ -52,12 +52,27 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
 
           <div
-            className="prose prose-sm sm:prose-base md:prose-lg max-w-none prose-headings:text-foreground prose-headings:font-bold prose-p:text-muted-foreground prose-p:leading-relaxed prose-ul:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-strong:font-semibold prose-a:text-foreground prose-a:underline hover:prose-a:text-foreground/80 prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-ul:list-disc prose-ul:ml-6 prose-li:my-2"
+            className="prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none 
+              prose-headings:text-gray-900 prose-headings:font-bold 
+              prose-h1:text-3xl prose-h1:font-bold prose-h1:mt-8 prose-h1:mb-4
+              prose-h2:text-2xl sm:prose-h2:text-3xl prose-h2:font-bold prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-gray-900
+              prose-h3:text-xl sm:prose-h3:text-2xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-gray-900
+              prose-h4:text-lg sm:prose-h4:text-xl prose-h4:font-semibold prose-h4:mt-6 prose-h4:mb-2 prose-h4:text-gray-900
+              prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4 prose-p:text-base sm:prose-p:text-lg
+              prose-ul:text-gray-700 prose-ul:my-4 prose-ul:ml-6
+              prose-ol:text-gray-700 prose-ol:my-4 prose-ol:ml-6
+              prose-li:text-gray-700 prose-li:mb-2 prose-li:leading-relaxed
+              prose-strong:text-gray-900 prose-strong:font-semibold
+              prose-a:text-gray-900 prose-a:underline hover:prose-a:text-blue-600 prose-a:font-medium
+              prose-code:text-gray-900 prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono
+              prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:my-6 prose-blockquote:text-gray-600
+              prose-img:rounded-lg prose-img:shadow-md prose-img:my-6
+              prose-hr:border-gray-200 prose-hr:my-8"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
 
-        <div className="mt-6 sm:mt-8 md:mt-12">
+        <div className="mt-8 sm:mt-10 md:mt-12">
           <EmailCapture source={`blog-${post.slug}`} />
         </div>
       </article>

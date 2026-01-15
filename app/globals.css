@@ -115,40 +115,105 @@
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
   
-  /* Blog content HTML styling */
+  /* Blog content HTML styling - Comprehensive */
+  .prose {
+    @apply text-gray-700;
+  }
+  
+  .prose h1 {
+    @apply text-3xl sm:text-4xl font-bold text-gray-900 mt-8 mb-4;
+  }
+  
   .prose h2 {
-    @apply text-2xl sm:text-3xl font-bold text-foreground mt-8 mb-4;
+    @apply text-2xl sm:text-3xl font-bold text-gray-900 mt-10 mb-4;
   }
   
   .prose h3 {
-    @apply text-xl sm:text-2xl font-semibold text-foreground mt-6 mb-3;
+    @apply text-xl sm:text-2xl font-semibold text-gray-900 mt-8 mb-3;
+  }
+  
+  .prose h4 {
+    @apply text-lg sm:text-xl font-semibold text-gray-900 mt-6 mb-2;
+  }
+  
+  .prose h5 {
+    @apply text-base sm:text-lg font-semibold text-gray-900 mt-4 mb-2;
+  }
+  
+  .prose h6 {
+    @apply text-sm sm:text-base font-semibold text-gray-900 mt-4 mb-2;
   }
   
   .prose p {
-    @apply text-base text-muted-foreground leading-relaxed mb-4;
+    @apply text-base sm:text-lg text-gray-700 leading-relaxed mb-4;
   }
   
-  .prose ul, .prose ol {
-    @apply my-4 ml-6;
+  .prose ul {
+    @apply my-4 ml-6 list-disc;
+  }
+  
+  .prose ol {
+    @apply my-4 ml-6 list-decimal;
   }
   
   .prose li {
-    @apply mb-2 text-muted-foreground;
+    @apply mb-2 text-gray-700 leading-relaxed;
+  }
+  
+  .prose li > p {
+    @apply mb-2;
+  }
+  
+  .prose li > ul,
+  .prose li > ol {
+    @apply mt-2 mb-2;
   }
   
   .prose strong {
-    @apply font-semibold text-foreground;
+    @apply font-semibold text-gray-900;
+  }
+  
+  .prose em {
+    @apply italic;
   }
   
   .prose a {
-    @apply text-foreground underline hover:text-foreground/80;
+    @apply text-gray-900 underline font-medium hover:text-blue-600 transition-colors;
   }
   
   .prose code {
-    @apply bg-accent px-1.5 py-0.5 rounded text-sm font-mono;
+    @apply bg-gray-100 text-gray-900 px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .prose pre {
+    @apply bg-gray-100 p-4 rounded-lg overflow-x-auto my-4;
+  }
+  
+  .prose pre code {
+    @apply bg-transparent p-0;
   }
   
   .prose blockquote {
-    @apply border-l-4 border-foreground/20 pl-4 italic my-4;
+    @apply border-l-4 border-gray-300 pl-4 italic my-6 text-gray-600;
+  }
+  
+  .prose img {
+    @apply rounded-lg shadow-md my-6 max-w-full h-auto;
+  }
+  
+  .prose hr {
+    @apply border-gray-200 my-8;
+  }
+  
+  .prose table {
+    @apply w-full my-4 border-collapse;
+  }
+  
+  .prose th {
+    @apply border border-gray-300 px-4 py-2 bg-gray-100 font-semibold text-gray-900;
+  }
+  
+  .prose td {
+    @apply border border-gray-300 px-4 py-2 text-gray-700;
   }
 }
