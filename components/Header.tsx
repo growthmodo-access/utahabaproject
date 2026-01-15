@@ -21,7 +21,7 @@ export default function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center">
-            <div className="relative h-11 sm:h-12 md:h-14 w-auto flex items-center justify-center flex-shrink-0">
+            <div className="relative h-10 sm:h-11 md:h-12 w-auto flex items-center justify-center flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="ABA Utah Logo"
