@@ -13,8 +13,15 @@ export default function ProviderDetailPage() {
 
   useEffect(() => {
     if (params.id) {
-      fetch(`/api/providers/${params.id}`)
-        .then(res => res.json())
+      const providerId = Array.isArray(params.id) ? params.id[0] : params.id
+      const encodedId = encodeURIComponent(providerId)
+      fetch(`/api/providers/${encodedId}`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('Provider not found')
+          }
+          return res.json()
+        })
         .then(data => {
           setProvider(data.provider)
           setLoading(false)

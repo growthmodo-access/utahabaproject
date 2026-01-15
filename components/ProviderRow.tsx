@@ -44,16 +44,16 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
         </div>
 
         {/* Details Section */}
-        <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex-1 min-w-0 flex flex-col lg:flex-row gap-4 lg:items-center">
           {provider.description && (
-            <p className="text-sm sm:text-base text-muted-foreground line-clamp-2 sm:line-clamp-1">
+            <p className="text-sm sm:text-base text-muted-foreground line-clamp-2 lg:line-clamp-1 lg:flex-1 lg:min-w-0">
               {provider.description}
             </p>
           )}
           
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 lg:gap-3 lg:flex-shrink-0">
             {provider.rating && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-accent rounded-lg">
+              <div className="flex items-center gap-1.5 px-2.5 lg:px-3 py-1.5 bg-accent rounded-lg">
                 <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 flex-shrink-0" />
                 <span className="text-sm font-semibold text-foreground">{provider.rating.toFixed(1)}</span>
               </div>
@@ -63,24 +63,21 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
                 {provider.services.slice(0, 2).map((service, idx) => (
                   <span 
                     key={idx}
-                    className="bg-accent text-accent-foreground px-2.5 py-1 rounded-lg text-xs font-medium"
+                    className="bg-accent text-accent-foreground px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap"
                   >
                     {service}
                   </span>
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="flex items-center gap-3 text-sm text-muted-foreground">
             {provider.phone && (
               <a 
                 href={`tel:${provider.phone}`} 
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors lg:hidden"
               >
                 <Phone className="w-4 h-4" />
-                <span className="hidden sm:inline">{provider.phone}</span>
+                <span>{provider.phone}</span>
               </a>
             )}
             {provider.website && (
@@ -89,30 +86,30 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
                 target="_blank" 
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors lg:hidden"
               >
                 <Globe className="w-4 h-4" />
-                <span className="hidden sm:inline">Website</span>
+                <span>Website</span>
               </a>
             )}
           </div>
         </div>
 
         {/* CTA Section */}
-        <div className="flex-shrink-0 flex flex-col sm:flex-row gap-2 sm:gap-3">
+        <div className="flex-shrink-0 flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
           {provider.phone && (
             <a
               href={`tel:${provider.phone}`}
               onClick={(e) => e.stopPropagation()}
-              className="group/cta inline-flex items-center justify-center gap-2 bg-foreground text-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-foreground/90 transition-all text-sm sm:text-base shadow-md hover:shadow-lg"
+              className="group/cta inline-flex items-center justify-center gap-2 bg-foreground text-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-foreground/90 transition-all text-sm sm:text-base shadow-md hover:shadow-lg whitespace-nowrap"
             >
               <PhoneCall className="w-4 h-4" />
               <span>Call Now</span>
             </a>
           )}
           <Link
-            href={`/directory/${provider.id}`}
-            className="group/cta inline-flex items-center justify-center gap-2 border-2 border-border bg-background text-foreground px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-accent transition-all text-sm sm:text-base"
+            href={`/directory/${encodeURIComponent(provider.id)}`}
+            className="group/cta inline-flex items-center justify-center gap-2 border-2 border-border bg-background text-foreground px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-accent transition-all text-sm sm:text-base whitespace-nowrap"
           >
             <span>View Details</span>
             <ArrowRight className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform" />

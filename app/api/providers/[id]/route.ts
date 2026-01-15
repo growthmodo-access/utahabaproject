@@ -3,14 +3,16 @@ import { getProviderById, updateProviderRank } from '@/lib/data'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const provider = getProviderById(params.id)
+    const { id } = await params
+    const decodedId = decodeURIComponent(id)
+    const provider = getProviderById(decodedId)
     
     if (!provider) {
       return NextResponse.json(
-        { error: 'Provider not found' },
+        { error: 'Provider not found', id: decodedId },
         { status: 404 }
       )
     }
@@ -27,17 +29,19 @@ export async function GET(
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
+    const decodedId = decodeURIComponent(id)
     const body = await request.json()
     const { rank } = body
     
     if (rank !== undefined) {
-      updateProviderRank(params.id, rank)
+      updateProviderRank(decodedId, rank)
     }
     
-    const provider = getProviderById(params.id)
+    const provider = getProviderById(decodedId)
     
     return NextResponse.json({ 
       success: true,
