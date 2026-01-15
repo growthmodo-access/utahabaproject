@@ -22,18 +22,18 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white">
       {/* Hero Section with Featured Image */}
-      {post.image && (
-        <section className="relative w-full h-72 sm:h-96 md:h-[500px] lg:h-[600px] -mt-16 mb-8 sm:mb-12">
-          <div className="absolute inset-0">
+      {post.image && post.image.trim() !== '' && (
+        <section className="relative w-full h-72 sm:h-96 md:h-[500px] lg:h-[600px] -mt-16 mb-8 sm:mb-12 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+          <div className="absolute inset-0 w-full h-full">
             <BlogImage
               src={post.image}
               alt={post.title}
-              className="object-cover"
+              className="object-cover w-full h-full"
               fill={true}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
           </div>
-          <div className="relative h-full flex items-end">
+          <div className="relative h-full flex items-end z-20">
             <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
               <Link
                 href="/blog"

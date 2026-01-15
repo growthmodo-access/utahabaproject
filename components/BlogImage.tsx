@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface BlogImageProps {
   src: string
@@ -14,8 +14,20 @@ interface BlogImageProps {
 
 export default function BlogImage({ src, alt, className, fill = true, width, height }: BlogImageProps) {
   const [imageError, setImageError] = useState(false)
+  const [imageSrc, setImageSrc] = useState(src)
 
-  if (imageError) {
+  useEffect(() => {
+    setImageSrc(src)
+    setImageError(false)
+  }, [src])
+
+  // Handle image loading errors
+  const handleError = () => {
+    console.warn(`Failed to load image: ${imageSrc}`)
+    setImageError(true)
+  }
+
+  if (imageError || !imageSrc || imageSrc === '') {
     // Fallback gradient background
     return (
       <div className={`${className || ''} bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center`}>
@@ -28,28 +40,32 @@ export default function BlogImage({ src, alt, className, fill = true, width, hei
   if (width && height) {
     return (
       <Image
-        src={src}
+        src={imageSrc}
         alt={alt}
         width={width}
         height={height}
         className={className}
-        onError={() => setImageError(true)}
-        unoptimized={src.startsWith('http')}
+        onError={handleError}
+        unoptimized={imageSrc.startsWith('http') || imageSrc.startsWith('//')}
+        priority={false}
       />
     )
   }
 
   // Use fill for responsive images
+  const isExternal = imageSrc.startsWith('http') || imageSrc.startsWith('//')
+  
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full min-h-[200px]">
       <Image
-        src={src}
+        src={imageSrc}
         alt={alt}
         fill
         className={className}
-        onError={() => setImageError(true)}
-        unoptimized={src.startsWith('http')}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        onError={handleError}
+        unoptimized={isExternal}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+        priority={false}
       />
     </div>
   )
