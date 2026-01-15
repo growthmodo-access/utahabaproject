@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="mb-4">
-              <div className="relative h-12 sm:h-14 md:h-16 w-auto flex items-center justify-start">
+              <div className="relative h-11 sm:h-12 md:h-14 w-auto flex items-center justify-start">
                 <Image
                   src="/logo.png"
                   alt="ABA Utah Logo"
