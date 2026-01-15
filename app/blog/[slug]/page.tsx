@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
 
           <div
-            className="prose prose-sm sm:prose-base md:prose-lg max-w-none text-foreground"
+            className="prose prose-sm sm:prose-base md:prose-lg max-w-none prose-headings:text-foreground prose-headings:font-bold prose-p:text-muted-foreground prose-p:leading-relaxed prose-ul:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-strong:font-semibold prose-a:text-foreground prose-a:underline hover:prose-a:text-foreground/80 prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-3 prose-ul:list-disc prose-ul:ml-6 prose-li:my-2"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>

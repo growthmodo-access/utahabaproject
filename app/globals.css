@@ -114,4 +114,41 @@
   .animate-pulse {
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
+  
+  /* Blog content HTML styling */
+  .prose h2 {
+    @apply text-2xl sm:text-3xl font-bold text-foreground mt-8 mb-4;
+  }
+  
+  .prose h3 {
+    @apply text-xl sm:text-2xl font-semibold text-foreground mt-6 mb-3;
+  }
+  
+  .prose p {
+    @apply text-base text-muted-foreground leading-relaxed mb-4;
+  }
+  
+  .prose ul, .prose ol {
+    @apply my-4 ml-6;
+  }
+  
+  .prose li {
+    @apply mb-2 text-muted-foreground;
+  }
+  
+  .prose strong {
+    @apply font-semibold text-foreground;
+  }
+  
+  .prose a {
+    @apply text-foreground underline hover:text-foreground/80;
+  }
+  
+  .prose code {
+    @apply bg-accent px-1.5 py-0.5 rounded text-sm font-mono;
+  }
+  
+  .prose blockquote {
+    @apply border-l-4 border-foreground/20 pl-4 italic my-4;
+  }
 }
