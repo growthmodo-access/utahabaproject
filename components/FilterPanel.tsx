@@ -105,42 +105,69 @@ export default function FilterPanel({ providers, filters, onFiltersChange, onCle
       {/* Filter Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-4 py-2 border border-border rounded-lg bg-card hover:bg-accent transition-colors"
+        className="relative flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg bg-white hover:bg-gray-50 transition-colors"
         aria-expanded={isOpen}
         aria-controls="filter-panel"
         aria-label={`${isOpen ? 'Close' : 'Open'} filters${activeFilterCount > 0 ? ` (${activeFilterCount} active)` : ''}`}
       >
-        <Filter className="w-4 h-4" />
-        <span className="text-sm font-medium">Filters</span>
+        <Filter className="w-4 h-4 text-gray-700" />
+        <span className="text-sm font-medium text-gray-900">Filters</span>
         {activeFilterCount > 0 && (
-          <span className="bg-foreground text-background rounded-full w-5 h-5 flex items-center justify-center text-xs font-semibold">
+          <span className="bg-gray-900 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-semibold">
             {activeFilterCount}
           </span>
         )}
       </button>
 
-      {/* Filter Panel */}
+      {/* Filter Panel Modal */}
       {isOpen && (
-        <div
-          ref={panelRef}
-          id="filter-panel"
-          className="absolute top-full left-0 right-0 sm:right-auto mt-2 w-full sm:w-96 bg-card border border-border rounded-lg shadow-xl p-4 sm:p-6 z-50 max-h-[80vh] overflow-y-auto"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="filter-panel-title"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <h3 id="filter-panel-title" className="text-lg font-semibold text-foreground">Filter Providers</h3>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-1 hover:bg-accent rounded transition-colors"
-              aria-label="Close filters"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+          {/* Modal */}
+          <div
+            ref={panelRef}
+            id="filter-panel"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="filter-panel-title"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                setIsOpen(false)
+              }
+            }}
+          >
+            <div className="bg-white border border-gray-200 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+              {/* Sticky Header */}
+              <div className="flex-shrink-0 bg-white border-b border-gray-200 px-6 py-5 flex items-center justify-between">
+                <h3 id="filter-panel-title" className="text-xl font-bold text-gray-900">Filter Providers</h3>
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                  aria-label="Close filters"
+                >
+                  <X className="w-5 h-5 text-gray-600" />
+                </button>
+              </div>
+              
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto p-6">
+                {/* Summary */}
+                <div className="mb-4 pb-4 border-b border-gray-200">
+                  <p className="text-sm text-gray-600">
+                    {activeFilterCount > 0 
+                      ? `Showing ${providers.length} provider${providers.length !== 1 ? 's' : ''} with ${activeFilterCount} filter${activeFilterCount !== 1 ? 's' : ''} applied.`
+                      : `Showing ${providers.length} provider${providers.length !== 1 ? 's' : ''}.`
+                    }
+                  </p>
+                </div>
 
-          {/* Active Filters */}
+                {/* Active Filters */}
           {activeFilterCount > 0 && (
             <div className="mb-4 pb-4 border-b border-border">
               <div className="flex items-center justify-between mb-2">
@@ -378,7 +405,10 @@ export default function FilterPanel({ providers, filters, onFiltersChange, onCle
               <span>20+ years</span>
             </div>
           </div>
-        </div>
+              </div>
+            </div>
+          </div>
+        </>
       )}
     </div>
   )
