@@ -308,15 +308,21 @@
 
   /* Enhanced blog content styling - Force HTML rendering */
   .blog-content {
-    @apply text-gray-700;
     color: #374151 !important;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    font-size: 1.125rem !important;
+    line-height: 1.75 !important;
   }
 
   .blog-content * {
     max-width: 100%;
     box-sizing: border-box;
+  }
+
+  /* Reset any prose styles that might interfere */
+  .blog-content.prose {
+    max-width: 100% !important;
   }
 
   /* Ensure all elements are visible - More specific selectors */

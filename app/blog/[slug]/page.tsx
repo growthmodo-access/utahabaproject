@@ -124,11 +124,10 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12">
           <div
             className="blog-content"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-            style={{
-              fontSize: '1.125rem',
-              lineHeight: '1.75',
-              color: '#374151'
+            dangerouslySetInnerHTML={{ 
+              __html: typeof post.content === 'string' 
+                ? post.content.replace(/\\n/g, '\n').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
+                : post.content 
             }}
           />
         </div>
