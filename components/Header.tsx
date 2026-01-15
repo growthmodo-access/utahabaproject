@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-// import Image from 'next/image' // Uncomment when adding logo.png
+import Image from 'next/image'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 
@@ -21,13 +21,7 @@ export default function Header() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-3">
-            <div className="relative w-10 h-10 flex items-center justify-center">
-              {/* Logo placeholder - Replace with your actual logo.png */}
-              {/* To use your logo: 1) Add logo.png to /public/ folder, 2) Uncomment Image component below, 3) Remove placeholder div */}
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-200 via-orange-300 to-red-300 flex items-center justify-center border-2 border-orange-400/30 shadow-sm">
-                <div className="w-6 h-5 bg-red-700 rounded-sm transform rotate-45"></div>
-              </div>
-              {/* 
+            <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="ABA Utah Logo"
@@ -36,7 +30,6 @@ export default function Header() {
                 className="object-contain"
                 priority
               />
-              */}
             </div>
             <span className="text-xl font-semibold text-foreground">ABA Utah</span>
           </Link>

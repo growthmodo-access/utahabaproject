@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Footer() {
   return (
@@ -6,7 +7,18 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto">
         <div className="grid md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-foreground text-lg font-semibold mb-4">ABA Utah</h3>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="relative w-10 h-10 flex items-center justify-center flex-shrink-0">
+                <Image
+                  src="/logo.png"
+                  alt="ABA Utah Logo"
+                  width={40}
+                  height={40}
+                  className="object-contain"
+                />
+              </div>
+              <h3 className="text-foreground text-lg font-semibold">ABA Utah</h3>
+            </div>
             <p className="text-sm text-muted-foreground">
               Your comprehensive resource for finding the best ABA therapy providers in Utah.
             </p>
