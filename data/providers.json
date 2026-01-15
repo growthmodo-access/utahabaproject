@@ -1,20 +1,2441 @@
 [
   {
     "id": "provider-1",
-    "name": "Sample ABA Provider",
+    "name": "A Plus Gold Plus Therapy",
+    "county": "Davis",
+    "city": "Provo",
+    "address": "180 N University Ave, Ste 270 Provo, UT 84601",
+    "phone": "(435) 503-8566",
+    "email": "info@goldplustherapy.com",
+    "website": "https://www.goldplustherapy.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "All Medicaids and Most Commercial"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Morgan",
+      "Salt Lake",
+      "Utah",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-2",
+    "name": "ABA Achievers",
+    "county": "Davis",
+    "city": "Draper",
+    "address": "13894 S Bangerter Pkwy STE 200, Draper, UT 84020",
+    "phone": "(435) 375-5050",
+    "email": "brittany@abaachievers",
+    "website": "https://abaachievers.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "UHC",
+      "Cigna",
+      "Aetna"
+    ],
+    "ageGroups": [
+      "Up to 22 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Utah",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-3",
+    "name": "ABA Blue Gems Therapy",
+    "county": "Sandy",
+    "city": "",
+    "address": "",
+    "phone": "(801) 466-2573",
+    "email": "info@bluegemsaba.com",
+    "website": "https://bluegemsaba.com",
+    "description": "Offers telehealth services. Waitlist: None",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Aetna",
+      "UHC",
+      "Medicaid",
+      "Cigna",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "2 to 15 years"
+    ],
+    "countiesServed": [
+      "Sandy",
+      "Draper",
+      "South Jordan",
+      "Smithfield"
+    ],
+    "waitlist": "None",
+    "telehealth": true
+  },
+  {
+    "id": "provider-4",
+    "name": "ABA Cedar Tree",
+    "county": "Cache",
+    "city": "",
+    "address": "",
+    "phone": "(801) 810-2896",
+    "email": "info@cedartreeaba.com",
+    "website": "https://cedartreeaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Healthy U",
+      "Molina",
+      "UHC",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Cache",
+      "Davis",
+      "Salt Lake",
+      "Utah",
+      "Washington",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-5",
+    "name": "ABA Golden Steps UT",
+    "county": "Davis",
+    "city": "",
+    "address": "",
+    "phone": "(801) 653-3111",
+    "email": "info@goldenstepsaba.com",
+    "website": "https://www.goldenstepsaba.com/utah",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "All Medicaids",
+      "BCBS",
+      "Cigna"
+    ],
+    "ageGroups": [
+      "Up to 13 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Iron",
+      "Morgan",
+      "Rich",
+      "Salt Lake",
+      "Summit",
+      "Utah",
+      "Wasatch",
+      "Washington",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-6",
+    "name": "ABA Kuska Autism Services",
+    "county": "Davis",
+    "city": "Bountiful",
+    "address": "95 E 2200 S Bountiful, UT 84010",
+    "phone": "(801) 980-7970",
+    "email": "info@kuska.co",
+    "website": "https://kuska.co",
+    "description": "Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Cigna",
+      "BCBS",
+      "Select Health",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Utah",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-7",
+    "name": "ABA Little Champs",
+    "county": "Davis",
+    "city": "City",
+    "address": "10 W broadway, Salt Lake City, UT 84101",
+    "phone": "(385) 494-3500",
+    "email": "Info@littlechampsaba.com",
+    "website": "https://Littlechampsaba.com",
+    "description": "Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "Aetna",
+      "Cigna"
+    ],
+    "ageGroups": [
+      "Up to 15 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Morgan",
+      "Salt Lake",
+      "Utah",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-8",
+    "name": "ABA Pediatric Autism Services",
+    "county": "Davis",
+    "city": "",
+    "address": "",
+    "phone": "(801) 762-8342",
+    "email": "info@abapediatricautismservices.com",
+    "website": "https://www.abapediatricautismservices.com",
+    "description": "Waitlist: No waitlist",
+    "insuranceAccepted": [
+      "BCBS",
+      "UHC",
+      "University of Utah",
+      "PEHP"
+    ],
+    "ageGroups": [
+      "Up to 6 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Weber"
+    ],
+    "waitlist": "No waitlist"
+  },
+  {
+    "id": "provider-9",
+    "name": "ABA Skill Builders",
+    "county": "Davis",
+    "city": "",
+    "address": "",
+    "phone": "(801) 448-6195",
+    "email": "info@skillbuildersaba.com",
+    "website": "https://www.skillbuildersaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Aetna",
+      "Cigna",
+      "BCBS",
+      "Select Health",
+      "UHC"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Utah"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-10",
+    "name": "ABA Total Care",
+    "county": "Statewide",
+    "city": "",
+    "address": "",
+    "phone": "(801) 210-0814",
+    "email": "info@totalcareaba.com",
+    "website": "https://totalcareaba.com",
+    "description": "Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid and most commercial"
+    ],
+    "ageGroups": [
+      "2 to 12 years"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "No waitlist",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-11",
+    "name": "ABA with Iris",
+    "county": "Statewide",
+    "city": "Sandy",
+    "address": "1468 E 8020 S, Sandy, UT 84093",
+    "phone": "(801) 979-1326",
+    "email": "abawithiris@gmail.com",
+    "website": "",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Tricare and most insurances"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-12",
+    "name": "Above & Beyond Therapy",
+    "county": "Davis",
+    "city": "",
+    "address": "",
+    "phone": "(801) 630-2040",
+    "email": "info@abtaba.com",
+    "website": "https://www.abtaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "DMBA",
+      "EMI",
+      "U of U",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "2 to 21 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Utah",
+      "Logan to Spanish Fork",
+      "Tooele"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-13",
+    "name": "Acclimate ABA",
+    "county": "Davis",
+    "city": "",
+    "address": "",
+    "phone": "(801) 843-5882",
+    "email": "hello@acclimateaba.com",
+    "website": "https://www.acclimateaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid and most insurances"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Morgan",
+      "Salt Lake",
+      "Utah",
+      "Weber",
+      "most of Utah"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-14",
+    "name": "Affinity Autism Services",
+    "county": "Davis",
+    "city": "Jordan",
+    "address": "1970 W 7800 S West Jordan, UT 84088",
+    "phone": "(801) 506-6695",
+    "email": "Affinity@affinitytreatment.com",
+    "website": "https://www.affinityautism.com",
+    "description": "Waitlist: 12 months",
+    "insuranceAccepted": [
+      "Medicaid",
+      "Aetna",
+      "BCBS",
+      "Cigna",
+      "UHC"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Iron",
+      "Salt Lake",
+      "Utah",
+      "Weber (limited)"
+    ],
+    "waitlist": "12 months"
+  },
+  {
+    "id": "provider-15",
+    "name": "A.B.I. Learning Center",
+    "county": "Davis",
+    "city": "Draper",
+    "address": "12637 S 265 W, Ste 300, Draper, UT 84020",
+    "phone": "(801) 998-8428",
+    "email": "Office@abilearningcenter.com",
+    "website": "https://www.abilearningcenter.com",
+    "description": "Spanish-speaking staff available. Waitlist: Contact provider",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "BCBS",
+      "Aetna",
+      "Tricare",
+      "UHC",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Utah"
+    ],
+    "waitlist": "Contact provider",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-16",
+    "name": "Achieving Abilities",
+    "county": "Cache",
+    "city": "Payson",
+    "address": "1392 W Turf Farm Way Ste 1-153, Payson, UT 84651",
+    "phone": "(801) 935-5796",
+    "email": "info@achievingabilities.com",
+    "website": "https://www.achievingabilities.com",
+    "description": "Waitlist: Contact provider",
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "UHC",
+      "Cigna",
+      "TRICARE"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Cache",
+      "Utah"
+    ],
+    "waitlist": "Contact provider"
+  },
+  {
+    "id": "provider-17",
+    "name": "ABS Kids",
+    "county": "Bountiful",
+    "city": "SLC",
+    "address": "515 S 700 E #2A SLC, UT 84102",
+    "phone": "(801) 935-4171",
+    "email": "info@alternativebehaviorstrategies.com",
+    "website": "https://www.abskids.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: 8 months",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "U of U",
+      "Optum",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Bountiful",
+      "Lehi",
+      "Salt Lake City",
+      "Richfield",
+      "Tooele"
+    ],
+    "waitlist": "8 months",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-18",
+    "name": "ACES ABA",
+    "county": "Salt Lake City & surrounding",
+    "city": "City",
+    "address": "222 Main St, Ste 500, Salt Lake City, UT 84101",
+    "phone": "1-855-223-7123",
+    "email": "verifications@acesaba.com",
+    "website": "https://www.acesaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Most (excluding Medicaid",
+      "Select Health)"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Salt Lake City & surrounding"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-19",
+    "name": "A.G.E.S. Learning Solutions",
+    "county": "Salt Lake City & surrounding",
+    "city": "Jordan",
+    "address": "7103 S Redwood Road, Ste 235, West Jordan, UT 84084",
+    "phone": "1-866-375-2437",
+    "email": "emmylou@ageslearningsolutions.com",
+    "website": "https://www.ageslearningsolutions.com",
+    "description": "Offers telehealth services. Waitlist: In-clinic no waitlist daytime",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "UHC",
+      "Aetna",
+      "U of U",
+      "Tricare"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Salt Lake City & surrounding"
+    ],
+    "waitlist": "In-clinic no waitlist daytime",
+    "telehealth": true
+  },
+  {
+    "id": "provider-20",
+    "name": "Advanced Behavior Analysis",
+    "county": "Davis",
+    "city": "Sandy",
+    "address": "8031 S 700 E, Sandy UT 84070",
+    "phone": "1-877-222-4621",
+    "email": "Abaintake.ut@anybehavior.com",
+    "website": "https://anybehavior.com",
+    "description": "Waitlist: Waitlist varies",
+    "insuranceAccepted": [
+      "Most major insurances"
+    ],
+    "ageGroups": [
+      "2 to 17 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Summit",
+      "Utah",
+      "Wasatch"
+    ],
+    "waitlist": "Waitlist varies"
+  },
+  {
+    "id": "provider-21",
+    "name": "Advanced Behavior Change",
     "county": "Salt Lake",
-    "city": "Salt Lake City",
-    "address": "123 Main St",
-    "phone": "(801) 555-0100",
-    "email": "info@sampleaba.com",
-    "website": "https://sampleaba.com",
-    "description": "A leading ABA therapy provider serving families in Salt Lake County.",
-    "services": ["Early Intervention", "School-Based Services", "In-Home Therapy"],
-    "rating": 4.8,
-    "rank": 1,
-    "yearsExperience": 10,
-    "certifications": ["BCBA", "Licensed Behavior Analyst"],
-    "insuranceAccepted": ["Blue Cross", "UnitedHealthcare", "Aetna"],
-    "ageGroups": ["0-3", "4-6", "7-12"]
+    "city": "SLC",
+    "address": "352 S Denver St, Ste 202, SLC, UT 84111",
+    "phone": "(801) 251-6219",
+    "email": "onlydiane@advancedbehaviorchange.com",
+    "website": "https://www.advancedbehaviorchange.com",
+    "description": "Offers telehealth services",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Private pay"
+    ],
+    "ageGroups": [
+      "7 and up"
+    ],
+    "countiesServed": [
+      "Salt Lake"
+    ],
+    "telehealth": true
+  },
+  {
+    "id": "provider-22",
+    "name": "Apex Behavior Consulting",
+    "county": "Davis",
+    "city": "SLC",
+    "address": "3006 S Highland Dr. #210 SLC, UT 84106",
+    "phone": "(385) 234-7165",
+    "email": "clientservices@apexbehavior.com",
+    "website": "https://www.apexbehavior.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist 9am-3pm",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "UHC",
+      "Select Health",
+      "PEHP",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Weber",
+      "Lehi",
+      "Saratoga Springs"
+    ],
+    "waitlist": "No waitlist 9am-3pm",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-23",
+    "name": "Aspen ABA",
+    "county": "Salt Lake",
+    "city": "Sandy",
+    "address": "11731 S Canberra Dr, Sandy, Utah 84094",
+    "phone": "(801) 921-5171",
+    "email": "info@aspenabatherapy.com",
+    "website": "https://www.aspenabatherapy.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid and most private"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah",
+      "part of Juab"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-24",
+    "name": "AIM-Autism in Motion",
+    "county": "Salt Lake",
+    "city": "West",
+    "address": "2811 N 2350 W, Farr West, UT 84404",
+    "phone": "(801) 452-1940",
+    "email": "gennie.tucker@aim-autisminmotion.com",
+    "website": "https://aim-autisminmotion.com",
+    "description": "Offers telehealth services",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Most insurances"
+    ],
+    "ageGroups": [
+      "Up to 22 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Weber",
+      "Davis",
+      "parts of Utah"
+    ],
+    "telehealth": true
+  },
+  {
+    "id": "provider-25",
+    "name": "Attain ABA Therapy",
+    "county": "Salt Lake City",
+    "city": "City",
+    "address": "222 S Main St, 5th Floor, Salt Lake City, UT 84101",
+    "phone": "(833) 599-2560",
+    "email": "admissions@attainaba.com",
+    "website": "https://www.attainaba.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "All Medicaids and most commercial"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Salt Lake City",
+      "Orem",
+      "Saint George",
+      "Ogden areas"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-26",
+    "name": "Autism Solutions",
+    "county": "Salt Lake",
+    "city": "Layton",
+    "address": "1848 N Hill Field RD #101 A, Layton, UT 84041",
+    "phone": "(801) 735-3252",
+    "email": "info@autismsolutionsutah.com",
+    "website": "https://autismsolutionsutah.com",
+    "description": "Offers telehealth services. Waitlist: 12 months",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Tricare",
+      "Cigna",
+      "BCBS",
+      "UHC"
+    ],
+    "ageGroups": [
+      "12+ months"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Davis",
+      "Utah"
+    ],
+    "waitlist": "12 months",
+    "telehealth": true
+  },
+  {
+    "id": "provider-27",
+    "name": "Autism Therapy Services",
+    "county": "St. George area",
+    "city": "George",
+    "address": "230 N 1680 E, building U, St. George, UT 84790",
+    "phone": "(435) 313-4571",
+    "email": "info@autismtherapyservices.com",
+    "website": "https://www.autismtherapyservices.com",
+    "description": "Offers telehealth services. Waitlist: Contact provider",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Select Health",
+      "Medicaid",
+      "Motivhealth",
+      "Aetna"
+    ],
+    "ageGroups": [
+      "Up to 8 years"
+    ],
+    "countiesServed": [
+      "St. George area",
+      "Cedar City"
+    ],
+    "waitlist": "Contact provider",
+    "telehealth": true
+  },
+  {
+    "id": "provider-28",
+    "name": "Aviation ABA",
+    "county": "Statewide",
+    "city": "City",
+    "address": "1240 E Stringham Ave, Salt Lake City, UT 84106",
+    "phone": "(801) 214-1115",
+    "email": "info@aviationaba.com",
+    "website": "https://www.aviationaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "HealthChoice",
+      "U of U",
+      "Molina",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-29",
+    "name": "Avion ABA UT",
+    "county": "Statewide",
+    "city": "SLC",
+    "address": "2825 E Cottonwood Parkway Ste 500, SLC, UT 84121",
+    "phone": "(385) 527-7500",
+    "email": "info@avionaba.com",
+    "website": "https://avionaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid and most commercial"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-30",
+    "name": "Balance Family Solutions",
+    "county": "Salt Lake",
+    "city": "City",
+    "address": "744 E 400 S, Ste B, Salt Lake City, UT 84102",
+    "phone": "(801) 477-5177",
+    "email": "info@balancefamilysolutions.org",
+    "website": "https://balancefamilysolutions.org",
+    "description": "Offers telehealth services. Waitlist: No waitlist daytime",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "U of U",
+      "BCBS",
+      "UHC",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "2 to 16 years"
+    ],
+    "countiesServed": [
+      "Salt Lake"
+    ],
+    "waitlist": "No waitlist daytime",
+    "telehealth": true
+  },
+  {
+    "id": "provider-31",
+    "name": "Bedrock ABA",
+    "county": "Davis",
+    "city": "City",
+    "address": "10 W Broadway, Salt Lake City, UT 84101",
+    "phone": "(385) 563-1930",
+    "email": "info@bedrock.com",
+    "website": "https://bedrockaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "All medicaids",
+      "BCBS",
+      "most insurances"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Morgan",
+      "Salt Lake",
+      "Utah"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-32",
+    "name": "Bee Kids Utah",
+    "county": "Tooele",
+    "city": "Tooele",
+    "address": "88 East 1000 North Ste 200, Tooele, UT 84074",
+    "phone": "(435) 233-6030",
+    "email": "admin@beekidsutah.com",
+    "website": "https://www.beekidsutah.com",
+    "insuranceAccepted": [
+      "Cigna",
+      "Medicaid",
+      "Select Health",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "2 to 16 years"
+    ],
+    "countiesServed": [
+      "Tooele"
+    ]
+  },
+  {
+    "id": "provider-33",
+    "name": "Beehive Behavior Services",
+    "county": "Cache",
+    "city": "",
+    "address": "",
+    "phone": "(435) 213-5383",
+    "email": "admin@buzzaba.com",
+    "website": "https://www.beehivebehaviorservices.com",
+    "description": "Offers telehealth services. Waitlist: None",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Cache",
+      "Box Elder",
+      "Weber",
+      "Davis",
+      "Salt Lake",
+      "Utah"
+    ],
+    "waitlist": "None",
+    "telehealth": true
+  },
+  {
+    "id": "provider-34",
+    "name": "Behavior and Learning Strategies",
+    "county": "Uintah",
+    "city": "",
+    "address": "",
+    "phone": "(801) 500-4248",
+    "email": "Joe.dixon@hi5aba.com",
+    "website": "https://behaviorlearning.hi5aba.com",
+    "description": "Offers telehealth services. Waitlist: 1 month",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "PEHP",
+      "BCBS",
+      "Aetna",
+      "Cigna"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Uintah",
+      "Duchesne",
+      "Carbon",
+      "Emery",
+      "Sanpete",
+      "Wayne",
+      "Utah"
+    ],
+    "waitlist": "1 month",
+    "telehealth": true
+  },
+  {
+    "id": "provider-35",
+    "name": "Behavior Supports and Solutions",
+    "county": "Tooele",
+    "city": "Tooele",
+    "address": "27 N Main Street Tooele, UT 84074",
+    "phone": "(801) 441-2751",
+    "email": "kamryn@behaviorsupportsandsolutions.com",
+    "website": "https://behaviorsupportsandsolutions.com",
+    "description": "Offers telehealth services. Waitlist: 1 month",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "All Utah Insurances"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Tooele",
+      "Salt Lake",
+      "Davis"
+    ],
+    "waitlist": "1 month",
+    "telehealth": true
+  },
+  {
+    "id": "provider-36",
+    "name": "Beyond Care Therapy",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 429-9671",
+    "email": "jack.ut@beyondcaretherapy.com",
+    "website": "https://beyondcaretherapy.com/utah",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Select Health",
+      "Molina",
+      "Regence"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Wasatch",
+      "Utah",
+      "Davis",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-37",
+    "name": "Breaking Barriers Therapy",
+    "county": "Lehi",
+    "city": "Springs",
+    "address": "24 W Sergeant Court Dr, Ste 204, Saratoga Springs, UT 84045",
+    "phone": "(801) 987-6333",
+    "email": "consults@breakingbarrierstherapy.com",
+    "website": "https://breakingbarrierstherapy.com",
+    "description": "Waitlist: Contact provider",
+    "insuranceAccepted": [
+      "All except Tricare and Select Healthy community care"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Lehi",
+      "Saratoga Springs",
+      "in-home"
+    ],
+    "waitlist": "Contact provider"
+  },
+  {
+    "id": "provider-38",
+    "name": "BridgeCare ABA",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 435-8088",
+    "email": "info@bridgecareaba.com",
+    "website": "https://www.bridgecareaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: None",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "All insurances besides Tricare"
+    ],
+    "ageGroups": [
+      "2 to 16 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah",
+      "Davis",
+      "Weber"
+    ],
+    "waitlist": "None",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-39",
+    "name": "Blue Autism Center",
+    "county": "Cottonwood Heights",
+    "city": "Heights",
+    "address": "2540 E Bengal Blvd Ste 300, Cottonwood Heights, UT 84121",
+    "phone": "(801) 495-5105",
+    "email": "",
+    "website": "https://www.blueautism.com",
+    "insuranceAccepted": [
+      "Select Health",
+      "Optum",
+      "BCBS",
+      "Medicaid",
+      "Cigna"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Cottonwood Heights"
+    ]
+  },
+  {
+    "id": "provider-40",
+    "name": "Brighter Strides ABA",
+    "county": "Statewide",
+    "city": "",
+    "address": "",
+    "phone": "(801) 720-2996",
+    "email": "info@brighterstridesaba.com",
+    "website": "https://brighterstridesaba.com",
+    "description": "Offers telehealth services. Waitlist: None",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "PEHP"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "None",
+    "telehealth": true
+  },
+  {
+    "id": "provider-41",
+    "name": "Buddies Behavioral Services",
+    "county": "Box Elder",
+    "city": "",
+    "address": "",
+    "phone": "(385) 266-5328",
+    "email": "admin@buddiesbehavior.com",
+    "website": "https://buddiesbehavior.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Box Elder",
+      "Weber",
+      "Davis"
+    ],
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-42",
+    "name": "Catalyst Behavior Solutions",
+    "county": "Davis",
+    "city": "Farmington",
+    "address": "1438 N Hwy 89, Ste 130 Farmington, UT 84025",
+    "phone": "(605) 271-2690",
+    "email": "Credentialing@catalystbehavior.com",
+    "website": "https://catalystbehavior.com",
+    "description": "Offers telehealth services. Waitlist: 30-60 Days",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "BCBS",
+      "Cigna",
+      "United",
+      "Tricare",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "Up to 13 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Weber"
+    ],
+    "waitlist": "30-60 Days",
+    "telehealth": true
+  },
+  {
+    "id": "provider-43",
+    "name": "Chrysalis",
+    "county": "Multiple locations statewide",
+    "city": "",
+    "address": "",
+    "phone": "(801) 655-4950",
+    "email": "autismservices@gochrysalis.com",
+    "website": "https://www.chrysalis.care/autism",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: Varies",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid and most commercial"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Multiple locations statewide"
+    ],
+    "waitlist": "Varies",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-44",
+    "name": "Connected 2 Therapy",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(385) 557-7880",
+    "email": "info@connected2therapy.com",
+    "website": "https://www.connected2therapy.com/aba",
+    "description": "Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Aetna",
+      "BCBS",
+      "PEHP",
+      "Medicaid",
+      "EMI",
+      "Cigna"
+    ],
+    "ageGroups": [
+      "4 to 18 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Davis",
+      "Weber",
+      "Utah"
+    ],
+    "waitlist": "No waitlist",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-45",
+    "name": "Continuum Behavioral Health",
+    "county": "Weber",
+    "city": "",
+    "address": "",
+    "phone": "1-800-828-5659",
+    "email": "contact@autismspectrumalliance.com",
+    "website": "https://www.behavioralhealthservices.net",
+    "description": "Offers telehealth services",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Cigna",
+      "TRICARE",
+      "UHC",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Weber",
+      "Summit",
+      "Salt Lake",
+      "Davis",
+      "Morgan"
+    ],
+    "telehealth": true
+  },
+  {
+    "id": "provider-46",
+    "name": "Crimson Counseling",
+    "county": "St. George and Washington County",
+    "city": "George",
+    "address": "1240 E 100 S, Building 7, St. George, UT 84780",
+    "phone": "(801) 872-3489",
+    "email": "admin@crimsoncounseling.net",
+    "website": "https://crimsonheightsbh.com",
+    "insuranceAccepted": [
+      "Medicaid",
+      "Regence",
+      "UHC",
+      "Tricare"
+    ],
+    "ageGroups": [
+      "Contact provider"
+    ],
+    "countiesServed": [
+      "St. George and Washington County"
+    ]
+  },
+  {
+    "id": "provider-47",
+    "name": "Discovery ABA",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(385) 354-5250",
+    "email": "info@discoveryaba.com",
+    "website": "https://www.discoveryaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Tricare",
+      "all major insurances"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah",
+      "Weber",
+      "Davis",
+      "Cache"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-48",
+    "name": "Eaton Alliance",
+    "county": "Utah",
+    "city": "Orem",
+    "address": "281 S Vineyard Rd Ste 103 Orem, UT 84058",
+    "phone": "(801) 768-0608",
+    "email": "",
+    "website": "https://eatonalliance.com",
+    "insuranceAccepted": [
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "All Ages"
+    ],
+    "countiesServed": [
+      "Utah",
+      "Salt Lake"
+    ]
+  },
+  {
+    "id": "provider-49",
+    "name": "Elevation Behavioral Science",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 923-3537",
+    "email": "services@elevationbx.com",
+    "website": "https://www.elevationbx.com",
+    "description": "Offers telehealth services. Waitlist: Daytime no waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Aetna",
+      "BCBS",
+      "Cigna",
+      "EMI",
+      "U of U",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah"
+    ],
+    "waitlist": "Daytime no waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-50",
+    "name": "EverReach ABA",
+    "county": "Statewide",
+    "city": "SLC",
+    "address": "10 W Broadway 7th Floor, SLC, UT 84101",
+    "phone": "(801) 639-9399",
+    "email": "info@everreachaba.com",
+    "website": "https://www.everreachaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "others"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-51",
+    "name": "Fabian House Elite Preschool",
+    "county": "Utah and surrounding",
+    "city": "Lehi",
+    "address": "3118 N 1200 W, Lehi, UT 84043",
+    "phone": "(801) 917-0940",
+    "email": "info@fabianhouse.com",
+    "website": "https://www.fabianhouse.com",
+    "description": "Spanish-speaking staff available. Waitlist: Contact provider",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Select Health",
+      "UHC",
+      "Medicaid",
+      "BCBS",
+      "Aetna"
+    ],
+    "ageGroups": [
+      "2 to 10 years"
+    ],
+    "countiesServed": [
+      "Utah and surrounding"
+    ],
+    "waitlist": "Contact provider",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-52",
+    "name": "Golden Touch ABA",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 630-5443",
+    "email": "info@goldentouchaba.com",
+    "website": "https://www.goldentouchaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "BCBS",
+      "DMBA",
+      "EMI",
+      "Medicaid",
+      "PEHP"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah",
+      "Wasatch",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-53",
+    "name": "Gracious Growth ABA",
+    "county": "Statewide",
+    "city": "City",
+    "address": "50 W Broadway #333, Salt Lake City, UT 84101",
+    "phone": "(801) 841-2824",
+    "email": "info@graciousgrowthaba.com",
+    "website": "https://graciousgrowthaba.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "All insurances"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Statewide"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-54",
+    "name": "Heartwise Support",
+    "county": "Davis",
+    "city": "City",
+    "address": "460 W 50 N Salt Lake City, UT 84101",
+    "phone": "(801) 609-6022",
+    "email": "jmccolloch@heartwisesupport.org",
+    "website": "https://www.heartwisesupport.org",
+    "description": "Offers telehealth services. Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "PEHP"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-55",
+    "name": "Honey Beehavior Analysis",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 317-8225",
+    "email": "tricia.hayner@honeyaba.org",
+    "website": "https://www.honeyaba.org",
+    "description": "Offers telehealth services. Waitlist: Contact provider",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "United",
+      "Cigna",
+      "Aetna",
+      "EMI"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Iron",
+      "Statewide via telehealth"
+    ],
+    "waitlist": "Contact provider",
+    "telehealth": true
+  },
+  {
+    "id": "provider-56",
+    "name": "Integrated Autism Therapies",
+    "county": "Salt Lake",
+    "city": "Jordan",
+    "address": "7733 S Redwood Road, West Jordan, UT 84084",
+    "phone": "(801) 885-1700",
+    "email": "barb@iatutah.com",
+    "website": "https://www.iatutah.com",
+    "description": "Offers telehealth services",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "PEHP",
+      "UHC",
+      "Tricare",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Salt Lake"
+    ],
+    "telehealth": true
+  },
+  {
+    "id": "provider-57",
+    "name": "Just Parent",
+    "county": "Statewide via telemedicine",
+    "city": "",
+    "address": "",
+    "phone": "(385) 376-3787",
+    "email": "",
+    "website": "https://www.justparent.com",
+    "description": "Waitlist: Contact provider",
+    "insuranceAccepted": [
+      "Medicaid",
+      "Magellan",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Statewide via telemedicine"
+    ],
+    "waitlist": "Contact provider"
+  },
+  {
+    "id": "provider-58",
+    "name": "Kids On The Move",
+    "county": "Clinic in Orem",
+    "city": "Orem",
+    "address": "475 West 260 North Orem, UT 84057",
+    "phone": "(385) 292-5633",
+    "email": "crice@kotm.org",
+    "website": "https://kotm.org",
+    "description": "Spanish-speaking staff available. Waitlist: Contact provider",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Select Health",
+      "U of U",
+      "DMBA",
+      "BCBS"
+    ],
+    "ageGroups": [
+      "Up to 17 years"
+    ],
+    "countiesServed": [
+      "Clinic in Orem",
+      "in-home in Utah County"
+    ],
+    "waitlist": "Contact provider",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-59",
+    "name": "Kyo Autism Therapy",
+    "county": "Davis",
+    "city": "Murray",
+    "address": "5242 S College Drive, Ste 380 Murray, UT 84123",
+    "phone": "1-877-264-6747",
+    "email": "info@kyocare.com",
+    "website": "https://kyocare.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Aetna",
+      "Cigna",
+      "Humana",
+      "Regence",
+      "Select Health",
+      "UHC",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "Up to 22 years"
+    ],
+    "countiesServed": [
+      "Davis",
+      "Salt Lake",
+      "Utah"
+    ],
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-60",
+    "name": "Learning Solutions LLC",
+    "county": "Uintah Basin and Tri-County area",
+    "city": "Vernal",
+    "address": "80 N Vernal Ave, Vernal, UT 84078",
+    "phone": "(435) 299-2399",
+    "email": "admin@LS-Inc.org",
+    "website": "https://LearningSolutionsInc.org",
+    "description": "Waitlist: 6 months",
+    "insuranceAccepted": [
+      "Call provider"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Uintah Basin and Tri-County area"
+    ],
+    "waitlist": "6 months"
+  },
+  {
+    "id": "provider-61",
+    "name": "Lexington Services",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 980-7970",
+    "email": "utahinfo@lexingtonservices.com",
+    "website": "https://www.lexingtonservices.com",
+    "description": "Offers telehealth services. Spanish-speaking staff available",
+    "services": [
+      "Telehealth",
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Select Health",
+      "U of U",
+      "Cigna",
+      "BCBS",
+      "UHC",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah",
+      "Davis",
+      "Weber"
+    ],
+    "telehealth": true,
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-62",
+    "name": "Lighthouse Youth & Family",
+    "county": "Uintah",
+    "city": "Vernal",
+    "address": "365 W 50 N Ste W8, Vernal, UT 84078",
+    "phone": "(435) 790-2757",
+    "email": "lbretorr.aba@gmail.com",
+    "website": "https://www.lighthouseyouthandfamily.com",
+    "description": "Waitlist: No",
+    "insuranceAccepted": [
+      "Regence",
+      "BCBS",
+      "Medicaid",
+      "PEHP",
+      "Selecthealth"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Uintah",
+      "Duchesne"
+    ],
+    "waitlist": "No"
+  },
+  {
+    "id": "provider-63",
+    "name": "Limitless Potential",
+    "county": "Weber",
+    "city": "Roy",
+    "address": "4881 S 1900 W, Roy, UT 84067",
+    "phone": "(385) 426-9644",
+    "email": "bekka@limitless-ut.com",
+    "website": "https://limitless-ut.com",
+    "description": "Waitlist: No wait daytime",
+    "insuranceAccepted": [
+      "Medicaid",
+      "Tricare",
+      "Aetna",
+      "BCBS",
+      "UHC"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Weber",
+      "Davis"
+    ],
+    "waitlist": "No wait daytime"
+  },
+  {
+    "id": "provider-64",
+    "name": "Manning Behavior Services",
+    "county": "Weber",
+    "city": "",
+    "address": "",
+    "phone": "(801) 548-3091",
+    "email": "christine@manningbehaviorservices.com",
+    "website": "https://www.manningbehaviorservices.com",
+    "description": "Waitlist: Daytime no waitlist",
+    "insuranceAccepted": [
+      "BCBS",
+      "UHC",
+      "Medicaid",
+      "Select Health",
+      "PEHP"
+    ],
+    "ageGroups": [
+      "2 to 25 years"
+    ],
+    "countiesServed": [
+      "Weber",
+      "Davis",
+      "Salt Lake"
+    ],
+    "waitlist": "Daytime no waitlist"
+  },
+  {
+    "id": "provider-65",
+    "name": "Mendability Sensory Enrichment",
+    "county": "Weber",
+    "city": "Fork",
+    "address": "915 S 500 E, Ste 101, American Fork, UT 84003",
+    "phone": "1-888-579-7002",
+    "email": "",
+    "website": "https://www.mendability.com",
+    "description": "Waitlist: Contact provider",
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Weber",
+      "Davis",
+      "Salt Lake"
+    ],
+    "waitlist": "Contact provider"
+  },
+  {
+    "id": "provider-66",
+    "name": "Neurobehavioral Center for Growth",
+    "county": "Bountiful",
+    "city": "Bountiful",
+    "address": "415 S Medical Dr, Ste D101, Bountiful, UT 84010",
+    "phone": "(801) 683-1062",
+    "email": "admin@neurobcg.com",
+    "website": "https://www.neurobcg.com",
+    "description": "Spanish-speaking staff available. Waitlist: Contact provider",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "most including Tri-Care",
+      "Optum"
+    ],
+    "ageGroups": [
+      "3 to 9 years"
+    ],
+    "countiesServed": [
+      "Bountiful",
+      "Layton",
+      "Salt Lake City",
+      "South Ogden"
+    ],
+    "waitlist": "Contact provider",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-67",
+    "name": "PBJ & Friends",
+    "county": "Utah (Saratoga Springs)",
+    "city": "Springs",
+    "address": "1305 Commerce Dr, Ste 120, Saratoga Springs, UT 84045",
+    "phone": "(801) 997-6839",
+    "email": "",
+    "website": "https://pbjandfriends.com",
+    "description": "Spanish-speaking staff available. Waitlist: 2 months evenings",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Aetna",
+      "BCBS",
+      "Cigna",
+      "DMBA",
+      "EMI",
+      "Medicaid",
+      "UHC"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Utah (Saratoga Springs)"
+    ],
+    "waitlist": "2 months evenings",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-68",
+    "name": "Peak Era ABA",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 406-6529",
+    "email": "peak.era.aba@gmail.com",
+    "website": "https://www.peakeraaba.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Tricare",
+      "BCBS",
+      "Medicaid",
+      "UHC",
+      "Aetna",
+      "Cigna"
+    ],
+    "ageGroups": [
+      "5 to 22 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Utah",
+      "Davis",
+      "Wasatch",
+      "Summit"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-69",
+    "name": "Perfect Piece",
+    "county": "Salt Lake",
+    "city": "Sandy",
+    "address": "9980 S 300 W, Ste 200, Sandy, UT 84070",
+    "phone": "(508) 733-7279",
+    "email": "Lauren@PerfectPiece.org",
+    "website": "https://www.PerfectPiece.org",
+    "insuranceAccepted": [
+      "Medicaid",
+      "most insurances"
+    ],
+    "ageGroups": [
+      "2 to 21 years"
+    ],
+    "countiesServed": [
+      "Salt Lake",
+      "Northern Utah"
+    ]
+  },
+  {
+    "id": "provider-70",
+    "name": "Pingree Autism Center",
+    "county": "Salt Lake City",
+    "city": "SLC",
+    "address": "780 S Guardsman Way, SLC, Utah 84108",
+    "phone": "(801) 581-0194",
+    "email": "",
+    "website": "https://www.carmenbpingree.com",
+    "insuranceAccepted": [
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "3 to 18 years"
+    ],
+    "countiesServed": [
+      "Salt Lake City"
+    ]
+  },
+  {
+    "id": "provider-71",
+    "name": "Precision Learning & Behavioral",
+    "county": "Tri-County: Uintah",
+    "city": "Vernal",
+    "address": "390 W Main Ste 100 Vernal, UT 84078",
+    "phone": "(435) 219-1603",
+    "email": "sodriscoll@precisionlearningbc.org",
+    "website": "",
+    "description": "Spanish-speaking staff available. Waitlist: No waitlist",
+    "services": [
+      "Spanish Language Support"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "BCBS",
+      "PEHP",
+      "Tricare",
+      "Molina"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Tri-County: Uintah",
+      "Duchesne",
+      "Dagget"
+    ],
+    "waitlist": "No waitlist",
+    "spanishSpeakers": true
+  },
+  {
+    "id": "provider-72",
+    "name": "Primary Children's ABA Clinic",
+    "county": "Riverton",
+    "city": "Riverton",
+    "address": "3773 W 12600 S, Riverton UT 84065",
+    "phone": "(801) 285-1300",
+    "email": "",
+    "website": "https://intermountainhealthcare.org",
+    "description": "Waitlist: No waitlist",
+    "insuranceAccepted": [
+      "Most major and local plans"
+    ],
+    "ageGroups": [
+      "2 to 6 years"
+    ],
+    "countiesServed": [
+      "Riverton"
+    ],
+    "waitlist": "No waitlist"
+  },
+  {
+    "id": "provider-73",
+    "name": "Radiant Behavior Solutions",
+    "county": "Box Elder",
+    "city": "",
+    "address": "",
+    "phone": "",
+    "email": "info@radiantbehavior.com",
+    "website": "https://www.radiantbehavior.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "UUHP",
+      "PEHP",
+      "Cigna",
+      "Aetna"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Box Elder",
+      "Cache",
+      "Salt Lake",
+      "Utah"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-74",
+    "name": "Re Therapy Services",
+    "county": "Utah",
+    "city": "Fork",
+    "address": "727 S Main Street, Spanish Fork, UT 84660",
+    "phone": "(801) 210-9319",
+    "email": "",
+    "website": "https://www.retherapyservices.com",
+    "insuranceAccepted": [
+      "U of U",
+      "BCBS",
+      "Cigna",
+      "PEHP",
+      "Optum",
+      "Aetna",
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Utah",
+      "Delta",
+      "Nephi"
+    ]
+  },
+  {
+    "id": "provider-75",
+    "name": "Reaching Milestones",
+    "county": "Layton area",
+    "city": "Layton",
+    "address": "365 W 1550 N, Layton, UT 84041",
+    "phone": "(678) 656-4716",
+    "email": "",
+    "website": "https://www.reachingmilestones.com",
+    "insuranceAccepted": [
+      "Aetna",
+      "BCBS",
+      "Cigna",
+      "Tri-Care",
+      "UnitedHealth"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Layton area"
+    ]
+  },
+  {
+    "id": "provider-76",
+    "name": "Rogue Behavior Services",
+    "county": "Box Elder",
+    "city": "",
+    "address": "",
+    "phone": "(385) 321-7880",
+    "email": "info@roguebx.com",
+    "website": "https://roguebehaviorservices.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "Regence",
+      "Optum",
+      "UHC",
+      "Select Health"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Box Elder",
+      "Cache",
+      "Davis",
+      "Iron",
+      "Kane",
+      "Salt Lake",
+      "Utah",
+      "Washington",
+      "Weber"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-77",
+    "name": "Sandstone Autism Services",
+    "county": "Utah",
+    "city": "Payson",
+    "address": "95 S 100 E St 300, Payson, UT 84651",
+    "phone": "(801) 696-9779",
+    "email": "sandstoneautismservices@gmail.com",
+    "website": "https://www.sandstoneautismservices.org",
+    "insuranceAccepted": [
+      "Aetna",
+      "BCBS",
+      "Select Health",
+      "EMI",
+      "DMBA",
+      "Medicaid",
+      "U of U"
+    ],
+    "ageGroups": [
+      "All ages"
+    ],
+    "countiesServed": [
+      "Utah",
+      "Juab",
+      "Sanpete",
+      "Washington",
+      "Cache"
+    ]
+  },
+  {
+    "id": "provider-78",
+    "name": "Simple Behavior Solutions",
+    "county": "St George",
+    "city": "",
+    "address": "",
+    "phone": "(951) 905-8652",
+    "email": "office@simplebehaviorsolutions.com",
+    "website": "https://Simplebehaviorsolutions.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "private pay"
+    ],
+    "ageGroups": [
+      "Up to 15 years"
+    ],
+    "countiesServed": [
+      "St George"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-79",
+    "name": "Success on the Spectrum",
+    "county": "Utah",
+    "city": "Fork",
+    "address": "36 N 1100 E, Ste B American Fork, UT 84003",
+    "phone": "(385) 486-4190",
+    "email": "americanfork@successonthespectrum.com",
+    "website": "https://www.successonthespectrum.com",
+    "description": "Waitlist: No waitlist",
+    "insuranceAccepted": [
+      "Medicaid",
+      "EMI",
+      "BCBS",
+      "Select Health"
+    ],
+    "ageGroups": [
+      "Up to 18 years"
+    ],
+    "countiesServed": [
+      "Utah",
+      "Salt Lake"
+    ],
+    "waitlist": "No waitlist"
+  },
+  {
+    "id": "provider-80",
+    "name": "Summit Behavior Services",
+    "county": "St. George",
+    "city": "George",
+    "address": "162 N 400 E, Ste A105, St. George, UT 84770",
+    "phone": "(435) 275-8911",
+    "email": "",
+    "website": "https://www.summitbehaviorservicesutah.weebly.com",
+    "description": "Waitlist: Contact provider",
+    "insuranceAccepted": [
+      "Medicaid"
+    ],
+    "ageGroups": [
+      "3 to 18 years"
+    ],
+    "countiesServed": [
+      "St. George",
+      "Cedar City"
+    ],
+    "waitlist": "Contact provider"
+  },
+  {
+    "id": "provider-81",
+    "name": "Transitional Behavior Support",
+    "county": "Summit: Heber",
+    "city": "",
+    "address": "",
+    "phone": "(385) 245-2555",
+    "email": "leslielilino@transitionalbehaviorsupport.com",
+    "website": "https://www.transitionalbehaviorsupport.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "BCBS",
+      "Select Health",
+      "Cigna",
+      "Medicaid",
+      "Aetna",
+      "DSPD"
+    ],
+    "ageGroups": [
+      "3 to 65 years"
+    ],
+    "countiesServed": [
+      "Summit: Heber",
+      "Midway; Utah: Lehi",
+      "Orem",
+      "Provo"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
+  },
+  {
+    "id": "provider-82",
+    "name": "Utah Autism Academy",
+    "county": "Midvale",
+    "city": "Midvale",
+    "address": "7434 S State Street, Midvale, Utah 84047",
+    "phone": "(801) 456-9955",
+    "email": "",
+    "website": "https://utahautismacademy.com",
+    "description": "Offers telehealth services",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "most insurances"
+    ],
+    "ageGroups": [
+      "2 to 21 years"
+    ],
+    "countiesServed": [
+      "Midvale",
+      "Orem",
+      "St. George"
+    ],
+    "telehealth": true
+  },
+  {
+    "id": "provider-83",
+    "name": "Utah Behavior Services",
+    "county": "Bear River",
+    "city": "",
+    "address": "",
+    "phone": "(801) 255-5131",
+    "email": "office@utbs.com",
+    "website": "https://utahbehaviorservices.com",
+    "description": "Offers telehealth services",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Medicaid",
+      "most insurances"
+    ],
+    "ageGroups": [
+      "Up to 21 years"
+    ],
+    "countiesServed": [
+      "Bear River",
+      "Brigham City",
+      "Cedar City",
+      "Lehi",
+      "SLC",
+      "Richfield",
+      "Riverdale",
+      "St. George"
+    ],
+    "telehealth": true
+  },
+  {
+    "id": "provider-84",
+    "name": "Whole Child Therapy",
+    "county": "Utah",
+    "city": "Fork",
+    "address": "1570 N Main Street, Spanish Fork, UT 84660",
+    "phone": "(801) 210-9319",
+    "email": "contactus@twctherapy.com",
+    "website": "https://www.thewholechildtherapy.com",
+    "description": "Waitlist: Afterschool 9 months",
+    "insuranceAccepted": [
+      "Select Health",
+      "Medicaid",
+      "U of U",
+      "PEHP",
+      "BCBS",
+      "UHC"
+    ],
+    "ageGroups": [
+      "2 to 18 years"
+    ],
+    "countiesServed": [
+      "Utah"
+    ],
+    "waitlist": "Afterschool 9 months"
+  },
+  {
+    "id": "provider-85",
+    "name": "Wildflower Grove ABA",
+    "county": "Salt Lake",
+    "city": "",
+    "address": "",
+    "phone": "(801) 630-8420",
+    "email": "Danielle@finnihealth.com",
+    "website": "https://www.wildflowergroveaba.com",
+    "description": "Offers telehealth services. Waitlist: No waitlist",
+    "services": [
+      "Telehealth"
+    ],
+    "insuranceAccepted": [
+      "Most insurances"
+    ],
+    "ageGroups": [
+      "2 to 10 years"
+    ],
+    "countiesServed": [
+      "Salt Lake"
+    ],
+    "waitlist": "No waitlist",
+    "telehealth": true
   }
 ]
