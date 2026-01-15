@@ -1,0 +1,81 @@
+'use client'
+
+import Link from 'next/link'
+import { Calendar, User, ArrowRight, BookOpen } from 'lucide-react'
+import BlogImage from '@/components/BlogImage'
+
+interface BlogRowProps {
+  post: {
+    id: string
+    title: string
+    excerpt: string
+    author: string
+    date: string
+    slug: string
+    category?: string
+    image?: string
+  }
+  index?: number
+}
+
+export default function BlogRow({ post, index }: BlogRowProps) {
+  return (
+    <div className="group border border-border rounded-xl bg-card hover:shadow-xl hover:border-foreground/20 transition-all duration-300 overflow-hidden">
+      <Link href={`/blog/${post.slug}`} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-5 sm:p-6">
+        {/* Image Section */}
+        <div className="relative w-full sm:w-32 md:w-40 lg:w-48 h-32 sm:h-24 flex-shrink-0 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden">
+          <BlogImage
+            src={post.image || '/blog/placeholder.jpg'}
+            alt={post.title}
+            className="object-cover group-hover:scale-110 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent pointer-events-none" />
+        </div>
+
+        {/* Content Section */}
+        <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+              {post.category && (
+                <span className="text-xs font-semibold px-2.5 py-1 rounded-lg bg-accent text-accent-foreground border border-border">
+                  {post.category}
+                </span>
+              )}
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <Calendar className="w-3.5 h-3.5" />
+                <time dateTime={post.date}>
+                  {new Date(post.date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </time>
+              </div>
+            </div>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
+              {post.title}
+            </h3>
+            <p className="text-sm text-muted-foreground line-clamp-2 sm:line-clamp-1 leading-relaxed">
+              {post.excerpt}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-3 text-sm text-muted-foreground">
+            <div className="flex items-center gap-1.5">
+              <User className="w-4 h-4" />
+              <span>{post.author}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-end">
+            <div className="flex items-center gap-2 text-foreground font-medium text-sm sm:text-base group-hover:gap-3 transition-all">
+              <BookOpen className="w-4 h-4" />
+              <span>Read Article</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  )
+}

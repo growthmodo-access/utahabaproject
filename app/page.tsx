@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, MapPin, Calculator, HelpCircle, BookOpen, Calendar, User, Star, Award, Sparkles, PhoneCall } from 'lucide-react'
 import BlogImage from '@/components/BlogImage'
+import BlogRow from '@/components/BlogRow'
 import ProviderRow from '@/components/ProviderRow'
 import { Provider } from '@/types/provider'
 import { getProvidersData } from '@/lib/data'
@@ -112,13 +113,13 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section - Enhanced */}
-      <section className="relative border-b border-border overflow-hidden">
+      <section className="relative overflow-hidden -mt-16 pt-16">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400/10 to-yellow-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 md:py-32 lg:py-40">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 md:py-32 lg:py-40 border-b border-border/50">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-50 to-yellow-100 border border-yellow-200 mb-6 sm:mb-8 shadow-sm">
               <Sparkles className="w-4 h-4 text-yellow-600" />
@@ -203,87 +204,35 @@ export default async function Home() {
         </section>
       )}
 
-      {/* Latest Blog Posts Section - Enhanced Row Layout */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-b border-border bg-white">
+      {/* Latest Blog Posts Section - Row Style Matching Providers */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-b border-border bg-gradient-to-b from-white via-gray-50/30 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 sm:mb-12 gap-4">
-            <div>
-              <div className="inline-flex items-center gap-2 mb-3">
-                <div className="w-1 h-6 bg-foreground rounded-full" />
-                <span className="text-sm font-semibold text-foreground/60 uppercase tracking-wider">Resources</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2">
-                Latest Articles
-              </h2>
-              <p className="text-sm sm:text-base text-muted-foreground">
-                Expert insights and resources about ABA therapy
-              </p>
+          <div className="mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 mb-3">
+              <div className="w-1 h-6 bg-gradient-to-b from-blue-400 to-blue-500 rounded-full" />
+              <span className="text-sm font-semibold text-foreground/60 uppercase tracking-wider">Resources</span>
             </div>
-            <Link 
-              href="/blog"
-              className="group inline-flex items-center gap-2 text-foreground hover:text-foreground/80 font-medium text-sm sm:text-base w-fit transition-colors"
-            >
-              View All 
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2">
+                  Latest Articles
+                </h2>
+                <p className="text-sm sm:text-base text-muted-foreground">
+                  Expert insights and resources about ABA therapy
+                </p>
+              </div>
+              <Link 
+                href="/blog"
+                className="group inline-flex items-center gap-2 text-foreground hover:text-foreground/80 font-medium text-sm sm:text-base w-fit transition-colors"
+              >
+                View All 
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
           <div className="space-y-4 sm:space-y-6">
-            {blogPosts.slice(0, 6).map((post) => (
-              <article
-                key={post.id}
-                className="group border border-border rounded-xl bg-card hover:shadow-xl hover:border-foreground/20 transition-all duration-300 overflow-hidden"
-              >
-                <Link href={`/blog/${post.slug}`} className="flex flex-col sm:flex-row">
-                  {/* Featured Image */}
-                  <div className="relative w-full sm:w-48 md:w-64 lg:w-80 h-48 sm:h-full sm:min-h-[200px] flex-shrink-0 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                    <BlogImage
-                      src={post.image || '/blog/placeholder.jpg'}
-                      alt={post.title}
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent pointer-events-none" />
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="flex-1 p-5 sm:p-6 md:p-8 flex flex-col justify-between">
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-3">
-                        {post.category && (
-                          <span className="text-xs font-semibold px-3 py-1 rounded-full bg-accent text-accent-foreground border border-border">
-                            {post.category}
-                          </span>
-                        )}
-                        <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
-                          <Calendar className="w-3.5 h-3.5" />
-                          <time dateTime={post.date}>
-                            {new Date(post.date).toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              year: 'numeric'
-                            })}
-                          </time>
-                        </div>
-                      </div>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 group-hover:text-foreground/80 transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <p className="text-sm sm:text-base text-muted-foreground mb-4 line-clamp-2 sm:line-clamp-1 leading-relaxed">
-                        {post.excerpt}
-                      </p>
-                    </div>
-                    <div className="flex items-center justify-between pt-4 border-t border-border">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <User className="w-4 h-4" />
-                        <span>{post.author}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-foreground font-medium text-sm sm:text-base group-hover:gap-3 transition-all">
-                        Read More
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </article>
+            {blogPosts.slice(0, 6).map((post, index) => (
+              <BlogRow key={post.id} post={post} index={index} />
             ))}
           </div>
         </div>
