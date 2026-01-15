@@ -111,17 +111,16 @@ export default async function Home() {
 
       {/* Top 5 Featured Providers Section - Row Style */}
       {featuredProviders.length > 0 && (
-        <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-b border-border bg-gradient-to-b from-white via-gray-50/30 to-white">
+        <section className="py-16 sm:py-20 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 border-b border-gray-200/50 bg-gradient-to-b from-white via-gray-50/30 to-white">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-8 sm:mb-12">
-              <div className="inline-flex items-center gap-2 mb-3">
-                <div className="w-1 h-6 bg-gradient-to-b from-yellow-400 to-yellow-500 rounded-full" />
-                <span className="text-sm font-semibold text-foreground/60 uppercase tracking-wider">Top Rated</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2">
+            <div className="mb-12 sm:mb-16">
+              <span className="inline-block text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-[0.15em] mb-4">
+                Top Rated
+              </span>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-4">
                 Top 5 Featured Providers
               </h2>
-              <p className="text-sm sm:text-base text-muted-foreground">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                 Our handpicked selection of Utah&apos;s best ABA therapy providers
               </p>
             </div>
@@ -144,19 +143,18 @@ export default async function Home() {
       )}
 
       {/* Latest Blog Posts Section - Row Style Matching Providers */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 border-b border-border bg-gradient-to-b from-white via-gray-50/30 to-white">
+      <section className="py-16 sm:py-20 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 border-b border-gray-200/50 bg-gradient-to-b from-white via-gray-50/30 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <div className="w-1 h-6 bg-gradient-to-b from-blue-400 to-blue-500 rounded-full" />
-              <span className="text-sm font-semibold text-foreground/60 uppercase tracking-wider">Resources</span>
-            </div>
+          <div className="mb-12 sm:mb-16">
+            <span className="inline-block text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-[0.15em] mb-4">
+              Resources
+            </span>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2">
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-4">
                   Latest Articles
                 </h2>
-                <p className="text-sm sm:text-base text-muted-foreground">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   Expert insights and resources about ABA therapy
                 </p>
               </div>
@@ -184,17 +182,16 @@ export default async function Home() {
       </section>
 
       {/* Features Section - Enhanced */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-border">
+      <section className="py-16 sm:py-20 md:py-24 lg:py-28 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-200/50">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <div className="w-1 h-6 bg-foreground rounded-full" />
-              <span className="text-sm font-semibold text-foreground/60 uppercase tracking-wider">Features</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-2">
+          <div className="text-center mb-12 sm:mb-16">
+            <span className="inline-block text-xs sm:text-sm font-semibold text-gray-500 uppercase tracking-[0.15em] mb-4">
+              Features
+            </span>
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-gray-900 mb-4">
               Everything You Need
             </h2>
-            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
               Comprehensive tools and resources to help you find the right ABA therapy provider
             </p>
           </div>
