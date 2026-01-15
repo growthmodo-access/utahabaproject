@@ -1,11 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Plus, Edit, Trash2, Save, X, Image as ImageIcon } from 'lucide-react'
 import { BlogPost } from '@/lib/blog-data'
 import Image from 'next/image'
 
 export default function AdminBlogPage() {
+  const router = useRouter()
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null)
   const [isCreating, setIsCreating] = useState(false)
@@ -105,12 +107,20 @@ export default function AdminBlogPage() {
       const responseData = await res.json()
 
       if (res.ok) {
-        setMessage(editingPost ? 'Post updated successfully!' : 'Post created successfully!')
+        setMessage(editingPost ? 'Post updated successfully! Refreshing...' : 'Post created successfully!')
         setEditingPost(null)
         setIsCreating(false)
         setImagePreview('')
         fetchPosts()
-        setTimeout(() => setMessage(''), 3000)
+        // Refresh the router to clear Next.js cache
+        router.refresh()
+        setTimeout(() => {
+          setMessage('')
+          // Force a hard refresh of blog pages
+          if (editingPost) {
+            window.location.href = `/blog/${editingPost.slug}`
+          }
+        }, 1000)
       } else {
         const errorMsg = responseData.error || `Error: ${res.status} ${res.statusText}`
         setMessage(errorMsg)

@@ -7,6 +7,9 @@ import RelatedPosts from '@/components/RelatedPosts'
 import { getBlogPost, getBlogPosts } from '@/lib/blog-data'
 import { calculateReadingTime, getRelatedPosts } from '@/lib/blog-utils'
 
+// Revalidate every 60 seconds to show updates
+export const revalidate = 60
+
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug
   const post = await getBlogPost(slug)
