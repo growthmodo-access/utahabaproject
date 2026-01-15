@@ -107,20 +107,14 @@ export default function AdminBlogPage() {
       const responseData = await res.json()
 
       if (res.ok) {
-        setMessage(editingPost ? 'Post updated successfully! Refreshing...' : 'Post created successfully!')
+        setMessage(editingPost ? 'Post updated successfully! Changes will appear on the blog page shortly.' : 'Post created successfully!')
         setEditingPost(null)
         setIsCreating(false)
         setImagePreview('')
         fetchPosts()
         // Refresh the router to clear Next.js cache
         router.refresh()
-        setTimeout(() => {
-          setMessage('')
-          // Force a hard refresh of blog pages
-          if (editingPost) {
-            window.location.href = `/blog/${editingPost.slug}`
-          }
-        }, 1000)
+        setTimeout(() => setMessage(''), 5000)
       } else {
         const errorMsg = responseData.error || `Error: ${res.status} ${res.statusText}`
         setMessage(errorMsg)
