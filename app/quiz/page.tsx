@@ -309,8 +309,8 @@ export default function QuizPage() {
           {showUserInfoForm && !userInfoSubmitted && (
             <div className="mb-6 sm:mb-8 md:mb-10">
               <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-xl p-6 sm:p-8 mb-6">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Let's Get Your Contact Information</h2>
-                <p className="text-sm sm:text-base text-gray-600 mb-6">We'll use this to send you personalized results and recommendations.</p>
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Let&apos;s Get Your Contact Information</h2>
+                <p className="text-sm sm:text-base text-gray-600 mb-6">We&apos;ll use this to send you personalized results and recommendations.</p>
                 <form onSubmit={handleUserInfoSubmit} className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
