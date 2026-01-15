@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { HelpCircle, CheckCircle, XCircle, ArrowRight, ArrowLeft } from 'lucide-react'
+import { HelpCircle, CheckCircle, XCircle, ArrowRight, ArrowLeft, Sparkles, TrendingUp, BookOpen } from 'lucide-react'
 import EmailCapture from '@/components/EmailCapture'
+import Link from 'next/link'
 
 interface Question {
   id: number
@@ -159,120 +160,169 @@ export default function QuizPage() {
   if (score !== null && result) {
     const ResultIcon = result.icon
     return (
-      <div className="min-h-screen bg-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto">
-          <div className={`bg-card border-2 ${result.borderColor} rounded-lg shadow-sm p-5 sm:p-6 md:p-8`}>
-            <div className="text-center mb-6">
-              <ResultIcon className={`w-12 h-12 sm:w-16 sm:h-16 ${result.color} mx-auto mb-4`} />
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">{result.title}</h1>
-              <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4">{Math.round(score)}%</div>
-            </div>
-            
-            <div className={`${result.bgColor} rounded-lg p-4 sm:p-6 mb-4 sm:mb-6`}>
-              <p className="text-sm sm:text-base md:text-lg text-foreground mb-3 sm:mb-4">{result.message}</p>
-              <p className="text-xs sm:text-sm md:text-base text-muted-foreground"><strong className="text-foreground">Recommendation:</strong> {result.recommendation}</p>
-            </div>
-
-            <div className="space-y-3 sm:space-y-4">
-              <a
-                href="/directory"
-                className="block w-full bg-foreground text-background text-center py-3 px-6 rounded-lg font-medium hover:bg-foreground/90 transition-colors text-sm sm:text-base"
-              >
-                Browse ABA Providers in Utah
-              </a>
-              <a
-                href="/cost-estimator"
-                className="block w-full border border-border bg-background text-foreground text-center py-3 px-6 rounded-lg font-medium hover:bg-accent transition-colors text-sm sm:text-base"
-              >
-                Estimate ABA Therapy Costs
-              </a>
+      <div className="flex flex-col min-h-screen bg-white">
+        {/* Results Hero Section */}
+        <section className="relative overflow-hidden -mt-16 pt-16 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-purple-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+          
+          <div className="relative max-w-4xl mx-auto text-center">
+            <ResultIcon className={`w-16 h-16 sm:w-20 sm:h-20 ${result.color} mx-auto mb-6`} />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
+              {result.title}
+            </h1>
+            <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 mb-6">
+              <TrendingUp className="w-5 h-5 text-purple-600" />
+              <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">{Math.round(score)}%</span>
+              <span className="text-sm sm:text-base text-muted-foreground">Match Score</span>
             </div>
           </div>
+        </section>
 
-          {showEmailCapture && (
-            <div className="mt-6 sm:mt-8">
-              <EmailCapture 
-                source="quiz"
-                onSuccess={() => setShowEmailCapture(false)}
-              />
+        {/* Results Content */}
+        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50/30 to-white">
+          <div className="max-w-4xl mx-auto">
+            <div className={`bg-card border-2 ${result.borderColor} rounded-xl shadow-lg p-6 sm:p-8 md:p-10 mb-8`}>
+              <div className={`${result.bgColor} rounded-lg p-6 sm:p-8 mb-6 sm:mb-8`}>
+                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-4">What This Means</h2>
+                <p className="text-sm sm:text-base md:text-lg text-foreground mb-4 leading-relaxed">{result.message}</p>
+                <div className="bg-white/50 rounded-lg p-4 mt-4">
+                  <p className="text-xs sm:text-sm md:text-base text-muted-foreground">
+                    <strong className="text-foreground">Our Recommendation:</strong> {result.recommendation}
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <Link
+                  href="/directory"
+                  className="block w-full bg-foreground text-background text-center py-4 px-6 rounded-xl font-semibold hover:bg-foreground/90 transition-all shadow-lg hover:shadow-xl text-sm sm:text-base"
+                >
+                  Browse ABA Providers in Utah
+                  <ArrowRight className="w-5 h-5 inline-block ml-2" />
+                </Link>
+                <Link
+                  href="/cost-estimator"
+                  className="block w-full border-2 border-border bg-background text-foreground text-center py-4 px-6 rounded-xl font-semibold hover:bg-accent transition-all text-sm sm:text-base"
+                >
+                  Estimate ABA Therapy Costs
+                </Link>
+                <Link
+                  href="/blog"
+                  className="block w-full border border-border bg-background text-foreground text-center py-4 px-6 rounded-xl font-medium hover:bg-accent transition-all text-sm sm:text-base"
+                >
+                  <BookOpen className="w-4 h-4 inline-block mr-2" />
+                  Learn More About ABA Therapy
+                </Link>
+              </div>
             </div>
-          )}
-        </div>
+
+            {showEmailCapture && (
+              <div className="mb-8">
+                <EmailCapture 
+                  source="quiz"
+                  onSuccess={() => setShowEmailCapture(false)}
+                />
+              </div>
+            )}
+          </div>
+        </section>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-white py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <HelpCircle className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-foreground mx-auto mb-3 sm:mb-4" />
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-3 md:mb-4 px-2">
-            Is ABA Therapy Right for You?
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden -mt-16 pt-16 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-purple-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
+        
+        <div className="relative max-w-7xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 mb-6 sm:mb-8 shadow-sm">
+            <Sparkles className="w-4 h-4 text-purple-600" />
+            <span className="text-sm font-semibold text-purple-800">Interactive Assessment</span>
+          </div>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-4 sm:mb-6 md:mb-8 leading-tight px-2">
+            Is ABA Therapy
+            <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-foreground via-purple-600/20 to-foreground bg-clip-text text-transparent">
+              Right for You?
+            </span>
           </h1>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground px-2">
-            Take our quiz to determine if ABA therapy could be beneficial
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-4xl mx-auto px-4 leading-relaxed font-light">
+            Take our interactive quiz to determine if ABA therapy could be beneficial for you or your loved one
           </p>
         </div>
+      </section>
 
-        <div className="bg-card border border-border rounded-lg shadow-sm p-4 sm:p-5 md:p-6 lg:p-8">
+      {/* Quiz Section */}
+      <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50/30 to-white">
+        <div className="max-w-4xl mx-auto">
+
+        <div className="bg-card border border-border rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
           {/* Progress Bar */}
-          <div className="mb-4 sm:mb-6">
-            <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
-              <span>Question {currentQuestion + 1} of {questions.length}</span>
-              <span>{Math.round(progress)}% Complete</span>
+          <div className="mb-6 sm:mb-8">
+            <div className="flex justify-between items-center text-xs sm:text-sm text-muted-foreground mb-3">
+              <span className="font-medium">Question {currentQuestion + 1} of {questions.length}</span>
+              <span className="font-semibold text-foreground">{Math.round(progress)}% Complete</span>
             </div>
-            <div className="w-full bg-accent rounded-full h-2">
+            <div className="w-full bg-accent rounded-full h-3 overflow-hidden">
               <div 
-                className="bg-foreground h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-purple-500 to-purple-600 h-3 rounded-full transition-all duration-500 shadow-sm"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
 
           {/* Question */}
-          <div className="mb-4 sm:mb-6 md:mb-8">
-            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-foreground mb-3 sm:mb-4 md:mb-6 leading-tight">
+          <div className="mb-6 sm:mb-8 md:mb-10">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
               {questions[currentQuestion].question}
             </h2>
-            <div className="space-y-2 sm:space-y-3">
+            <div className="space-y-3 sm:space-y-4">
               {questions[currentQuestion].options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => handleAnswer(questions[currentQuestion].id, option.score)}
-                  className={`w-full text-left p-3 sm:p-4 rounded-lg border-2 transition-all text-sm sm:text-base ${
+                  className={`w-full text-left p-4 sm:p-5 rounded-xl border-2 transition-all text-sm sm:text-base hover:shadow-md ${
                     currentAnswer === option.score
-                      ? 'border-foreground bg-accent'
+                      ? 'border-foreground bg-gradient-to-r from-purple-50 to-purple-100 shadow-md'
                       : 'border-border hover:border-foreground/50 hover:bg-accent/50'
                   }`}
                 >
-                  <span className="font-medium text-foreground">{option.label}</span>
+                  <span className={`font-medium ${currentAnswer === option.score ? 'text-foreground' : 'text-foreground'}`}>
+                    {option.label}
+                  </span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-3">
+          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 pt-6 border-t border-border">
             <button
               onClick={prevQuestion}
               disabled={currentQuestion === 0}
-              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg border border-border text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-border text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm sm:text-base w-full sm:w-auto font-medium"
             >
-              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ArrowLeft className="w-5 h-5" />
               Previous
             </button>
             <button
               onClick={nextQuestion}
               disabled={!currentAnswer}
-              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base w-full sm:w-auto"
+              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl text-sm sm:text-base w-full sm:w-auto font-semibold"
             >
               {currentQuestion === questions.length - 1 ? 'See Results' : 'Next'}
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              <ArrowRight className="w-5 h-5" />
             </button>
           </div>
         </div>
-      </div>
+        </div>
+      </section>
     </div>
   )
 }

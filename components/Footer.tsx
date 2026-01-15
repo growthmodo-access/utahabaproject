@@ -41,14 +41,21 @@ export default function Footer() {
             </ul>
           </div>
           <div>
-            <h4 className="text-foreground font-semibold mb-4 text-sm">Contact</h4>
-            <p className="text-sm text-muted-foreground">
-              Have questions? Reach out to us for assistance finding the right provider.
-            </p>
+            <h4 className="text-foreground font-semibold mb-4 text-sm">Legal & Contact</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact Us</Link></li>
+              <li><Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">Terms & Conditions</Link></li>
+            </ul>
           </div>
         </div>
-        <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            <Link href="/privacy" className="hover:text-foreground transition-colors">Privacy</Link>
+            <Link href="/terms" className="hover:text-foreground transition-colors">Terms</Link>
+            <Link href="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+          </div>
         </div>
       </div>
     </footer>
