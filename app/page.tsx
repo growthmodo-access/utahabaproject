@@ -5,6 +5,7 @@ import BlogRow from '@/components/BlogRow'
 import ProviderRow from '@/components/ProviderRow'
 import { Provider } from '@/types/provider'
 import { getProvidersData } from '@/lib/data'
+import { getBlogPosts } from '@/lib/blog-data'
 
 // Fetch providers directly from data source
 async function getFeaturedProviders(): Promise<Provider[]> {
@@ -43,72 +44,10 @@ async function getFeaturedProviders(): Promise<Provider[]> {
   }
 }
 
-// Sample blog posts with featured images
-const blogPosts = [
-  {
-    id: '1',
-    title: 'Understanding ABA Therapy: A Comprehensive Guide for Utah Families',
-    excerpt: 'Applied Behavior Analysis (ABA) is an evidence-based therapy that helps individuals with autism develop essential life skills.',
-    author: 'Dr. Sarah Johnson',
-    date: '2024-01-15',
-    slug: 'understanding-aba-therapy',
-    category: 'Education',
-    image: '/blog/aba-therapy-guide.jpg'
-  },
-  {
-    id: '2',
-    title: 'How to Choose the Right ABA Provider in Utah',
-    excerpt: 'Selecting an ABA provider is one of the most important decisions you\'ll make. This guide covers key factors to consider.',
-    author: 'Michael Chen',
-    date: '2024-01-10',
-    slug: 'choosing-aba-provider',
-    category: 'Guide',
-    image: '/blog/choosing-provider.jpg'
-  },
-  {
-    id: '3',
-    title: 'Insurance Coverage for ABA Therapy in Utah: What You Need to Know',
-    excerpt: 'Navigating insurance coverage for ABA therapy can be confusing. Learn about Utah-specific insurance requirements.',
-    author: 'Jennifer Martinez',
-    date: '2024-01-05',
-    slug: 'insurance-coverage-utah',
-    category: 'Insurance',
-    image: '/blog/insurance-coverage.jpg'
-  },
-  {
-    id: '4',
-    title: 'Early Intervention: Why Starting ABA Therapy Early Matters',
-    excerpt: 'Research shows that early intervention with ABA therapy can lead to significantly better outcomes.',
-    author: 'Dr. Sarah Johnson',
-    date: '2023-12-28',
-    slug: 'early-intervention-aba',
-    category: 'Research',
-    image: '/blog/early-intervention.jpg'
-  },
-  {
-    id: '5',
-    title: 'The Cost of ABA Therapy: Breaking Down Expenses',
-    excerpt: 'Understanding the true cost of ABA therapy and how to maximize your insurance benefits.',
-    author: 'Michael Chen',
-    date: '2023-12-20',
-    slug: 'aba-therapy-costs',
-    category: 'Finance',
-    image: '/blog/aba-costs.jpg'
-  },
-  {
-    id: '6',
-    title: 'Success Stories: How ABA Therapy Transformed Lives in Utah',
-    excerpt: 'Real stories from Utah families who have seen remarkable progress through ABA therapy.',
-    author: 'Jennifer Martinez',
-    date: '2023-12-15',
-    slug: 'aba-success-stories',
-    category: 'Stories',
-    image: '/blog/success-stories.jpg'
-  }
-]
-
 export default async function Home() {
   const featuredProviders = await getFeaturedProviders()
+  const blogPosts = await getBlogPosts()
+  const latestPosts = blogPosts.slice(0, 6) // Get latest 6 posts
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -231,9 +170,15 @@ export default async function Home() {
             </div>
           </div>
           <div className="space-y-4 sm:space-y-6">
-            {blogPosts.slice(0, 6).map((post, index) => (
-              <BlogRow key={post.id} post={post} index={index} />
-            ))}
+            {latestPosts.length === 0 ? (
+              <div className="text-center py-12 col-span-full">
+                <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
+              </div>
+            ) : (
+              latestPosts.map((post, index) => (
+                <BlogRow key={post.id} post={post} index={index} />
+              ))
+            )}
           </div>
         </div>
       </section>

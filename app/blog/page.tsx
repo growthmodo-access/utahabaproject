@@ -2,63 +2,10 @@ import Link from 'next/link'
 import { Calendar, User, ArrowRight } from 'lucide-react'
 import BlogImage from '@/components/BlogImage'
 import EmailCapture from '@/components/EmailCapture'
+import { getBlogPosts } from '@/lib/blog-data'
 
-interface BlogPost {
-  id: string
-  title: string
-  excerpt: string
-  author: string
-  date: string
-  slug: string
-  category?: string
-  image?: string
-}
-
-// Sample blog posts - in production, these would come from a CMS or database
-const blogPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Understanding ABA Therapy: A Comprehensive Guide for Utah Families',
-    excerpt: 'Applied Behavior Analysis (ABA) is an evidence-based therapy that helps individuals with autism develop essential life skills. Learn what ABA therapy involves and how it can benefit your family.',
-    author: 'Dr. Sarah Johnson',
-    date: '2024-01-15',
-    slug: 'understanding-aba-therapy',
-    category: 'Education',
-    image: '/blog/aba-therapy-guide.jpg'
-  },
-  {
-    id: '2',
-    title: 'How to Choose the Right ABA Provider in Utah',
-    excerpt: 'Selecting an ABA provider is one of the most important decisions you\'ll make. This guide covers key factors to consider, questions to ask, and red flags to watch for.',
-    author: 'Michael Chen',
-    date: '2024-01-10',
-    slug: 'choosing-aba-provider',
-    category: 'Guide',
-    image: '/blog/choosing-provider.jpg'
-  },
-  {
-    id: '3',
-    title: 'Insurance Coverage for ABA Therapy in Utah: What You Need to Know',
-    excerpt: 'Navigating insurance coverage for ABA therapy can be confusing. Learn about Utah-specific insurance requirements, coverage options, and how to maximize your benefits.',
-    author: 'Jennifer Martinez',
-    date: '2024-01-05',
-    slug: 'insurance-coverage-utah',
-    category: 'Insurance',
-    image: '/blog/insurance-coverage.jpg'
-  },
-  {
-    id: '4',
-    title: 'Early Intervention: Why Starting ABA Therapy Early Matters',
-    excerpt: 'Research shows that early intervention with ABA therapy can lead to significantly better outcomes. Discover the benefits of starting ABA therapy at a young age.',
-    author: 'Dr. Sarah Johnson',
-    date: '2023-12-28',
-    slug: 'early-intervention-aba',
-    category: 'Research',
-    image: '/blog/early-intervention.jpg'
-  }
-]
-
-export default function BlogPage() {
+export default async function BlogPage() {
+  const blogPosts = await getBlogPosts()
   return (
     <div className="min-h-screen bg-white py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
@@ -72,7 +19,12 @@ export default function BlogPage() {
         </div>
 
         <div className="space-y-4 sm:space-y-6 mb-6 sm:mb-8 md:mb-12">
-          {blogPosts.map((post) => (
+          {blogPosts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
+            </div>
+          ) : (
+            blogPosts.map((post) => (
             <article
               key={post.id}
               className="group border border-border rounded-lg bg-card hover:shadow-lg transition-all overflow-hidden"
@@ -128,7 +80,8 @@ export default function BlogPage() {
                 </div>
               </Link>
             </article>
-          ))}
+            ))
+          )}
         </div>
 
         <div className="max-w-2xl mx-auto">
