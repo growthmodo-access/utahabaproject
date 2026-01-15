@@ -4,7 +4,8 @@ import { useState, useEffect, useMemo } from 'react'
 import { Provider } from '@/types/provider'
 import { FilterOptions, SortOption } from '@/types/filter'
 import ProviderCard from '@/components/ProviderCard'
-import ProviderCardSkeleton from '@/components/ProviderCardSkeleton'
+import ProviderRow from '@/components/ProviderRow'
+import ProviderRowSkeleton from '@/components/ProviderRowSkeleton'
 import FilterPanel from '@/components/FilterPanel'
 import EmptyState from '@/components/EmptyState'
 import { MapPin, Search, ArrowUpDown } from 'lucide-react'
@@ -194,9 +195,9 @@ export default function DirectoryPage() {
 
         {/* Loading State */}
         {loading && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <div className="space-y-4 sm:space-y-6">
             {[...Array(8)].map((_, i) => (
-              <ProviderCardSkeleton key={i} />
+              <ProviderRowSkeleton key={i} />
             ))}
           </div>
         )}
@@ -209,9 +210,9 @@ export default function DirectoryPage() {
               Top Providers in {selectedCounty} County
             </h2>
             {processedProviders.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+              <div className="space-y-4 sm:space-y-6">
                 {processedProviders.map((provider, index) => (
-                  <ProviderCard 
+                  <ProviderRow 
                     key={provider.id} 
                     provider={provider} 
                     rank={index + 1}
@@ -238,9 +239,9 @@ export default function DirectoryPage() {
                     </span>
                   </h2>
                   {countyProviders.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                    <div className="space-y-4 sm:space-y-6">
                       {countyProviders.slice(0, 8).map((provider, index) => (
-                        <ProviderCard 
+                        <ProviderRow 
                           key={provider.id} 
                           provider={provider} 
                           rank={index + 1}
