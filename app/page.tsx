@@ -282,53 +282,53 @@ export default async function Home() {
               )}
 
               {/* Other Latest Posts - Consistent Card Sizes */}
-              {latestPosts.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`}>
-                  <article className="group h-full flex flex-col bg-white border border-gray-200/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gray-300/80 transition-all duration-300">
-                    {/* Image - Consistent Aspect Ratio */}
-                    <div className="relative w-full h-48 sm:h-56 lg:h-72 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                      {post.image && post.image.trim() !== '' ? (
-                        <BlogImage
-                          src={post.image}
-                          alt={post.title}
-                          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                          fill={true}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                          <div className="text-gray-400 text-xs">No Image</div>
-                        </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-                      {post.category && (
-                        <div className="absolute top-4 left-4">
-                          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-md border border-gray-200/50">
-                            {post.category}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="flex-1 flex flex-col p-6 lg:p-8">
-                      <div className="flex flex-wrap items-center gap-3 mb-3">
-                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                          <Calendar className="w-3.5 h-3.5" />
-                          <time dateTime={post.date}>
-                            {new Date(post.date).toLocaleDateString('en-US', {
-                              month: 'short',
-                              day: 'numeric',
-                              year: 'numeric'
-                            })}
-                          </time>
-                        </div>
-                        {post.readingTime && (
-                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span>{post.readingTime} min read</span>
+              {latestPosts.map((post) => {
+                const readingTime = calculateReadingTime(post.content)
+                return (
+                  <Link key={post.id} href={`/blog/${post.slug}`}>
+                    <article className="group h-full flex flex-col bg-white border border-gray-200/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gray-300/80 transition-all duration-300">
+                      {/* Image - Consistent Aspect Ratio */}
+                      <div className="relative w-full h-48 sm:h-56 lg:h-72 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                        {post.image && post.image.trim() !== '' ? (
+                          <BlogImage
+                            src={post.image}
+                            alt={post.title}
+                            className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                            fill={true}
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                            <div className="text-gray-400 text-xs">No Image</div>
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                        {post.category && (
+                          <div className="absolute top-4 left-4">
+                            <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-md border border-gray-200/50">
+                              {post.category}
+                            </span>
                           </div>
                         )}
                       </div>
+                      
+                      {/* Content */}
+                      <div className="flex-1 flex flex-col p-6 lg:p-8">
+                        <div className="flex flex-wrap items-center gap-3 mb-3">
+                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                            <Calendar className="w-3.5 h-3.5" />
+                            <time dateTime={post.date}>
+                              {new Date(post.date).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                              })}
+                            </time>
+                          </div>
+                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span>{readingTime} min read</span>
+                          </div>
+                        </div>
                       <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight line-clamp-2">
                         {post.title}
                       </h3>
@@ -348,7 +348,8 @@ export default async function Home() {
                     </div>
                   </article>
                 </Link>
-              ))}
+                )
+              })}
             </div>
           )}
         </div>
