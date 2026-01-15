@@ -35,26 +35,35 @@ try {
 
   console.log(`Found ${data.length} rows in Excel file (sheet: ${sheetName})`);
 
-  // Transform data
-  const providers = data.map((row, index) => {
-    // Generate ID
-    const id = row.id || row.ID || `provider-${index + 1}`;
-    
+  // Transform data - create separate entries for each county served
+  let providerIndex = 0;
+  const providers = [];
+  
+  data.forEach((row, index) => {
     // Extract provider name (handle various column name formats)
     const name = row['Provider Name'] || row['provider name'] || row.name || row.Name || 'Unknown Provider';
+    
+    if (!name || name === 'Unknown Provider') return; // Skip empty rows
     
     // Extract counties served (can be comma-separated)
     const countiesServed = row['Counties Served'] || row['counties served'] || row.county || row.County || '';
     const counties = countiesServed ? 
       String(countiesServed).split(',').map(c => c.trim()).filter(Boolean) : [];
     
-    // Use first county as primary county, or extract from address
-    const primaryCounty = counties.length > 0 ? counties[0] : '';
+    // If no counties specified, try to extract from address or use a default
+    let defaultCounty = row.County || row.county || '';
+    if (counties.length === 0 && defaultCounty) {
+      counties.push(defaultCounty);
+    }
+    
+    // If still no counties, create one entry with empty county
+    if (counties.length === 0) {
+      counties.push('');
+    }
     
     // Extract address and try to parse city/county from it
     const address = row.Address || row.address || '';
     let city = row.City || row.city || '';
-    let county = primaryCounty || row.County || row.county || '';
     
     // Try to extract city from address if not provided
     if (!city && address) {
@@ -104,25 +113,34 @@ try {
     if (telehealth === 'Yes') services.push('Telehealth');
     if (spanishSpeakers === 'Yes') services.push('Spanish Language Support');
     
-    return {
-      id: String(id),
-      name: name.trim(),
-      county: county.trim() || (counties.length > 0 ? counties[0] : ''),
-      city: city.trim(),
-      address: address.trim(),
-      phone: phone.trim(),
-      email: email.trim(),
-      website: website.trim(),
-      description: description,
-      services: services.length > 0 ? services : undefined,
-      insuranceAccepted: insuranceAccepted.length > 0 ? insuranceAccepted : undefined,
-      ageGroups: ageGroups.length > 0 ? ageGroups : undefined,
-      countiesServed: counties.length > 0 ? counties : undefined, // Store all counties
-      waitlist: waitlist || undefined,
-      telehealth: telehealth === 'Yes' || undefined,
-      spanishSpeakers: spanishSpeakers === 'Yes' || undefined,
-    };
-  }).filter(p => p.name && p.name !== 'Unknown Provider'); // Filter out empty rows
+    // Create a separate entry for each county served
+    counties.forEach((county, countyIndex) => {
+      providerIndex++;
+      const id = row.id || row.ID || `provider-${providerIndex}`;
+      
+      providers.push({
+        id: String(id) + (counties.length > 1 ? `-${countyIndex + 1}` : ''),
+        name: name.trim(),
+        county: county.trim(),
+        city: city.trim(),
+        address: address.trim(),
+        phone: phone.trim(),
+        email: email.trim(),
+        website: website.trim(),
+        description: description,
+        services: services.length > 0 ? services : undefined,
+        insuranceAccepted: insuranceAccepted.length > 0 ? insuranceAccepted : undefined,
+        ageGroups: ageGroups.length > 0 ? ageGroups : undefined,
+        countiesServed: counties.length > 0 ? counties : undefined, // Store all counties
+        waitlist: waitlist || undefined,
+        telehealth: telehealth === 'Yes' || undefined,
+        spanishSpeakers: spanishSpeakers === 'Yes' || undefined,
+      });
+    });
+  });
+  
+  // Filter out providers with empty names
+  const filteredProviders = providers.filter(p => p.name && p.name !== 'Unknown Provider');
 
   // Save to JSON file
   const outputPath = path.join(__dirname, '..', 'data', 'providers.json');
@@ -132,14 +150,28 @@ try {
     fs.mkdirSync(dataDir, { recursive: true });
   }
 
-  fs.writeFileSync(outputPath, JSON.stringify(providers, null, 2));
+  fs.writeFileSync(outputPath, JSON.stringify(filteredProviders, null, 2));
   
-  console.log(`✅ Successfully imported ${providers.length} providers`);
+  console.log(`✅ Successfully imported ${filteredProviders.length} providers`);
   console.log(`📁 Data saved to: ${outputPath}`);
   console.log('\nSummary:');
-  console.log(`- Total providers: ${providers.length}`);
-  const counties = [...new Set(providers.map(p => p.county).filter(Boolean))];
+  console.log(`- Total providers: ${filteredProviders.length}`);
+  const counties = [...new Set(filteredProviders.map(p => p.county).filter(Boolean))];
   console.log(`- Counties: ${counties.length} (${counties.join(', ')})`);
+  
+  // Show providers with multiple entries
+  const providerNames = {};
+  filteredProviders.forEach(p => {
+    if (!providerNames[p.name]) providerNames[p.name] = [];
+    providerNames[p.name].push(p.county);
+  });
+  const multiCountyProviders = Object.entries(providerNames).filter(([name, counties]) => counties.length > 1);
+  if (multiCountyProviders.length > 0) {
+    console.log(`\nProviders with multiple county entries:`);
+    multiCountyProviders.forEach(([name, counties]) => {
+      console.log(`  - ${name}: ${counties.length} entries (${counties.join(', ')})`);
+    });
+  }
   console.log('\nNext steps:');
   console.log('1. Review the generated providers.json file');
   console.log('2. Restart your dev server to see the providers');
