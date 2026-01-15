@@ -1,5 +1,13 @@
 import { promises as fs } from 'fs'
 import path from 'path'
+import { isSupabaseConfigured } from './supabase'
+import {
+  getBlogPostsFromSupabase,
+  getBlogPostFromSupabase,
+  createBlogPostInSupabase,
+  updateBlogPostInSupabase,
+  deleteBlogPostFromSupabase,
+} from './blog-data-supabase'
 
 export interface BlogPost {
   id: string
@@ -38,6 +46,16 @@ async function checkFileSystemWritable(): Promise<boolean> {
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
+  // Use Supabase if configured
+  if (isSupabaseConfigured()) {
+    try {
+      return await getBlogPostsFromSupabase()
+    } catch (error) {
+      console.error('Error fetching from Supabase, falling back to file storage:', error)
+      // Fall through to file storage
+    }
+  }
+
   // If using in-memory storage, return that
   if (isReadOnly && inMemoryBlogPosts !== null) {
     return inMemoryBlogPosts
@@ -62,6 +80,16 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 }
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  // Use Supabase if configured
+  if (isSupabaseConfigured()) {
+    try {
+      return await getBlogPostFromSupabase(slug)
+    } catch (error) {
+      console.error('Error fetching from Supabase, falling back to file storage:', error)
+      // Fall through to file storage
+    }
+  }
+
   const posts = await getBlogPosts()
   return posts.find(post => post.slug === slug) || null
 }
@@ -98,6 +126,16 @@ export async function saveBlogPosts(posts: BlogPost[]): Promise<void> {
 }
 
 export async function createBlogPost(post: Omit<BlogPost, 'id'>): Promise<BlogPost> {
+  // Use Supabase if configured
+  if (isSupabaseConfigured()) {
+    try {
+      return await createBlogPostInSupabase(post)
+    } catch (error) {
+      console.error('Error creating in Supabase, falling back to file storage:', error)
+      throw error // Re-throw Supabase errors
+    }
+  }
+
   const posts = await getBlogPosts()
   const newId = String(Math.max(...posts.map(p => parseInt(p.id) || 0), 0) + 1)
   const newPost: BlogPost = { ...post, id: newId }
@@ -107,6 +145,16 @@ export async function createBlogPost(post: Omit<BlogPost, 'id'>): Promise<BlogPo
 }
 
 export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | null> {
+  // Use Supabase if configured
+  if (isSupabaseConfigured()) {
+    try {
+      return await updateBlogPostInSupabase(id, updates)
+    } catch (error) {
+      console.error('Error updating in Supabase, falling back to file storage:', error)
+      throw error // Re-throw Supabase errors
+    }
+  }
+
   try {
     const posts = await getBlogPosts()
     const index = posts.findIndex(p => p.id === id)
@@ -132,6 +180,16 @@ export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Pr
 }
 
 export async function deleteBlogPost(id: string): Promise<boolean> {
+  // Use Supabase if configured
+  if (isSupabaseConfigured()) {
+    try {
+      return await deleteBlogPostFromSupabase(id)
+    } catch (error) {
+      console.error('Error deleting in Supabase, falling back to file storage:', error)
+      throw error // Re-throw Supabase errors
+    }
+  }
+
   const posts = await getBlogPosts()
   const filtered = posts.filter(p => p.id !== id)
   if (filtered.length === posts.length) return false

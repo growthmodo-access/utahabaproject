@@ -12,9 +12,11 @@ export default function AdminBlogPage() {
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
   const [imagePreview, setImagePreview] = useState<string>('')
+  const [supabaseConfigured, setSupabaseConfigured] = useState(false)
 
   useEffect(() => {
     fetchPosts()
+    setSupabaseConfigured(isSupabaseConfigured())
   }, [])
 
   useEffect(() => {
@@ -155,12 +157,27 @@ export default function AdminBlogPage() {
           </div>
         )}
 
-        {/* Warning for serverless environments */}
-        <div className="mb-4 p-4 rounded-lg bg-yellow-50 border border-yellow-200">
-          <p className="text-sm text-yellow-800">
-            <strong>Note:</strong> If you&apos;re running in a serverless environment (Vercel, AWS Lambda, etc.), 
-            blog posts are stored in memory and will be lost on server restart. For persistent storage, 
-            consider using a database like Supabase or PostgreSQL.
+        {/* Storage status message */}
+        <div className={`mb-4 p-4 rounded-lg border ${
+          supabaseConfigured
+            ? 'bg-green-50 border-green-200'
+            : 'bg-yellow-50 border-yellow-200'
+        }`}>
+          <p className={`text-sm ${
+            supabaseConfigured
+              ? 'text-green-800'
+              : 'text-yellow-800'
+          }`}>
+            {supabaseConfigured ? (
+              <>
+                <strong>✓ Supabase Connected:</strong> Blog posts are stored persistently in Supabase database.
+              </>
+            ) : (
+              <>
+                <strong>Note:</strong> Supabase is not configured. Blog posts are stored in memory/file system 
+                and may be lost on server restart. See <code className="bg-yellow-100 px-1 rounded">SUPABASE_SETUP.md</code> for setup instructions.
+              </>
+            )}
           </p>
         </div>
 
