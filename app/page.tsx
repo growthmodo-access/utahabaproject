@@ -173,19 +173,19 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Featured Post - Large Prominent Display */}
+          {/* Featured Post - Sleek Compact Display */}
           {featuredPost && (
-            <div className="mb-12 sm:mb-16">
+            <div className="mb-10 sm:mb-12">
               <Link href={`/blog/${featuredPost.slug}`}>
-                <article className="group relative bg-white border-2 border-gray-200 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:border-gray-300 transition-all duration-300">
+                <article className="group relative bg-white border border-gray-200/80 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:border-gray-300/80 transition-all duration-300">
                   <div className="flex flex-col lg:flex-row">
-                    {/* Featured Image - Larger */}
-                    <div className="relative w-full lg:w-1/2 h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                    {/* Featured Image - Compact */}
+                    <div className="relative w-full lg:w-[280px] xl:w-[320px] h-48 sm:h-56 lg:h-full lg:min-h-[240px] flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
                       {featuredPost.image && featuredPost.image.trim() !== '' ? (
                         <BlogImage
                           src={featuredPost.image}
                           alt={featuredPost.title}
-                          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                           fill={true}
                         />
                       ) : (
@@ -193,28 +193,28 @@ export default async function Home() {
                           <div className="text-gray-400 text-xs">No Image</div>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-4 left-4">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-2.5 left-2.5">
                         {featuredPost.category && (
-                          <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-bold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-md border border-gray-200/50">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-sm border border-gray-200/50">
                             {featuredPost.category}
                           </span>
                         )}
                       </div>
-                      <div className="absolute bottom-4 left-4 right-4">
-                        <span className="inline-flex items-center px-3 py-1.5 rounded-lg text-xs font-semibold bg-white/95 backdrop-blur-sm text-gray-700 shadow-md">
-                          <Sparkles className="w-3.5 h-3.5 mr-1.5 text-blue-600" />
-                          Featured Article
+                      <div className="absolute bottom-2.5 left-2.5 right-2.5">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm">
+                          <Sparkles className="w-3 h-3 mr-1 text-blue-600" />
+                          Featured
                         </span>
                       </div>
                     </div>
                     
-                    {/* Featured Content */}
-                    <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                    {/* Featured Content - Compact */}
+                    <div className="flex-1 p-5 sm:p-6 lg:p-7 flex flex-col justify-between min-h-[240px]">
                       <div>
-                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                        <div className="flex flex-wrap items-center gap-2.5 mb-3">
                           <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                            <Calendar className="w-4 h-4" />
+                            <Calendar className="w-3.5 h-3.5" />
                             <time dateTime={featuredPost.date}>
                               {new Date(featuredPost.date).toLocaleDateString('en-US', {
                                 year: 'numeric',
@@ -224,28 +224,28 @@ export default async function Home() {
                             </time>
                           </div>
                           <div className="flex items-center gap-1.5 text-xs text-gray-500">
-                            <Clock className="w-4 h-4" />
+                            <Clock className="w-3.5 h-3.5" />
                             <span>{calculateReadingTime(featuredPost.content)} min read</span>
                           </div>
                         </div>
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 group-hover:text-gray-700 transition-colors leading-tight">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
                           {featuredPost.title}
                         </h3>
-                        <p className="text-base sm:text-lg text-gray-600 mb-6 leading-relaxed line-clamp-3">
+                        <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2">
                           {featuredPost.excerpt}
                         </p>
                       </div>
                       
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-2.5 text-sm text-gray-500">
-                          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center border border-blue-100">
-                            <User className="w-4 h-4 text-blue-600" />
+                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center border border-blue-100">
+                            <User className="w-3 h-3 text-blue-600" />
                           </div>
                           <span className="font-medium">{featuredPost.author}</span>
                         </div>
-                        <div className="flex items-center gap-2 text-gray-900 font-semibold text-sm sm:text-base group-hover:gap-3 transition-all">
+                        <div className="flex items-center gap-1.5 text-gray-900 font-semibold text-xs sm:text-sm group-hover:gap-2 transition-all">
                           <span>Read Full Article</span>
-                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                         </div>
                       </div>
                     </div>
