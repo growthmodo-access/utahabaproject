@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, MapPin, Calculator, HelpCircle, BookOpen, Calendar, User, Star, Award, Sparkles, PhoneCall, Clock } from 'lucide-react'
 import BlogImage from '@/components/BlogImage'
-import BlogRow from '@/components/BlogRow'
 import ProviderRow from '@/components/ProviderRow'
 import { Provider } from '@/types/provider'
 import { getProvidersData } from '@/lib/data'
@@ -202,14 +201,19 @@ export default async function Home() {
             </div>
           </div>
 
-          {/* Featured Post - Column Layout */}
-          {featuredPost && (
-            <div className="mb-10 sm:mb-12">
-              <Link href={`/blog/${featuredPost.slug}`}>
-                <article className="group relative bg-white border border-gray-200/80 rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:border-gray-300/80 transition-all duration-300">
-                  <div className="flex flex-col">
-                    {/* Featured Image - Top */}
-                    <div className="relative w-full h-48 sm:h-56 md:h-64 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+          {/* Blog Posts Grid - Consistent Card Sizes */}
+          {latestPosts.length === 0 && !featuredPost ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {/* Featured Post - Same size as others but with featured badge */}
+              {featuredPost && (
+                <Link href={`/blog/${featuredPost.slug}`} className="md:col-span-2 lg:col-span-1">
+                  <article className="group h-full flex flex-col bg-white border border-gray-200/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gray-300/80 transition-all duration-300">
+                    {/* Featured Image - Consistent Aspect Ratio */}
+                    <div className="relative w-full h-56 sm:h-64 lg:h-72 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
                       {featuredPost.image && featuredPost.image.trim() !== '' ? (
                         <BlogImage
                           src={featuredPost.image}
@@ -222,32 +226,32 @@ export default async function Home() {
                           <div className="text-gray-400 text-xs">No Image</div>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute top-2.5 left-2.5">
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute top-4 left-4">
                         {featuredPost.category && (
-                          <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-sm border border-gray-200/50">
+                          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-md border border-gray-200/50">
                             {featuredPost.category}
                           </span>
                         )}
                       </div>
-                      <div className="absolute bottom-2.5 left-2.5 right-2.5">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm">
-                          <Sparkles className="w-3 h-3 mr-1 text-blue-600" />
+                      <div className="absolute bottom-4 left-4">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-white/95 backdrop-blur-sm text-gray-700 shadow-md">
+                          <Sparkles className="w-3.5 h-3.5 text-blue-600" />
                           Featured
                         </span>
                       </div>
                     </div>
                     
-                    {/* Featured Content - Bottom */}
-                    <div className="p-5 sm:p-6 flex flex-col">
-                      <div className="flex flex-wrap items-center gap-2.5 mb-3">
+                    {/* Featured Content */}
+                    <div className="flex-1 flex flex-col p-6 lg:p-8">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
                         <div className="flex items-center gap-1.5 text-xs text-gray-500">
                           <Calendar className="w-3.5 h-3.5" />
                           <time dateTime={featuredPost.date}>
                             {new Date(featuredPost.date).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'long',
-                              day: 'numeric'
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric'
                             })}
                           </time>
                         </div>
@@ -256,51 +260,97 @@ export default async function Home() {
                           <span>{calculateReadingTime(featuredPost.content)} min read</span>
                         </div>
                       </div>
-                      <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
+                      <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight line-clamp-2">
                         {featuredPost.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2">
+                      <p className="text-sm sm:text-base text-gray-600 line-clamp-3 leading-relaxed mb-4 flex-1">
                         {featuredPost.excerpt}
                       </p>
-                      
                       <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-50 to-blue-100 flex items-center justify-center border border-blue-100">
-                            <User className="w-3 h-3 text-blue-600" />
-                          </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <User className="w-4 h-4" />
                           <span className="font-medium">{featuredPost.author}</span>
                         </div>
-                        <div className="flex items-center gap-1.5 text-gray-900 font-semibold text-xs sm:text-sm group-hover:gap-2 transition-all">
-                          <span>Read Full Article</span>
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+                        <div className="flex items-center gap-2 text-gray-900 font-medium text-sm group-hover:gap-3 transition-all">
+                          <span>Read More</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </div>
                       </div>
                     </div>
-                  </div>
-                </article>
-              </Link>
+                  </article>
+                </Link>
+              )}
+
+              {/* Other Latest Posts - Consistent Card Sizes */}
+              {latestPosts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <article className="group h-full flex flex-col bg-white border border-gray-200/80 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-gray-300/80 transition-all duration-300">
+                    {/* Image - Consistent Aspect Ratio */}
+                    <div className="relative w-full h-48 sm:h-56 lg:h-72 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                      {post.image && post.image.trim() !== '' ? (
+                        <BlogImage
+                          src={post.image}
+                          alt={post.title}
+                          className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                          fill={true}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                          <div className="text-gray-400 text-xs">No Image</div>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                      {post.category && (
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-900 shadow-md border border-gray-200/50">
+                            {post.category}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1 flex flex-col p-6 lg:p-8">
+                      <div className="flex flex-wrap items-center gap-3 mb-3">
+                        <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                          <Calendar className="w-3.5 h-3.5" />
+                          <time dateTime={post.date}>
+                            {new Date(post.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric'
+                            })}
+                          </time>
+                        </div>
+                        {post.readingTime && (
+                          <div className="flex items-center gap-1.5 text-xs text-gray-500">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span>{post.readingTime} min read</span>
+                          </div>
+                        )}
+                      </div>
+                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <p className="text-sm sm:text-base text-gray-600 line-clamp-3 leading-relaxed mb-4 flex-1">
+                        {post.excerpt}
+                      </p>
+                      <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
+                          <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          <span className="font-medium">{post.author}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-gray-900 font-medium text-xs sm:text-sm group-hover:gap-3 transition-all">
+                          <span>Read More</span>
+                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              ))}
             </div>
           )}
-
-          {/* Other Latest Posts */}
-          <div className="space-y-4 sm:space-y-6">
-            {latestPosts.length === 0 && !featuredPost ? (
-              <div className="text-center py-12 col-span-full">
-                <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
-              </div>
-            ) : (
-              latestPosts.map((post, index) => (
-                <BlogRow 
-                  key={post.id} 
-                  post={{
-                    ...post,
-                    readingTime: calculateReadingTime(post.content)
-                  }} 
-                  index={index} 
-                />
-              ))
-            )}
-          </div>
         </div>
       </section>
 
