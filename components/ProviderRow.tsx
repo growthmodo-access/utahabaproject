@@ -56,48 +56,42 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
           </div>
 
           {/* Details Section - Better Organized */}
-          <div className="flex-1 min-w-0 flex flex-col gap-3 lg:gap-4">
+          <div className="flex-1 min-w-0 flex flex-col gap-3">
+            {/* Description */}
             {provider.description && (
-              <p className="text-sm text-muted-foreground line-clamp-2">
+              <p className="text-sm text-gray-600 leading-relaxed">
                 {provider.description}
               </p>
             )}
             
-            <div className="flex flex-wrap items-center gap-2 lg:gap-3">
-              {provider.rating && (
-                <div className="flex items-center gap-1.5 px-2.5 py-1 bg-accent rounded-lg">
-                  <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 flex-shrink-0" />
-                  <span className="text-sm font-semibold text-foreground">{provider.rating.toFixed(1)}</span>
-                </div>
-              )}
-              {provider.services && provider.services.length > 0 && (
-                <div className="flex flex-wrap gap-1.5">
-                  {provider.services.slice(0, 3).map((service, idx) => (
-                    <span 
-                      key={idx}
-                      className="bg-accent text-accent-foreground px-2.5 py-1 rounded-lg text-xs font-medium whitespace-nowrap"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                </div>
-              )}
+            {/* Tags Section - All aligned left */}
+            {provider.services && provider.services.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2">
+                {provider.services.slice(0, 5).map((service, idx) => (
+                  <span 
+                    key={idx}
+                    className="bg-gray-100 text-gray-700 px-2.5 py-1 rounded-md text-xs font-medium whitespace-nowrap"
+                  >
+                    {service}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* Contact & Info Section - All aligned left in a row */}
+            <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600">
               {provider.insuranceAccepted && provider.insuranceAccepted.length > 0 && (
-                <span className="text-xs text-muted-foreground">
+                <span className="text-xs text-gray-600 font-medium whitespace-nowrap">
                   {provider.insuranceAccepted.length} Insurance{provider.insuranceAccepted.length > 1 ? 's' : ''}
                 </span>
               )}
-            </div>
-
-            {/* Contact Info - Desktop Only */}
-            <div className="hidden lg:flex items-center gap-4 text-sm text-muted-foreground">
               {provider.phone && (
                 <a 
                   href={`tel:${provider.phone}`} 
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                  className="flex items-center gap-1.5 hover:text-gray-900 transition-colors whitespace-nowrap"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 flex-shrink-0" />
                   <span>{provider.phone}</span>
                 </a>
               )}
@@ -107,9 +101,9 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
                   target="_blank" 
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+                  className="flex items-center gap-1.5 hover:text-gray-900 transition-colors whitespace-nowrap"
                 >
-                  <Globe className="w-4 h-4" />
+                  <Globe className="w-4 h-4 flex-shrink-0" />
                   <span>Website</span>
                 </a>
               )}

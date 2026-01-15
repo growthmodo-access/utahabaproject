@@ -80,16 +80,37 @@ export default function QuizPage() {
   const [answers, setAnswers] = useState<Record<number, number>>({})
   const [score, setScore] = useState<number | null>(null)
   const [showEmailCapture, setShowEmailCapture] = useState(false)
+  const [userInfo, setUserInfo] = useState({ name: '', email: '', phone: '' })
+  const [showUserInfoForm, setShowUserInfoForm] = useState(false)
+  const [userInfoSubmitted, setUserInfoSubmitted] = useState(false)
 
   const handleAnswer = (questionId: number, answerScore: number) => {
     setAnswers({ ...answers, [questionId]: answerScore })
   }
 
   const nextQuestion = () => {
+    // Show user info form after question 3 (middle of quiz)
+    if (currentQuestion === 2 && !userInfoSubmitted) {
+      setShowUserInfoForm(true)
+      return
+    }
+    
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
     } else {
       calculateScore()
+    }
+  }
+
+  const handleUserInfoSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (userInfo.name && userInfo.email && userInfo.phone) {
+      setUserInfoSubmitted(true)
+      setShowUserInfoForm(false)
+      // Continue to next question
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1)
+      }
     }
   }
 
@@ -104,6 +125,13 @@ export default function QuizPage() {
     const maxScore = questions.length * 10
     const percentage = (totalScore / maxScore) * 100
     setScore(percentage)
+    
+    // If user info was collected, submit to Klaviyo or store it
+    if (userInfoSubmitted && userInfo.name && userInfo.email) {
+      // You can add API call here to save user info
+      // For now, we'll just show the email capture
+    }
+    
     setShowEmailCapture(true)
   }
 
@@ -162,7 +190,7 @@ export default function QuizPage() {
     return (
       <div className="flex flex-col min-h-screen bg-white">
         {/* Results Hero Section */}
-        <section className="relative overflow-hidden -mt-16 pt-16 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+        <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
           <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
           <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-purple-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
@@ -235,7 +263,7 @@ export default function QuizPage() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden -mt-16 pt-16 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+      <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-purple-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
@@ -277,49 +305,111 @@ export default function QuizPage() {
             </div>
           </div>
 
-          {/* Question */}
-          <div className="mb-6 sm:mb-8 md:mb-10">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
-              {questions[currentQuestion].question}
-            </h2>
-            <div className="space-y-3 sm:space-y-4">
-              {questions[currentQuestion].options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(questions[currentQuestion].id, option.score)}
-                  className={`w-full text-left p-4 sm:p-5 rounded-xl border-2 transition-all text-sm sm:text-base hover:shadow-md ${
-                    currentAnswer === option.score
-                      ? 'border-foreground bg-gradient-to-r from-purple-50 to-purple-100 shadow-md'
-                      : 'border-border hover:border-foreground/50 hover:bg-accent/50'
-                  }`}
-                >
-                  <span className={`font-medium ${currentAnswer === option.score ? 'text-foreground' : 'text-foreground'}`}>
-                    {option.label}
-                  </span>
-                </button>
-              ))}
+          {/* User Info Form - Show in middle of quiz */}
+          {showUserInfoForm && !userInfoSubmitted && (
+            <div className="mb-6 sm:mb-8 md:mb-10">
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200 rounded-xl p-6 sm:p-8 mb-6">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2">Let's Get Your Contact Information</h2>
+                <p className="text-sm sm:text-base text-gray-600 mb-6">We'll use this to send you personalized results and recommendations.</p>
+                <form onSubmit={handleUserInfoSubmit} className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={userInfo.name}
+                      onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm sm:text-base focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors bg-white"
+                      placeholder="Enter your full name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Email Address <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={userInfo.email}
+                      onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm sm:text-base focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors bg-white"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Phone Number <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      value={userInfo.phone}
+                      onChange={(e) => setUserInfo({ ...userInfo, phone: e.target.value })}
+                      className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm sm:text-base focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors bg-white"
+                      placeholder="Enter your phone number"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-gray-800 transition-all shadow-md hover:shadow-lg text-sm sm:text-base"
+                  >
+                    Continue Quiz
+                    <ArrowRight className="w-5 h-5 inline-block ml-2" />
+                  </button>
+                </form>
+              </div>
             </div>
-          </div>
+          )}
+
+          {/* Question */}
+          {!showUserInfoForm && (
+            <div className="mb-6 sm:mb-8 md:mb-10">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
+                {questions[currentQuestion].question}
+              </h2>
+              <div className="space-y-3 sm:space-y-4">
+                {questions[currentQuestion].options.map((option, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(questions[currentQuestion].id, option.score)}
+                    className={`w-full text-left p-4 sm:p-5 rounded-xl border-2 transition-all text-sm sm:text-base hover:shadow-md ${
+                      currentAnswer === option.score
+                        ? 'border-foreground bg-gradient-to-r from-purple-50 to-purple-100 shadow-md'
+                        : 'border-border hover:border-foreground/50 hover:bg-accent/50'
+                    }`}
+                  >
+                    <span className={`font-medium ${currentAnswer === option.score ? 'text-foreground' : 'text-foreground'}`}>
+                      {option.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 pt-6 border-t border-border">
-            <button
-              onClick={prevQuestion}
-              disabled={currentQuestion === 0}
-              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-border text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm sm:text-base w-full sm:w-auto font-medium"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              Previous
-            </button>
-            <button
-              onClick={nextQuestion}
-              disabled={!currentAnswer}
-              className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl text-sm sm:text-base w-full sm:w-auto font-semibold"
-            >
-              {currentQuestion === questions.length - 1 ? 'See Results' : 'Next'}
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
+          {!showUserInfoForm && (
+            <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 pt-6 border-t border-border">
+              <button
+                onClick={prevQuestion}
+                disabled={currentQuestion === 0}
+                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl border-2 border-border text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm sm:text-base w-full sm:w-auto font-medium"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                Previous
+              </button>
+              <button
+                onClick={nextQuestion}
+                disabled={!currentAnswer}
+                className="flex items-center justify-center gap-2 px-6 sm:px-8 py-3 sm:py-4 rounded-xl bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg hover:shadow-xl text-sm sm:text-base w-full sm:w-auto font-semibold"
+              >
+                {currentQuestion === questions.length - 1 ? 'See Results' : 'Next'}
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
         </div>
         </div>
       </section>
