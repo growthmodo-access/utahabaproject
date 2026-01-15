@@ -284,10 +284,10 @@ export default function AdminBlogPage() {
                 )}
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex flex-col sm:flex-row gap-4 pt-4 border-t border-gray-200">
                 <button
                   type="submit"
-                  className="flex items-center gap-2 bg-foreground text-background px-6 py-2 rounded-lg font-semibold hover:bg-foreground/90 transition-colors shadow-md hover:shadow-lg"
+                  className="flex items-center justify-center gap-2 bg-gray-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg active:scale-95"
                 >
                   <Save className="w-5 h-5" />
                   {editingPost ? 'Update Post' : 'Create Post'}
@@ -299,7 +299,7 @@ export default function AdminBlogPage() {
                     setEditingPost(null)
                     setImagePreview('')
                   }}
-                  className="px-6 py-2 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+                  className="px-6 py-3 border-2 border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors active:scale-95"
                 >
                   Cancel
                 </button>
