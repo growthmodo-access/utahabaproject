@@ -123,8 +123,13 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         {/* Blog Content - Enhanced HTML Rendering */}
         <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12">
           <div
-            className="blog-content prose prose-sm sm:prose-base md:prose-lg lg:prose-xl max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-p:leading-relaxed prose-ul:text-gray-700 prose-ol:text-gray-700 prose-li:text-gray-700 prose-strong:text-gray-900 prose-strong:font-semibold prose-a:text-gray-900 prose-a:underline hover:prose-a:text-blue-600"
+            className="blog-content"
             dangerouslySetInnerHTML={{ __html: post.content }}
+            style={{
+              fontSize: '1.125rem',
+              lineHeight: '1.75',
+              color: '#374151'
+            }}
           />
         </div>
 
