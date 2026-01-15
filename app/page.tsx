@@ -157,7 +157,7 @@ export default async function Home() {
                 Top 5 Featured Providers
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground">
-                Our handpicked selection of Utah's best ABA therapy providers
+                Our handpicked selection of Utah&apos;s best ABA therapy providers
               </p>
             </div>
             <div className="space-y-3 sm:space-y-4">

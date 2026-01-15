@@ -59,7 +59,7 @@ export default function EmailCapture({ source, onSuccess }: EmailCaptureProps) {
       <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
         <Check className="w-12 h-12 text-green-600 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-green-900 mb-2">Thank You!</h3>
-        <p className="text-green-700">You've been successfully subscribed to our newsletter.</p>
+        <p className="text-green-700">You&apos;ve been successfully subscribed to our newsletter.</p>
       </div>
     )
   }
