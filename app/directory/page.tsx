@@ -27,7 +27,7 @@ export default function DirectoryPage() {
     certifications: [],
     minExperience: 0,
   })
-  const [sortOption, setSortOption] = useState<SortOption>('name-asc')
+  const [sortOption, setSortOption] = useState<SortOption>('recommended')
 
   useEffect(() => {
     setLoading(true)
@@ -80,13 +80,30 @@ export default function DirectoryPage() {
   }, [providers, debouncedSearchTerm, filters, sortOption])
 
   const groupedByCounty = useMemo(() => {
-    return processedProviders.reduce((acc, provider) => {
+    const grouped = processedProviders.reduce((acc, provider) => {
       const county = provider.county || 'Unknown'
       if (!acc[county]) acc[county] = []
       acc[county].push(provider)
       return acc
     }, {} as Record<string, Provider[]>)
-  }, [processedProviders])
+    
+    // If "Recommended" sort is active, ensure Golden Touch ABA appears first in each county group
+    if (sortOption === 'recommended') {
+      Object.keys(grouped).forEach(county => {
+        const providers = grouped[county]
+        const goldenTouchIndex = providers.findIndex(p => 
+          p.name?.toLowerCase().includes('golden touch')
+        )
+        if (goldenTouchIndex > 0) {
+          const goldenTouch = providers[goldenTouchIndex]
+          providers.splice(goldenTouchIndex, 1)
+          providers.unshift(goldenTouch)
+        }
+      })
+    }
+    
+    return grouped
+  }, [processedProviders, sortOption])
 
   const clearFilters = () => {
     setFilters({
@@ -160,6 +177,7 @@ export default function DirectoryPage() {
                   className="w-full border border-border rounded-lg px-3 sm:px-4 py-2 pr-9 text-sm sm:text-base focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background appearance-none"
                   aria-label="Sort providers"
                 >
+                  <option value="recommended">Recommended</option>
                   <option value="name-asc">Name (A-Z)</option>
                   <option value="name-desc">Name (Z-A)</option>
                 </select>
@@ -205,13 +223,19 @@ export default function DirectoryPage() {
             </h2>
             {processedProviders.length > 0 ? (
               <div className="space-y-4 sm:space-y-6">
-                {processedProviders.map((provider, index) => (
-                  <ProviderRow 
-                    key={provider.id} 
-                    provider={provider} 
-                    rank={index + 1}
-                  />
-                ))}
+                {processedProviders.map((provider, index) => {
+                  const isGoldenTouch = provider.name?.toLowerCase().includes('golden touch') || false
+                  const isRecommended = sortOption === 'recommended' && index === 0 && isGoldenTouch
+                  return (
+                    <ProviderRow 
+                      key={provider.id} 
+                      provider={provider} 
+                      rank={index + 1}
+                      tag={isRecommended ? 'Recommended' : undefined}
+                      featured={isRecommended}
+                    />
+                  )
+                })}
               </div>
             ) : (
               <EmptyState
@@ -234,13 +258,20 @@ export default function DirectoryPage() {
                   </h2>
                   {countyProviders.length > 0 ? (
                     <div className="space-y-4 sm:space-y-6">
-                      {countyProviders.slice(0, 8).map((provider, index) => (
-                        <ProviderRow 
-                          key={provider.id} 
-                          provider={provider} 
-                          rank={index + 1}
-                        />
-                      ))}
+                      {countyProviders.slice(0, 8).map((provider, index) => {
+                        const isGoldenTouch = provider.name?.toLowerCase().includes('golden touch') || false
+                        // Show "Recommended" tag if it's Golden Touch and it's first in the list when "recommended" sort is active
+                        const isRecommended = sortOption === 'recommended' && index === 0 && isGoldenTouch
+                        return (
+                          <ProviderRow 
+                            key={provider.id} 
+                            provider={provider} 
+                            rank={index + 1}
+                            tag={isRecommended ? 'Recommended' : undefined}
+                            featured={isRecommended}
+                          />
+                        )
+                      })}
                     </div>
                   ) : (
                     <EmptyState type="no-county" />

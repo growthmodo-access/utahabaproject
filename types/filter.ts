@@ -8,6 +8,7 @@ export interface FilterOptions {
 }
 
 export type SortOption = 
+  | 'recommended'
   | 'rating-desc'
   | 'rating-asc'
   | 'name-asc'

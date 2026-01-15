@@ -61,6 +61,26 @@ export function sortProviders(providers: Provider[], sortOption: SortOption): Pr
   const sorted = [...providers]
 
   switch (sortOption) {
+    case 'recommended':
+      // Put Golden Touch ABA first, then sort by rank/rating
+      return sorted.sort((a, b) => {
+        const aIsGoldenTouch = a.name?.toLowerCase().includes('golden touch') || false
+        const bIsGoldenTouch = b.name?.toLowerCase().includes('golden touch') || false
+        
+        // Golden Touch ABA always comes first
+        if (aIsGoldenTouch && !bIsGoldenTouch) return -1
+        if (!aIsGoldenTouch && bIsGoldenTouch) return 1
+        
+        // For others, sort by rank first, then rating
+        if (a.rank && b.rank) return a.rank - b.rank
+        if (a.rank) return -1
+        if (b.rank) return 1
+        if (a.rating && b.rating) return b.rating - a.rating
+        if (a.rating) return -1
+        if (b.rating) return 1
+        return a.name.localeCompare(b.name)
+      })
+    
     case 'rating-desc':
       return sorted.sort((a, b) => {
         const ratingA = a.rating || 0
