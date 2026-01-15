@@ -51,22 +51,21 @@ async function getFeaturedProviders(): Promise<Provider[]> {
       }
     })
     
-    // Convert map to array and sort
+    // Convert map to array and randomize (Fisher-Yates shuffle)
     const otherProviders = Array.from(uniqueProvidersMap.values())
       .filter((p: Provider) => p.rank || p.rating || p.name)
-      .sort((a: Provider, b: Provider) => {
-        if (a.rank && b.rank) return a.rank - b.rank
-        if (a.rank) return -1
-        if (b.rank) return 1
-        if (a.rating && b.rating) return b.rating - a.rating
-        if (a.rating) return -1
-        if (b.rating) return 1
-        return a.name.localeCompare(b.name)
-      })
-      .slice(0, 4)
     
-    // Combine: Golden Touch first, then top 4 unique others
-    const featured = goldenTouch ? [goldenTouch, ...otherProviders] : otherProviders
+    // Shuffle array randomly (Fisher-Yates algorithm)
+    for (let i = otherProviders.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [otherProviders[i], otherProviders[j]] = [otherProviders[j], otherProviders[i]]
+    }
+    
+    // Take first 4 after randomization
+    const shuffledProviders = otherProviders.slice(0, 4)
+    
+    // Combine: Golden Touch first, then 4 random unique others
+    const featured = goldenTouch ? [goldenTouch, ...shuffledProviders] : shuffledProviders
     
     return featured.slice(0, 5)
   } catch (error) {

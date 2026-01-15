@@ -62,24 +62,27 @@ export function sortProviders(providers: Provider[], sortOption: SortOption): Pr
 
   switch (sortOption) {
     case 'recommended':
-      // Put Golden Touch ABA first, then sort by rank/rating
-      return sorted.sort((a, b) => {
-        const aIsGoldenTouch = a.name?.toLowerCase().includes('golden touch') || false
-        const bIsGoldenTouch = b.name?.toLowerCase().includes('golden touch') || false
-        
-        // Golden Touch ABA always comes first
-        if (aIsGoldenTouch && !bIsGoldenTouch) return -1
-        if (!aIsGoldenTouch && bIsGoldenTouch) return 1
-        
-        // For others, sort by rank first, then rating
-        if (a.rank && b.rank) return a.rank - b.rank
-        if (a.rank) return -1
-        if (b.rank) return 1
-        if (a.rating && b.rating) return b.rating - a.rating
-        if (a.rating) return -1
-        if (b.rating) return 1
-        return a.name.localeCompare(b.name)
+      // Put Golden Touch ABA first, then randomize the rest
+      const goldenTouchProviders: Provider[] = []
+      const otherProviders: Provider[] = []
+      
+      sorted.forEach(provider => {
+        const isGoldenTouch = provider.name?.toLowerCase().includes('golden touch') || false
+        if (isGoldenTouch) {
+          goldenTouchProviders.push(provider)
+        } else {
+          otherProviders.push(provider)
+        }
       })
+      
+      // Shuffle other providers randomly (Fisher-Yates algorithm)
+      for (let i = otherProviders.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        ;[otherProviders[i], otherProviders[j]] = [otherProviders[j], otherProviders[i]]
+      }
+      
+      // Return Golden Touch first, then randomized others
+      return [...goldenTouchProviders, ...otherProviders]
     
     case 'rating-desc':
       return sorted.sort((a, b) => {
