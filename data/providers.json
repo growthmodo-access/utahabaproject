@@ -1,0 +1,20 @@
+[
+  {
+    "id": "provider-1",
+    "name": "Sample ABA Provider",
+    "county": "Salt Lake",
+    "city": "Salt Lake City",
+    "address": "123 Main St",
+    "phone": "(801) 555-0100",
+    "email": "info@sampleaba.com",
+    "website": "https://sampleaba.com",
+    "description": "A leading ABA therapy provider serving families in Salt Lake County.",
+    "services": ["Early Intervention", "School-Based Services", "In-Home Therapy"],
+    "rating": 4.8,
+    "rank": 1,
+    "yearsExperience": 10,
+    "certifications": ["BCBA", "Licensed Behavior Analyst"],
+    "insuranceAccepted": ["Blue Cross", "UnitedHealthcare", "Aetna"],
+    "ageGroups": ["0-3", "4-6", "7-12"]
+  }
+]

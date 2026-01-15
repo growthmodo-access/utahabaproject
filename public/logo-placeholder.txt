@@ -1,0 +1,9 @@
+Please add your logo file here as "logo.png"
+
+The logo should be:
+- A circular logo with a natural arch (Utah-themed)
+- Recommended size: 40x40px or larger (will be scaled)
+- Format: PNG with transparent background preferred
+- File name: logo.png
+
+Once you add the logo.png file to this public directory, it will automatically appear in the header.
