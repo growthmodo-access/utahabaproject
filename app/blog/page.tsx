@@ -66,7 +66,8 @@ export default async function BlogPage() {
                   <BlogImage
                     src={post.image || '/blog/placeholder.jpg'}
                     alt={post.title}
-                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    fill={true}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/5 via-transparent to-transparent pointer-events-none" />
                   <div className="absolute top-3 left-3">
