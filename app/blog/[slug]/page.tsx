@@ -125,9 +125,20 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           <div
             className="blog-content"
             dangerouslySetInnerHTML={{ 
-              __html: typeof post.content === 'string' 
-                ? post.content.replace(/\\n/g, '\n').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&')
-                : post.content 
+              __html: (() => {
+                if (typeof post.content !== 'string') return ''
+                let content = post.content
+                // Fix newlines
+                content = content.replace(/\\n/g, '\n')
+                // Unescape HTML entities in CORRECT order (amp MUST be first!)
+                content = content.replace(/&amp;/g, '&')
+                content = content.replace(/&lt;/g, '<')
+                content = content.replace(/&gt;/g, '>')
+                content = content.replace(/&quot;/g, '"')
+                content = content.replace(/&#39;/g, "'")
+                content = content.replace(/&#x27;/g, "'")
+                return content
+              })()
             }}
           />
         </div>
