@@ -15,11 +15,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Validate file type
+    // Validate file type - Support PNG, JPEG, WebP, and GIF
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
-    if (!allowedTypes.includes(file.type)) {
+    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+    const fileExtension = path.extname(file.name).toLowerCase()
+    
+    if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
       return NextResponse.json(
-        { error: 'Invalid file type. Only images are allowed (JPEG, PNG, WebP, GIF)' },
+        { error: 'Invalid file type. Only images are allowed (JPEG, JPG, PNG, WebP, GIF)' },
         { status: 400 }
       )
     }

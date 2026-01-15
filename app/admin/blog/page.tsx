@@ -69,10 +69,13 @@ export default function AdminBlogPage() {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      // Validate file type
+      // Validate file type - Support PNG, JPEG, WebP, and GIF
       const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
-      if (!allowedTypes.includes(file.type)) {
-        setMessage('Invalid file type. Please upload an image (JPEG, PNG, WebP, or GIF).')
+      const allowedExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+      const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'))
+      
+      if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension)) {
+        setMessage('Invalid file type. Please upload an image (PNG, JPEG, JPG, WebP, or GIF).')
         return
       }
       
@@ -372,7 +375,7 @@ export default function AdminBlogPage() {
                         <div className="flex flex-col items-center gap-2">
                           <ImageIcon className="w-8 h-8 text-gray-400" />
                           <span className="text-sm font-medium text-gray-700">Click to upload image</span>
-                          <span className="text-xs text-gray-500">JPEG, PNG, WebP, or GIF (Max 5MB)</span>
+                          <span className="text-xs text-gray-500">PNG, JPEG, JPG, WebP, or GIF (Max 5MB)</span>
                         </div>
                       )}
                     </div>
