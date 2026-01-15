@@ -58,7 +58,12 @@ export default function AdminBlogPage() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setMessage('')
+    
     const formData = new FormData(e.currentTarget)
+    const categoryValue = formData.get('category') as string
+    const imageValue = formData.get('image') as string
+    
     const postData = {
       title: formData.get('title') as string,
       excerpt: formData.get('excerpt') as string,
@@ -66,8 +71,14 @@ export default function AdminBlogPage() {
       author: formData.get('author') as string,
       date: formData.get('date') as string,
       slug: formData.get('slug') as string,
-      category: formData.get('category') as string || undefined,
-      image: formData.get('image') as string || undefined,
+      category: categoryValue && categoryValue.trim() ? categoryValue.trim() : undefined,
+      image: imageValue && imageValue.trim() ? imageValue.trim() : undefined,
+    }
+
+    // Validate required fields
+    if (!postData.title || !postData.excerpt || !postData.content || !postData.author || !postData.date || !postData.slug) {
+      setMessage('Please fill in all required fields')
+      return
     }
 
     try {
@@ -86,19 +97,23 @@ export default function AdminBlogPage() {
         })
       }
 
+      const responseData = await res.json()
+
       if (res.ok) {
-        setMessage(editingPost ? 'Post updated successfully' : 'Post created successfully')
+        setMessage(editingPost ? 'Post updated successfully!' : 'Post created successfully!')
         setEditingPost(null)
         setIsCreating(false)
+        setImagePreview('')
         fetchPosts()
         setTimeout(() => setMessage(''), 3000)
       } else {
-        const errorData = await res.json()
-        setMessage(errorData.error || 'Error saving post')
+        const errorMsg = responseData.error || `Error: ${res.status} ${res.statusText}`
+        setMessage(errorMsg)
+        console.error('Error response:', responseData)
       }
     } catch (error) {
       console.error('Error saving post:', error)
-      setMessage('Error saving post')
+      setMessage(`Error saving post: ${error instanceof Error ? error.message : 'Unknown error'}`)
     }
   }
 

@@ -49,13 +49,28 @@ export async function createBlogPost(post: Omit<BlogPost, 'id'>): Promise<BlogPo
 }
 
 export async function updateBlogPost(id: string, updates: Partial<BlogPost>): Promise<BlogPost | null> {
-  const posts = await getBlogPosts()
-  const index = posts.findIndex(p => p.id === id)
-  if (index === -1) return null
-  
-  posts[index] = { ...posts[index], ...updates }
-  await saveBlogPosts(posts)
-  return posts[index]
+  try {
+    const posts = await getBlogPosts()
+    const index = posts.findIndex(p => p.id === id)
+    if (index === -1) {
+      console.error(`Blog post with id ${id} not found`)
+      return null
+    }
+    
+    // Merge updates with existing post, preserving the id
+    const updatedPost: BlogPost = { 
+      ...posts[index], 
+      ...updates,
+      id: posts[index].id // Ensure ID is never changed
+    }
+    
+    posts[index] = updatedPost
+    await saveBlogPosts(posts)
+    return posts[index]
+  } catch (error) {
+    console.error('Error updating blog post:', error)
+    throw error
+  }
 }
 
 export async function deleteBlogPost(id: string): Promise<boolean> {

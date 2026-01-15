@@ -43,11 +43,14 @@ export async function PATCH(
     const id = Array.isArray(params.id) ? params.id[0] : params.id
     const body = await request.json()
     
+    console.log('Updating blog post:', { id, body })
+    
     const updatedPost = await updateBlogPost(id, body)
     
     if (!updatedPost) {
+      console.error(`Blog post with id ${id} not found`)
       return NextResponse.json(
-        { error: 'Blog post not found' },
+        { error: `Blog post with id ${id} not found` },
         { status: 404 }
       )
     }
@@ -55,8 +58,9 @@ export async function PATCH(
     return NextResponse.json({ post: updatedPost })
   } catch (error) {
     console.error('Error updating blog post:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: 'Failed to update blog post' },
+      { error: `Failed to update blog post: ${errorMessage}` },
       { status: 500 }
     )
   }
