@@ -124,10 +124,11 @@ export default function AdminBlogPage() {
               setEditingPost(null)
               setImagePreview('')
             }}
-            className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+            className="flex items-center gap-2 bg-gray-900 text-white px-4 py-2 sm:px-6 sm:py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors shadow-md hover:shadow-lg active:scale-95"
+            type="button"
           >
             <Plus className="w-5 h-5" />
-            New Post
+            <span>New Post</span>
           </button>
         </div>
 
@@ -286,7 +287,7 @@ export default function AdminBlogPage() {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="flex items-center gap-2 bg-primary-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+                  className="flex items-center gap-2 bg-foreground text-background px-6 py-2 rounded-lg font-semibold hover:bg-foreground/90 transition-colors shadow-md hover:shadow-lg"
                 >
                   <Save className="w-5 h-5" />
                   {editingPost ? 'Update Post' : 'Create Post'}
