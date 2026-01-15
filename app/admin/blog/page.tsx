@@ -155,6 +155,15 @@ export default function AdminBlogPage() {
           </div>
         )}
 
+        {/* Warning for serverless environments */}
+        <div className="mb-4 p-4 rounded-lg bg-yellow-50 border border-yellow-200">
+          <p className="text-sm text-yellow-800">
+            <strong>Note:</strong> If you&apos;re running in a serverless environment (Vercel, AWS Lambda, etc.), 
+            blog posts are stored in memory and will be lost on server restart. For persistent storage, 
+            consider using a database like Supabase or PostgreSQL.
+          </p>
+        </div>
+
         {(isCreating || editingPost) && (
           <div className="bg-white rounded-xl shadow-md p-6 mb-8">
             <div className="flex justify-between items-center mb-4">

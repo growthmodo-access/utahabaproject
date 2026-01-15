@@ -15,12 +15,48 @@ export interface BlogPost {
 
 const dataFilePath = path.join(process.cwd(), 'data', 'blog-posts.json')
 
+// In-memory storage for serverless environments
+let inMemoryBlogPosts: BlogPost[] | null = null
+let isReadOnly = false
+
+// Check if file system is writable
+async function checkFileSystemWritable(): Promise<boolean> {
+  if (isReadOnly !== false) return !isReadOnly
+  
+  try {
+    // Try to write a test file
+    const testPath = path.join(process.cwd(), 'data', '.test-write')
+    await fs.writeFile(testPath, 'test', 'utf8')
+    await fs.unlink(testPath)
+    isReadOnly = false
+    return true
+  } catch (error) {
+    console.warn('File system is read-only, using in-memory storage:', error)
+    isReadOnly = true
+    return false
+  }
+}
+
 export async function getBlogPosts(): Promise<BlogPost[]> {
+  // If using in-memory storage, return that
+  if (isReadOnly && inMemoryBlogPosts !== null) {
+    return inMemoryBlogPosts
+  }
+  
   try {
     const fileContents = await fs.readFile(dataFilePath, 'utf8')
-    return JSON.parse(fileContents)
+    const posts = JSON.parse(fileContents)
+    // Cache in memory for read-only environments
+    if (isReadOnly) {
+      inMemoryBlogPosts = posts
+    }
+    return posts
   } catch (error) {
     console.error('Error reading blog posts:', error)
+    // Return in-memory data if available
+    if (inMemoryBlogPosts !== null) {
+      return inMemoryBlogPosts
+    }
     return []
   }
 }
@@ -31,11 +67,33 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function saveBlogPosts(posts: BlogPost[]): Promise<void> {
+  // Check if file system is writable
+  const writable = await checkFileSystemWritable()
+  
+  if (!writable) {
+    // Use in-memory storage
+    inMemoryBlogPosts = posts
+    console.warn('File system is read-only. Changes are stored in memory only and will be lost on server restart.')
+    console.warn('For persistent storage, please set up a database (e.g., Supabase, PostgreSQL).')
+    return
+  }
+  
   try {
     await fs.writeFile(dataFilePath, JSON.stringify(posts, null, 2), 'utf8')
-  } catch (error) {
+    // Update in-memory cache
+    inMemoryBlogPosts = posts
+  } catch (error: any) {
     console.error('Error saving blog posts:', error)
-    throw error
+    // Fallback to in-memory storage
+    inMemoryBlogPosts = posts
+    
+    // Check if it's a read-only file system error
+    if (error?.code === 'EROFS' || error?.message?.includes('read-only')) {
+      console.warn('Using in-memory storage due to read-only file system')
+      return // Don't throw, just use in-memory storage
+    }
+    
+    throw new Error(`Failed to save blog posts: ${error?.message || 'Unknown error'}. Consider using a database for persistent storage.`)
   }
 }
 
