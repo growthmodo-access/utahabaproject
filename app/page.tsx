@@ -6,6 +6,7 @@ import ProviderRow from '@/components/ProviderRow'
 import { Provider } from '@/types/provider'
 import { getProvidersData } from '@/lib/data'
 import { getBlogPosts } from '@/lib/blog-data'
+import { calculateReadingTime } from '@/lib/blog-utils'
 
 // Fetch providers directly from data source
 async function getFeaturedProviders(): Promise<Provider[]> {
