@@ -14,7 +14,7 @@ interface ProviderRowProps {
 export default function ProviderRow({ provider, rank, featured = false, tag }: ProviderRowProps) {
   return (
     <div className={`group border border-border rounded-xl bg-card hover:shadow-xl hover:border-foreground/20 transition-all duration-300 overflow-hidden ${featured ? 'ring-2 ring-yellow-400/30 bg-gradient-to-br from-card to-yellow-50/20' : ''}`}>
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-5 sm:p-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-5 sm:p-6 min-w-0">
         {/* Rank and Name Section */}
         <div className="flex-shrink-0 w-full sm:w-auto flex items-center gap-4 sm:gap-6 min-w-0">
           {rank && (
@@ -22,9 +22,9 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
               {rank}
             </div>
           )}
-          <div className="flex-1 sm:flex-none min-w-0">
-            <div className="flex items-center gap-2 mb-1.5">
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground/80 transition-colors">
+          <div className="flex-1 sm:flex-none min-w-0 max-w-full">
+            <div className="flex items-center gap-2 mb-1.5 flex-wrap">
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground/80 transition-colors break-words">
                 {provider.name}
               </h3>
               {tag && (
