@@ -16,7 +16,10 @@ export default function AdminBlogPage() {
 
   useEffect(() => {
     fetchPosts()
-    setSupabaseConfigured(isSupabaseConfigured())
+    // Check if Supabase is configured (client-side check)
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+    const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    setSupabaseConfigured(!!(supabaseUrl && supabaseKey))
   }, [])
 
   useEffect(() => {
