@@ -122,7 +122,7 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
               <a
                 href={`tel:${provider.phone}`}
                 onClick={(e) => e.stopPropagation()}
-                className="group/cta inline-flex items-center justify-center gap-2 bg-foreground text-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-foreground/90 transition-all text-sm sm:text-base shadow-md hover:shadow-lg whitespace-nowrap"
+                className="group/cta inline-flex items-center justify-center gap-2 bg-foreground text-background px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-foreground/90 transition-all text-sm sm:text-base shadow-md hover:shadow-lg whitespace-nowrap w-full sm:w-auto"
               >
                 <PhoneCall className="w-4 h-4" />
                 <span>Call Now</span>
@@ -133,7 +133,7 @@ export default function ProviderRow({ provider, rank, featured = false, tag }: P
               className="group/cta inline-flex items-center justify-center gap-2 border-2 border-border bg-background text-foreground px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-medium hover:bg-accent transition-all text-sm sm:text-base whitespace-nowrap w-full"
             >
               <HelpCircle className="w-4 h-4" />
-              <span className="text-center">Get Assistance Now</span>
+              <span>Get Assistance Now</span>
             </button>
           </div>
         </div>

@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     description: 'Find the best ABA therapy providers in Utah by county',
     type: 'website',
   },
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
 }
 
 export default function RootLayout({
