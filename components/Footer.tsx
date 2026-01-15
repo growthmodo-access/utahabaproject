@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="border-t border-border mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} ABA Utah. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} All rights reserved.</p>
         </div>
       </div>
     </footer>
