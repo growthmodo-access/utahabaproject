@@ -1,8 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Edit, Trash2, Save, X } from 'lucide-react'
+import { Plus, Edit, Trash2, Save, X, Image as ImageIcon } from 'lucide-react'
 import { BlogPost } from '@/lib/blog-data'
+import Image from 'next/image'
 
 export default function AdminBlogPage() {
   const [posts, setPosts] = useState<BlogPost[]>([])
@@ -10,10 +11,19 @@ export default function AdminBlogPage() {
   const [isCreating, setIsCreating] = useState(false)
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
+  const [imagePreview, setImagePreview] = useState<string>('')
 
   useEffect(() => {
     fetchPosts()
   }, [])
+
+  useEffect(() => {
+    if (editingPost?.image) {
+      setImagePreview(editingPost.image)
+    } else if (!isCreating && !editingPost) {
+      setImagePreview('')
+    }
+  }, [editingPost, isCreating])
 
   const fetchPosts = async () => {
     try {
@@ -112,6 +122,7 @@ export default function AdminBlogPage() {
             onClick={() => {
               setIsCreating(true)
               setEditingPost(null)
+              setImagePreview('')
             }}
             className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
           >
@@ -135,14 +146,15 @@ export default function AdminBlogPage() {
                 {editingPost ? 'Edit Post' : 'Create New Post'}
               </h2>
               <button
-                onClick={() => {
-                  setIsCreating(false)
-                  setEditingPost(null)
-                }}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X className="w-6 h-6" />
-              </button>
+                  onClick={() => {
+                    setIsCreating(false)
+                    setEditingPost(null)
+                    setImagePreview('')
+                  }}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <X className="w-6 h-6" />
+                </button>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -218,28 +230,57 @@ export default function AdminBlogPage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-                  <input
-                    type="text"
-                    name="category"
-                    defaultValue={editingPost?.category}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="Education, Guide, etc."
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <input
+                  type="text"
+                  name="category"
+                  defaultValue={editingPost?.category}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="Education, Guide, etc."
+                />
+              </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Image URL</label>
-                  <input
-                    type="text"
-                    name="image"
-                    defaultValue={editingPost?.image}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="/blog/image.jpg"
-                  />
-                </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <span className="flex items-center gap-2">
+                    <ImageIcon className="w-4 h-4" />
+                    Featured Image URL
+                  </span>
+                  <span className="text-xs font-normal text-gray-500 ml-6">(Recommended for homepage display)</span>
+                </label>
+                <input
+                  type="text"
+                  name="image"
+                  defaultValue={editingPost?.image}
+                  onChange={(e) => setImagePreview(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  placeholder="/blog/your-image.jpg"
+                />
+                <p className="text-xs text-gray-500 mt-1 mb-3">
+                  Upload your image to <code className="bg-gray-100 px-1 rounded">public/blog/</code> folder, then enter the path (e.g., <code className="bg-gray-100 px-1 rounded">/blog/image.jpg</code>). 
+                  Recommended size: 1200x630px for best display on homepage and blog listing.
+                </p>
+                
+                {/* Image Preview */}
+                {imagePreview && (
+                  <div className="mt-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                    <p className="text-xs font-medium text-gray-700 mb-2">Preview:</p>
+                    <div className="relative w-full max-w-md h-48 bg-gray-100 rounded-lg overflow-hidden border border-gray-200">
+                      <Image
+                        src={imagePreview}
+                        alt="Featured image preview"
+                        fill
+                        className="object-cover"
+                        onError={() => setImagePreview('')}
+                        unoptimized
+                      />
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">
+                      This is how the featured image will appear on the homepage and blog listing.
+                    </p>
+                  </div>
+                )}
               </div>
 
               <div className="flex gap-4">
@@ -255,6 +296,7 @@ export default function AdminBlogPage() {
                   onClick={() => {
                     setIsCreating(false)
                     setEditingPost(null)
+                    setImagePreview('')
                   }}
                   className="px-6 py-2 border border-gray-300 rounded-lg font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                 >
@@ -297,10 +339,11 @@ export default function AdminBlogPage() {
                       <td className="px-6 py-4 text-sm font-medium">
                         <div className="flex items-center gap-2">
                           <button
-                            onClick={() => {
-                              setEditingPost(post)
-                              setIsCreating(false)
-                            }}
+                          onClick={() => {
+                            setEditingPost(post)
+                            setIsCreating(false)
+                            setImagePreview(post.image || '')
+                          }}
                             className="text-primary-600 hover:text-primary-900"
                             title="Edit"
                           >
