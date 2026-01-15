@@ -3,9 +3,9 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-background py-12 px-4">
+    <footer className="border-t border-border bg-background py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
           <div>
             <div className="mb-4">
               <div className="relative h-10 sm:h-11 md:h-12 w-auto flex items-center justify-start">

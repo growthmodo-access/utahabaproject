@@ -33,7 +33,7 @@ export default function BlogRow({ post, index }: BlogRowProps) {
         </div>
 
         {/* Content Section */}
-        <div className="flex-1 min-w-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex-1 min-w-0 flex flex-col gap-3 sm:gap-4">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
               {post.category && (
@@ -52,26 +52,24 @@ export default function BlogRow({ post, index }: BlogRowProps) {
                 </time>
               </div>
             </div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
+            <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-foreground mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
               {post.title}
             </h3>
-            <p className="text-sm text-muted-foreground line-clamp-2 sm:line-clamp-1 leading-relaxed">
+            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
               {post.excerpt}
             </p>
           </div>
 
-          <div className="flex items-center gap-3 text-sm text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <User className="w-4 h-4" />
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
+              <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>{post.author}</span>
             </div>
-          </div>
 
-          <div className="flex items-center justify-end">
-            <div className="flex items-center gap-2 text-foreground font-medium text-sm sm:text-base group-hover:gap-3 transition-all">
-              <BookOpen className="w-4 h-4" />
+            <div className="flex items-center gap-2 text-foreground font-medium text-xs sm:text-sm md:text-base group-hover:gap-3 transition-all">
+              <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               <span>Read Article</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
         </div>

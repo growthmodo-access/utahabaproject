@@ -125,34 +125,34 @@ export default async function Home() {
               <Sparkles className="w-4 h-4 text-yellow-600" />
               <span className="text-sm font-semibold text-yellow-800">Trusted by Utah Families</span>
             </div>
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground mb-6 sm:mb-8 leading-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight text-foreground mb-4 sm:mb-6 md:mb-8 leading-tight px-2">
               Find the Best ABA Therapy
               <br className="hidden sm:block" />
               <span className="bg-gradient-to-r from-foreground via-yellow-600/20 to-foreground bg-clip-text text-transparent">
                 Providers in Utah
               </span>
             </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-10 sm:mb-12 max-w-4xl mx-auto px-4 leading-relaxed font-light">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-4xl mx-auto px-4 leading-relaxed font-light">
               Discover top-rated Applied Behavior Analysis providers across all Utah counties. 
               Get expert guidance and tools to make informed decisions about ABA therapy.
             </p>
-            <div className="flex flex-wrap gap-4 sm:gap-6 justify-center px-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 justify-center px-4 w-full sm:w-auto">
               <Link 
                 href="/directory" 
-                className="group inline-flex items-center gap-3 bg-foreground text-background px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-semibold hover:bg-foreground/90 transition-all duration-200 text-base sm:text-lg shadow-xl hover:shadow-2xl hover:scale-105"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-foreground text-background px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl font-semibold hover:bg-foreground/90 transition-all duration-200 text-sm sm:text-base md:text-lg shadow-xl hover:shadow-2xl hover:scale-105 w-full sm:w-auto"
               >
                 Browse Providers 
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link 
                 href="/cost-estimator" 
-                className="group inline-flex items-center gap-3 border-2 border-foreground bg-background text-foreground px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-semibold hover:bg-accent transition-all duration-200 text-base sm:text-lg hover:border-foreground/20 hover:scale-105"
+                className="group inline-flex items-center justify-center gap-2 sm:gap-3 border-2 border-foreground bg-background text-foreground px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 rounded-xl font-semibold hover:bg-accent transition-all duration-200 text-sm sm:text-base md:text-lg hover:border-foreground/20 hover:scale-105 w-full sm:w-auto"
               >
-                <Calculator className="w-5 h-5" />
+                <Calculator className="w-4 h-4 sm:w-5 sm:h-5" />
                 Estimate Costs
               </Link>
             </div>
-            <div className="mt-12 sm:mt-16 flex flex-wrap items-center justify-center gap-6 sm:gap-8 text-sm sm:text-base text-muted-foreground">
+            <div className="mt-8 sm:mt-12 md:mt-16 flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 text-xs sm:text-sm md:text-base text-muted-foreground px-4">
               <div className="flex items-center gap-2">
                 <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                 <span>85+ Providers</span>

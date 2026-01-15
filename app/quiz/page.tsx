@@ -203,21 +203,21 @@ export default function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white py-8 sm:py-12 md:py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto">
-        <div className="text-center mb-6 sm:mb-8">
-          <HelpCircle className="w-12 h-12 sm:w-16 sm:h-16 text-foreground mx-auto mb-4" />
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8">
+          <HelpCircle className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-foreground mx-auto mb-3 sm:mb-4" />
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 sm:mb-3 md:mb-4 px-2">
             Is ABA Therapy Right for You?
           </h1>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground px-2">
             Take our quiz to determine if ABA therapy could be beneficial
           </p>
         </div>
 
-        <div className="bg-card border border-border rounded-lg shadow-sm p-5 sm:p-6 md:p-8">
+        <div className="bg-card border border-border rounded-lg shadow-sm p-4 sm:p-5 md:p-6 lg:p-8">
           {/* Progress Bar */}
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             <div className="flex justify-between text-xs sm:text-sm text-muted-foreground mb-2">
               <span>Question {currentQuestion + 1} of {questions.length}</span>
               <span>{Math.round(progress)}% Complete</span>
@@ -231,8 +231,8 @@ export default function QuizPage() {
           </div>
 
           {/* Question */}
-          <div className="mb-6 sm:mb-8">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-foreground mb-4 sm:mb-6">
+          <div className="mb-4 sm:mb-6 md:mb-8">
+            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-foreground mb-3 sm:mb-4 md:mb-6 leading-tight">
               {questions[currentQuestion].question}
             </h2>
             <div className="space-y-2 sm:space-y-3">
@@ -253,11 +253,11 @@ export default function QuizPage() {
           </div>
 
           {/* Navigation */}
-          <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
+          <div className="flex flex-col sm:flex-row justify-between gap-2 sm:gap-3">
             <button
               onClick={prevQuestion}
               disabled={currentQuestion === 0}
-              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg border border-border text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg border border-border text-foreground hover:bg-accent disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base w-full sm:w-auto"
             >
               <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               Previous
@@ -265,7 +265,7 @@ export default function QuizPage() {
             <button
               onClick={nextQuestion}
               disabled={!currentAnswer}
-              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base"
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg bg-foreground text-background hover:bg-foreground/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-sm sm:text-base w-full sm:w-auto"
             >
               {currentQuestion === questions.length - 1 ? 'See Results' : 'Next'}
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
