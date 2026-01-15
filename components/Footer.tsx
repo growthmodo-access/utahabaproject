@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="mb-4">
-              <div className="relative h-10 w-auto flex items-center justify-start mb-3">
+              <div className="relative h-12 sm:h-14 md:h-16 w-auto flex items-center justify-start">
                 <Image
                   src="/logo.png"
                   alt="ABA Utah Logo"
@@ -18,7 +18,6 @@ export default function Footer() {
                   unoptimized
                 />
               </div>
-              <h3 className="text-foreground text-lg font-semibold">ABA Utah</h3>
             </div>
             <p className="text-sm text-muted-foreground">
               Your comprehensive resource for finding the best ABA therapy providers in Utah.

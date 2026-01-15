@@ -20,8 +20,8 @@ export default function Header() {
       <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" role="navigation" aria-label="Main navigation">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="relative h-10 w-auto flex items-center justify-center flex-shrink-0">
+          <Link href="/" className="flex items-center">
+            <div className="relative h-12 sm:h-14 md:h-16 w-auto flex items-center justify-center flex-shrink-0">
               <Image
                 src="/logo.png"
                 alt="ABA Utah Logo"
@@ -32,7 +32,6 @@ export default function Header() {
                 unoptimized
               />
             </div>
-            <span className="text-xl font-semibold text-foreground hidden sm:inline">ABA Utah</span>
           </Link>
           
           {/* Desktop Navigation */}
