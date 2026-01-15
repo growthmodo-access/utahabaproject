@@ -33,12 +33,18 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
             >
               {/* Image */}
               <div className="relative w-full h-48 sm:h-56 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                <BlogImage
-                  src={post.image || '/blog/placeholder.jpg'}
-                  alt={post.title}
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
-                  fill={true}
-                />
+                {post.image && post.image.trim() !== '' ? (
+                  <BlogImage
+                    src={post.image}
+                    alt={post.title}
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    fill={true}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <div className="text-gray-400 text-xs">No Image</div>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
                 {post.category && (
                   <div className="absolute top-3 left-3">

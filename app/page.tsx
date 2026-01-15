@@ -181,12 +181,18 @@ export default async function Home() {
                   <div className="flex flex-col lg:flex-row">
                     {/* Featured Image - Larger */}
                     <div className="relative w-full lg:w-1/2 h-64 sm:h-80 lg:h-96 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                      <BlogImage
-                        src={featuredPost.image || '/blog/placeholder.jpg'}
-                        alt={featuredPost.title}
-                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                        fill={true}
-                      />
+                      {featuredPost.image && featuredPost.image.trim() !== '' ? (
+                        <BlogImage
+                          src={featuredPost.image}
+                          alt={featuredPost.title}
+                          className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                          fill={true}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                          <div className="text-gray-400 text-xs">No Image</div>
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
                       <div className="absolute top-4 left-4">
                         {featuredPost.category && (

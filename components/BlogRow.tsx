@@ -25,11 +25,18 @@ export default function BlogRow({ post, index }: BlogRowProps) {
       <Link href={`/blog/${post.slug}`} className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-5 sm:p-6">
         {/* Image Section */}
         <div className="relative w-full sm:w-32 md:w-40 lg:w-48 h-32 sm:h-24 flex-shrink-0 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg overflow-hidden">
-          <BlogImage
-            src={post.image || '/blog/placeholder.jpg'}
-            alt={post.title}
-            className="object-cover group-hover:scale-110 transition-transform duration-500"
-          />
+          {post.image && post.image.trim() !== '' ? (
+            <BlogImage
+              src={post.image}
+              alt={post.title}
+              className="object-cover group-hover:scale-110 transition-transform duration-500"
+              fill={true}
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+              <div className="text-gray-400 text-xs">No Image</div>
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-br from-foreground/5 to-transparent pointer-events-none" />
         </div>
 

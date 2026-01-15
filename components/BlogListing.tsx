@@ -83,12 +83,18 @@ export default function BlogListing({ posts }: BlogListingProps) {
                 <Link href={`/blog/${post.slug}`} className="flex flex-col sm:flex-row">
                   {/* Featured Image - Improved Aspect Ratio */}
                   <div className="relative w-full sm:w-[300px] md:w-[360px] lg:w-[400px] h-56 sm:h-64 md:h-72 flex-shrink-0 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
-                    <BlogImage
-                      src={post.image || '/blog/placeholder.jpg'}
-                      alt={post.title}
-                      className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                      fill={true}
-                    />
+                    {post.image && post.image.trim() !== '' ? (
+                      <BlogImage
+                        src={post.image}
+                        alt={post.title}
+                        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                        fill={true}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                        <div className="text-gray-400 text-xs">No Image</div>
+                      </div>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute top-3 left-3">
                       {post.category && (
