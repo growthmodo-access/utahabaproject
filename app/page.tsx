@@ -113,13 +113,13 @@ export default async function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* Hero Section - Enhanced */}
-      <section className="relative overflow-hidden -mt-16 pt-16">
+      <section className="relative overflow-hidden -mt-16 pt-16 min-h-[calc(100vh-4rem)] flex items-center">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400/10 to-yellow-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 md:py-32 lg:py-40 border-b border-border/50">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 border-b border-border/50">
           <div className="text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-yellow-50 to-yellow-100 border border-yellow-200 mb-6 sm:mb-8 shadow-sm">
               <Sparkles className="w-4 h-4 text-yellow-600" />
