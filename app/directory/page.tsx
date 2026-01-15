@@ -27,7 +27,7 @@ export default function DirectoryPage() {
     certifications: [],
     minExperience: 0,
   })
-  const [sortOption, setSortOption] = useState<SortOption>('rank-asc')
+  const [sortOption, setSortOption] = useState<SortOption>('name-asc')
 
   useEffect(() => {
     setLoading(true)
@@ -160,14 +160,8 @@ export default function DirectoryPage() {
                   className="w-full border border-border rounded-lg px-3 sm:px-4 py-2 pr-9 text-sm sm:text-base focus:ring-2 focus:ring-foreground/20 focus:border-foreground transition-colors bg-background appearance-none"
                   aria-label="Sort providers"
                 >
-                  <option value="rank-asc">Rank (Low to High)</option>
-                  <option value="rank-desc">Rank (High to Low)</option>
-                  <option value="rating-desc">Highest Rated</option>
-                  <option value="rating-asc">Lowest Rated</option>
                   <option value="name-asc">Name (A-Z)</option>
                   <option value="name-desc">Name (Z-A)</option>
-                  <option value="experience-desc">Most Experienced</option>
-                  <option value="experience-asc">Least Experienced</option>
                 </select>
                 <ArrowUpDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4 pointer-events-none" aria-hidden="true" />
               </div>
