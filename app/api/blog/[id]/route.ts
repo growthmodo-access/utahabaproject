@@ -14,7 +14,8 @@ export async function GET(
     
     // If not found by ID, try by slug
     if (!post) {
-      post = await getBlogPost(id)
+      const postBySlug = await getBlogPost(id)
+      post = postBySlug || undefined
     }
     
     if (!post) {
