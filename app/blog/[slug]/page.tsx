@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       )}
 
       {/* Content Section */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-10 md:pb-12">
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pb-8 sm:pb-10 md:pb-12 lg:pb-16">
         {!post.image && (
           <Link
             href="/blog"
@@ -165,16 +165,16 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         )}
 
         {!post.image && (
-          <div className="mb-8 sm:mb-10">
+          <div className="mb-8 sm:mb-10 md:mb-12">
             {post.category && (
-              <span className="inline-block bg-gray-100 text-gray-700 text-xs font-semibold uppercase tracking-wide px-3 py-1.5 rounded-md mb-4 sm:mb-5">
+              <span className="inline-block bg-gray-100 text-gray-700 text-xs sm:text-sm font-semibold uppercase tracking-wide px-3 sm:px-4 py-1.5 sm:py-2 rounded-md mb-4 sm:mb-5 md:mb-6">
                 {post.category}
               </span>
             )}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-5 sm:mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 mb-5 sm:mb-6 md:mb-8 leading-tight tracking-tight">
               {post.title}
             </h1>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-gray-600 mb-6 sm:mb-8 pb-6 sm:pb-8 border-b border-gray-200 text-sm sm:text-base">
+            <div className="flex flex-wrap items-center gap-3 sm:gap-6 text-gray-600 mb-6 sm:mb-8 md:mb-10 pb-6 sm:pb-8 border-b border-gray-200 text-sm sm:text-base">
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 text-gray-500" />
                 <span className="font-medium">{post.author}</span>
@@ -198,9 +198,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         )}
 
         {/* Blog Content - Enhanced HTML Rendering */}
-        <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12">
+        <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16">
           <div
-            className="blog-content"
+            className="blog-content max-w-none prose prose-lg sm:prose-xl md:prose-2xl"
             dangerouslySetInnerHTML={{ 
               __html: (() => {
                 if (typeof post.content !== 'string') return ''

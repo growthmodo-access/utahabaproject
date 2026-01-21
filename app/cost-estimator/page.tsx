@@ -82,9 +82,19 @@ export default function CostEstimatorPage() {
               Cost Estimator
             </span>
           </h1>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 md:mb-12 max-w-4xl mx-auto px-4 leading-relaxed font-light">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-6 sm:mb-8 max-w-4xl mx-auto px-4 leading-relaxed font-light">
             Get a personalized estimate for ABA therapy costs in Utah based on your specific needs
           </p>
+          <div className="max-w-3xl mx-auto px-4">
+            <div className="bg-amber-50/80 border border-amber-200 rounded-lg p-3 sm:p-4 backdrop-blur-sm">
+              <div className="flex items-start gap-2 sm:gap-3">
+                <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <p className="text-xs sm:text-sm text-amber-900 leading-relaxed">
+                  <strong>Note:</strong> This calculator uses AI-generated estimates. Actual costs may vary. Always verify pricing directly with providers.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -244,13 +254,25 @@ export default function CostEstimatorPage() {
               </div>
             </div>
 
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 sm:p-5 mb-4">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="font-semibold text-sm text-yellow-900 mb-1">Important Note</h4>
-                  <p className="text-xs text-yellow-800">
-                    These are estimates based on average rates in Utah. Actual costs may vary based on provider, insurance coverage details, individual needs, and location. Always contact providers directly for accurate pricing and to verify your insurance benefits.
+                  <h4 className="font-semibold text-sm sm:text-base text-yellow-900 mb-2">AI-Generated Estimate Disclaimer</h4>
+                  <p className="text-xs sm:text-sm text-yellow-800 leading-relaxed">
+                    <strong>Important:</strong> This cost estimate is generated using AI tools and is for informational purposes only. The actual cost of ABA therapy may vary significantly based on your specific provider, insurance plan details, individual needs, location, and other factors. These estimates should not be considered as definitive pricing. Always contact providers directly to obtain accurate pricing information and verify your insurance benefits before making any decisions.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <div className="flex items-start gap-3">
+                <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-semibold text-sm text-blue-900 mb-1">Additional Information</h4>
+                  <p className="text-xs text-blue-800">
+                    Actual costs may vary based on provider, insurance coverage details, individual needs, and location. Always contact providers directly for accurate pricing and to verify your insurance benefits.
                   </p>
                 </div>
               </div>

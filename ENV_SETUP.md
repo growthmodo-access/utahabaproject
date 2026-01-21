@@ -12,6 +12,16 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 # Klaviyo Configuration (optional)
 # KLAVIYO_API_KEY=your_klaviyo_api_key_here
 # KLAVIYO_LIST_ID=your_klaviyo_list_id_here
+
+# Google Analytics (optional)
+# Get your GA4 Measurement ID from: https://analytics.google.com/
+# Format: G-XXXXXXXXXX
+# NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Google Search Console Verification (optional)
+# Get your verification code from: https://search.google.com/search-console
+# This is the content value from the meta tag Google provides
+# NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=your_verification_code_here
 ```
 
 ## Steps:

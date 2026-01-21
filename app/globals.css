@@ -313,6 +313,25 @@
     overflow-wrap: break-word;
     font-size: 1.125rem !important;
     line-height: 1.75 !important;
+    /* Optimal reading width for better readability */
+    max-width: 65ch !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  /* Responsive font sizes for better mobile reading */
+  @media (max-width: 640px) {
+    .blog-content {
+      font-size: 1rem !important;
+      line-height: 1.7 !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog-content {
+      font-size: 1.25rem !important;
+      line-height: 1.8 !important;
+    }
   }
 
   .blog-content * {
@@ -367,6 +386,36 @@
     line-height: 1.2 !important;
   }
 
+  @media (max-width: 640px) {
+    .blog-content h1 {
+      font-size: 1.875rem !important;
+    }
+    .blog-content h2 {
+      font-size: 1.5rem !important;
+    }
+    .blog-content h3 {
+      font-size: 1.25rem !important;
+    }
+    .blog-content h4 {
+      font-size: 1.125rem !important;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .blog-content h1 {
+      font-size: 2.75rem !important;
+    }
+    .blog-content h2 {
+      font-size: 2.25rem !important;
+    }
+    .blog-content h3 {
+      font-size: 1.75rem !important;
+    }
+    .blog-content h4 {
+      font-size: 1.5rem !important;
+    }
+  }
+
   .blog-content h2 {
     font-size: 1.875rem !important;
     line-height: 1.3 !important;
@@ -388,6 +437,14 @@
     line-height: 1.75 !important;
     color: #374151 !important;
     font-size: 1.125rem !important;
+    /* Better spacing between paragraphs */
+    margin-bottom: 1.5rem !important;
+  }
+
+  @media (min-width: 1024px) {
+    .blog-content p {
+      margin-bottom: 1.75rem !important;
+    }
   }
 
   .blog-content p:first-of-type {
@@ -492,11 +549,21 @@
   .blog-content img {
     border-radius: 0.5rem !important;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
     max-width: 100% !important;
     height: auto !important;
     display: block !important;
+    /* Center images for better visual balance */
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  @media (min-width: 768px) {
+    .blog-content img {
+      margin-top: 2.5rem !important;
+      margin-bottom: 2.5rem !important;
+    }
   }
 
   .blog-content hr {
