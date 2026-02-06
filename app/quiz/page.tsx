@@ -1,13 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { HelpCircle, CheckCircle, XCircle, ArrowRight, ArrowLeft, Sparkles, TrendingUp, BookOpen } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { HelpCircle, CheckCircle, XCircle, ArrowRight, ArrowLeft, Sparkles, TrendingUp, BookOpen, ChevronDown, ChevronUp } from 'lucide-react'
 import EmailCapture from '@/components/EmailCapture'
 import Link from 'next/link'
 
 interface Question {
   id: number
   question: string
+  whyWeAsk?: string
   options: { value: string; label: string; score: number }[]
 }
 
@@ -15,6 +17,7 @@ const questions: Question[] = [
   {
     id: 1,
     question: "Has your child been diagnosed with Autism Spectrum Disorder (ASD)?",
+    whyWeAsk: "ABA therapy is most commonly recommended for individuals with an autism diagnosis. Knowing where you are in the process helps us tailor our recommendations.",
     options: [
       { value: 'yes', label: 'Yes, diagnosed', score: 10 },
       { value: 'evaluating', label: 'Currently being evaluated', score: 8 },
@@ -25,6 +28,7 @@ const questions: Question[] = [
   {
     id: 2,
     question: "What age is the individual?",
+    whyWeAsk: "ABA is effective at any age, but early intervention (typically before 5) often leads to the strongest outcomes. Age also affects which providers and programs are available.",
     options: [
       { value: '0-3', label: '0-3 years (Early Intervention)', score: 10 },
       { value: '4-6', label: '4-6 years (Preschool)', score: 9 },
@@ -36,6 +40,7 @@ const questions: Question[] = [
   {
     id: 3,
     question: "Are there challenges with communication or social skills?",
+    whyWeAsk: "ABA therapy often focuses on building communication and social skills. Understanding the level of need helps match you with the right intensity of support.",
     options: [
       { value: 'severe', label: 'Significant challenges', score: 10 },
       { value: 'moderate', label: 'Moderate challenges', score: 7 },
@@ -46,6 +51,7 @@ const questions: Question[] = [
   {
     id: 4,
     question: "Are there behavioral concerns (tantrums, aggression, self-injury)?",
+    whyWeAsk: "Behavior reduction and replacement are core components of ABA. Knowing the extent of these concerns helps determine how much focus may be needed in this area.",
     options: [
       { value: 'frequent', label: 'Frequent and significant', score: 10 },
       { value: 'occasional', label: 'Occasional', score: 6 },
@@ -56,6 +62,7 @@ const questions: Question[] = [
   {
     id: 5,
     question: "Are there challenges with daily living skills (feeding, dressing, hygiene)?",
+    whyWeAsk: "ABA can help build independence in daily routines. This question helps us understand whether life-skills training would be a priority in your plan.",
     options: [
       { value: 'significant', label: 'Significant challenges', score: 9 },
       { value: 'moderate', label: 'Moderate challenges', score: 6 },
@@ -66,6 +73,7 @@ const questions: Question[] = [
   {
     id: 6,
     question: "How is the individual's academic performance?",
+    whyWeAsk: "School performance can reflect how well current supports are working. ABA can complement educational goals and address skills that affect learning.",
     options: [
       { value: 'struggling', label: 'Significantly struggling', score: 9 },
       { value: 'below', label: 'Below grade level', score: 6 },
@@ -83,18 +91,21 @@ export default function QuizPage() {
   const [userInfo, setUserInfo] = useState({ name: '', email: '', phone: '' })
   const [showUserInfoForm, setShowUserInfoForm] = useState(false)
   const [userInfoSubmitted, setUserInfoSubmitted] = useState(false)
+  const [whyWeAskOpen, setWhyWeAskOpen] = useState(false)
+  const [direction, setDirection] = useState(0) // -1 = back, 1 = forward
 
   const handleAnswer = (questionId: number, answerScore: number) => {
     setAnswers({ ...answers, [questionId]: answerScore })
   }
 
   const nextQuestion = () => {
+    setDirection(1)
+    setWhyWeAskOpen(false)
     // Show user info form after question 3 (middle of quiz)
     if (currentQuestion === 2 && !userInfoSubmitted) {
       setShowUserInfoForm(true)
       return
     }
-    
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
     } else {
@@ -115,6 +126,8 @@ export default function QuizPage() {
   }
 
   const prevQuestion = () => {
+    setDirection(-1)
+    setWhyWeAskOpen(false)
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1)
     }
@@ -188,28 +201,53 @@ export default function QuizPage() {
   if (score !== null && result) {
     const ResultIcon = result.icon
     return (
-      <div className="flex flex-col min-h-screen bg-white">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="flex flex-col min-h-screen bg-white"
+      >
         {/* Results Hero Section */}
-        <section className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="relative overflow-hidden pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-8 border-b border-border/50"
+        >
           <div className="absolute inset-0 bg-gradient-to-br from-gray-50/90 via-white to-gray-50/90" />
           <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-purple-400/10 to-purple-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-foreground/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2" />
-          
           <div className="relative max-w-4xl mx-auto text-center">
-            <ResultIcon className={`w-16 h-16 sm:w-20 sm:h-20 ${result.color} mx-auto mb-6`} />
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.2 }}
+            >
+              <ResultIcon className={`w-16 h-16 sm:w-20 sm:h-20 ${result.color} mx-auto mb-6`} />
+            </motion.div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 sm:mb-6">
               {result.title}
             </h1>
-            <div className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 mb-6">
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.4 }}
+              className="inline-flex items-center justify-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-purple-50 to-purple-100 border border-purple-200 mb-6"
+            >
               <TrendingUp className="w-5 h-5 text-purple-600" />
               <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">{Math.round(score)}%</span>
               <span className="text-sm sm:text-base text-muted-foreground">Match Score</span>
-            </div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
         {/* Results Content */}
-        <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50/30 to-white">
+        <motion.section
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50/30 to-white"
+        >
           <div className="max-w-4xl mx-auto">
             <div className={`bg-card border-2 ${result.borderColor} rounded-xl shadow-lg p-6 sm:p-8 md:p-10 mb-8`}>
               <div className={`${result.bgColor} rounded-lg p-6 sm:p-8 mb-6 sm:mb-8`}>
@@ -255,8 +293,8 @@ export default function QuizPage() {
               </div>
             )}
           </div>
-        </section>
-      </div>
+        </motion.section>
+      </motion.div>
     )
   }
 
@@ -290,17 +328,39 @@ export default function QuizPage() {
       <section className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-gray-50/30 to-white">
         <div className="max-w-4xl mx-auto">
 
-        <div className="bg-card border border-border rounded-xl shadow-lg p-6 sm:p-8 md:p-10">
-          {/* Progress Bar */}
-          <div className="mb-6 sm:mb-8">
-            <div className="flex justify-between items-center text-xs sm:text-sm text-muted-foreground mb-3">
+        <div className="bg-card border border-border rounded-2xl shadow-xl p-6 sm:p-8 md:p-10 lg:p-12">
+          {/* Step progress dots + bar */}
+          <div className="mb-8 sm:mb-10">
+            <div className="flex justify-between items-center text-xs sm:text-sm text-muted-foreground mb-4">
               <span className="font-medium">Question {currentQuestion + 1} of {questions.length}</span>
               <span className="font-semibold text-foreground">{Math.round(progress)}% Complete</span>
             </div>
-            <div className="w-full bg-accent rounded-full h-3 overflow-hidden">
-              <div 
-                className="bg-gradient-to-r from-purple-500 to-purple-600 h-3 rounded-full transition-all duration-500 shadow-sm"
-                style={{ width: `${progress}%` }}
+            <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
+              {questions.map((_, index) => {
+                const isCompleted = answers[questions[index].id] !== undefined
+                const isCurrent = index === currentQuestion
+                return (
+                  <motion.div
+                    key={index}
+                    className={`flex-1 h-2 sm:h-2.5 rounded-full ${
+                      isCompleted ? 'bg-purple-600' : isCurrent ? 'bg-purple-400' : 'bg-gray-200'
+                    }`}
+                    initial={false}
+                    animate={{
+                      scale: isCurrent ? 1.05 : 1,
+                      opacity: isCompleted || isCurrent ? 1 : 0.6,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                )
+              })}
+            </div>
+            <div className="w-full bg-accent rounded-full h-2 overflow-hidden">
+              <motion.div
+                className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full shadow-sm"
+                initial={false}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               />
             </div>
           </div>
@@ -363,30 +423,92 @@ export default function QuizPage() {
             </div>
           )}
 
-          {/* Question */}
+          {/* Question - animated */}
           {!showUserInfoForm && (
-            <div className="mb-6 sm:mb-8 md:mb-10">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-6 sm:mb-8 leading-tight">
-                {questions[currentQuestion].question}
-              </h2>
-              <div className="space-y-3 sm:space-y-4">
-                {questions[currentQuestion].options.map((option, index) => (
-                  <button
-                    key={index}
-                    onClick={() => handleAnswer(questions[currentQuestion].id, option.score)}
-                    className={`w-full text-left p-4 sm:p-5 rounded-xl border-2 transition-all text-sm sm:text-base hover:shadow-md ${
-                      currentAnswer === option.score
-                        ? 'border-foreground bg-gradient-to-r from-purple-50 to-purple-100 shadow-md'
-                        : 'border-border hover:border-foreground/50 hover:bg-accent/50'
-                    }`}
-                  >
-                    <span className={`font-medium ${currentAnswer === option.score ? 'text-foreground' : 'text-foreground'}`}>
-                      {option.label}
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentQuestion}
+                initial={{ opacity: 0, x: direction >= 0 ? 24 : -24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: direction >= 0 ? -24 : 24 }}
+                transition={{ duration: 0.3 }}
+                className="mb-6 sm:mb-8 md:mb-10"
+              >
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6 leading-tight">
+                  {questions[currentQuestion].question}
+                </h2>
+                {questions[currentQuestion].whyWeAsk && (
+                  <div className="mb-6">
+                    <button
+                      type="button"
+                      onClick={() => setWhyWeAskOpen((o) => !o)}
+                      className="flex items-center gap-2 text-sm text-purple-600 hover:text-purple-700 font-medium"
+                    >
+                      {whyWeAskOpen ? (
+                        <>
+                          <ChevronUp className="w-4 h-4" />
+                          Hide why we ask
+                        </>
+                      ) : (
+                        <>
+                          <ChevronDown className="w-4 h-4" />
+                          Why we ask this
+                        </>
+                      )}
+                    </button>
+                    <AnimatePresence>
+                      {whyWeAskOpen && (
+                        <motion.p
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="overflow-hidden text-sm text-muted-foreground mt-2 pl-6 border-l-2 border-purple-200"
+                        >
+                          {questions[currentQuestion].whyWeAsk}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+                <div className="space-y-3 sm:space-y-4">
+                  {questions[currentQuestion].options.map((option, index) => {
+                    const isSelected = currentAnswer === option.score
+                    return (
+                      <motion.button
+                        key={option.value}
+                        type="button"
+                        onClick={() => handleAnswer(questions[currentQuestion].id, option.score)}
+                        className={`w-full text-left p-4 sm:p-5 rounded-xl border-2 transition-colors text-sm sm:text-base flex items-center justify-between gap-3 ${
+                          isSelected
+                            ? 'border-purple-600 bg-gradient-to-r from-purple-50 to-purple-100 shadow-md'
+                            : 'border-border hover:border-purple-300 hover:bg-purple-50/50'
+                        }`}
+                        whileHover={{ scale: 1.01 }}
+                        whileTap={{ scale: 0.99 }}
+                        initial={false}
+                        animate={{
+                          boxShadow: isSelected ? '0 4px 14px rgba(147, 51, 234, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
+                        }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <span className="font-medium text-foreground">{option.label}</span>
+                        {isSelected && (
+                          <motion.span
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                            className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center"
+                          >
+                            <CheckCircle className="w-5 h-5 text-white" />
+                          </motion.span>
+                        )}
+                      </motion.button>
+                    )
+                  })}
+                </div>
+              </motion.div>
+            </AnimatePresence>
           )}
 
           {/* Navigation */}

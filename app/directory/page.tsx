@@ -11,6 +11,7 @@ import EmptyState from '@/components/EmptyState'
 import { MapPin, Search, ArrowUpDown } from 'lucide-react'
 import { filterProviders, sortProviders } from '@/lib/client-utils'
 import { useDebounce } from '@/lib/useDebounce'
+import { getValidCountiesFromProviderList, normalizeCountyToUtahCounty } from '@/lib/utah-counties'
 
 export default function DirectoryPage() {
   const [selectedCounty, setSelectedCounty] = useState<string>('')
@@ -31,16 +32,18 @@ export default function DirectoryPage() {
 
   useEffect(() => {
     setLoading(true)
-    // Fetch providers data
     fetch('/api/providers')
       .then(res => res.json())
       .then(data => {
-        const allCounties = Array.from(new Set(data.providers.map((p: Provider) => p.county).filter(Boolean))).sort() as string[]
-        setCounties(allCounties)
-        
+        const rawCounties = data.providers.map((p: Provider) => p.county).filter(Boolean)
+        const validCounties = getValidCountiesFromProviderList(rawCounties)
+        setCounties(validCounties)
+
         if (selectedCounty) {
-          const filtered = data.providers
-            .filter((p: Provider) => p.county?.toLowerCase() === selectedCounty.toLowerCase())
+          const filtered = data.providers.filter((p: Provider) => {
+            const normalized = normalizeCountyToUtahCounty(p.county)
+            return normalized === selectedCounty
+          })
           setProviders(filtered)
         } else {
           setProviders(data.providers)
@@ -81,7 +84,7 @@ export default function DirectoryPage() {
 
   const groupedByCounty = useMemo(() => {
     const grouped = processedProviders.reduce((acc, provider) => {
-      const county = provider.county || 'Unknown'
+      const county = normalizeCountyToUtahCounty(provider.county) || 'Other'
       if (!acc[county]) acc[county] = []
       acc[county].push(provider)
       return acc
@@ -251,7 +254,7 @@ export default function DirectoryPage() {
                 <div key={county}>
                   <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-4 sm:mb-6 flex items-center gap-2">
                     <MapPin className="w-5 h-5 sm:w-6 sm:h-6 text-foreground/60" aria-hidden="true" />
-                    {county} County - Top Providers
+                    {county === 'Other' ? 'Other Areas' : `${county} County`} - Top Providers
                     <span className="text-base sm:text-lg font-normal text-muted-foreground ml-2">
                       ({countyProviders.length})
                     </span>
