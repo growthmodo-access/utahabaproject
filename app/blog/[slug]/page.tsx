@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
           </div>
           <div className="relative h-full flex items-end z-20">
-            <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
+            <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
               <Link
                 href="/blog"
                 className="inline-flex items-center gap-2 text-white/90 hover:text-white mb-4 sm:mb-6 text-sm sm:text-base transition-colors group backdrop-blur-sm bg-black/20 px-3 py-1.5 rounded-lg"
@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       )}
 
       {/* Content Section */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pb-8 sm:pb-10 md:pb-12 lg:pb-16">
+      <article className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 pb-8 sm:pb-10 md:pb-12 lg:pb-16">
         {!post.image && (
           <Link
             href="/blog"

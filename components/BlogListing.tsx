@@ -29,7 +29,7 @@ export default function BlogListing({ posts }: BlogListingProps) {
   }, [filteredPosts])
 
   return (
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-7xl mx-auto w-full">
       {/* Category Filter */}
       {categories.length > 0 && (
         <div className="mb-8 sm:mb-10 md:mb-12">
