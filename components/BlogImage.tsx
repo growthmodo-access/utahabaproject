@@ -19,7 +19,13 @@ export default function BlogImage({ src, alt, className, fill = true, width, hei
 
   useEffect(() => {
     if (src && src.trim() !== '') {
-      setImageSrc(src)
+      // If the blog post references an image under /blog/ but that file
+      // does not exist, fall back to a shared placeholder that we know exists.
+      // This prevents blank grey boxes when content was imported without images.
+      const normalizedSrc =
+        src.startsWith('/blog/') ? '/P1.jpg' : src
+
+      setImageSrc(normalizedSrc)
       setImageError(false)
       setUseFallback(false)
     } else {
