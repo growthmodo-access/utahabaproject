@@ -1,0 +1,8 @@
+-- Blog featured images: Supabase Storage (required for uploads on Vercel / serverless)
+--
+-- In Supabase Dashboard → Storage → New bucket:
+--   Name: blog-images
+--   Public bucket: ON  (so featured image URLs work without signed URLs)
+--
+-- The API route uploads with SUPABASE_SERVICE_ROLE_KEY (server-only).
+-- No extra RLS policies are required for that path.

@@ -27,6 +27,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 # Get an API key from https://openrouter.ai/
 # OPENROUTER_API_KEY=your_openrouter_api_key_here
 # OPENROUTER_MODEL=openai/gpt-4o-mini
+
+# Blog featured image uploads (required on Vercel / serverless)
+# Get the service role key from Supabase → Project Settings → API (keep secret; never expose to the browser).
+# Create a public Storage bucket named "blog-images" (see supabase-storage-blog-images.sql).
+# SUPABASE_SERVICE_ROLE_KEY=your_service_role_key_here
 ```
 
 ## Steps:
@@ -47,3 +52,11 @@ After creating `.env.local`, you need to run the SQL setup script in Supabase:
 1. Go to your Supabase dashboard
 2. Navigate to SQL Editor
 3. Run the SQL from `supabase-setup.sql`
+
+### Blog images on production (Vercel)
+
+Local development can save uploads under `public/blog`. On Vercel the filesystem is read-only, so uploads **must** use Supabase Storage:
+
+1. In Supabase → **Storage** → **New bucket** → name `blog-images`, enable **Public bucket**.
+2. Add `SUPABASE_SERVICE_ROLE_KEY` to Vercel (and locally if you want to test Storage uploads) alongside your existing `NEXT_PUBLIC_SUPABASE_*` variables.
+3. Redeploy. The admin upload API will store files in that bucket and return a public `https://…supabase.co/storage/...` URL for the post.
