@@ -8,7 +8,8 @@
     "date": "2024-01-15",
     "slug": "understanding-aba-therapy",
     "category": "Education",
-    "image": "/blog/aba-therapy-guide.jpg"
+    "image": "/blog/aba-therapy-guide.jpg",
+    "featured": true
   },
   {
     "id": "2",
@@ -19,7 +20,8 @@
     "date": "2024-01-10",
     "slug": "choosing-aba-provider",
     "category": "Guide",
-    "image": "/blog/choosing-provider.jpg"
+    "image": "/blog/choosing-provider.jpg",
+    "featured": true
   },
   {
     "id": "3",

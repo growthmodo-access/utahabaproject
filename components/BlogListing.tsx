@@ -21,11 +21,15 @@ export default function BlogListing({ posts }: BlogListingProps) {
     return posts.filter(post => post.category === selectedCategory)
   }, [posts, selectedCategory])
   
-  // Sort posts by date (newest first)
+  // Sort posts by featured flag, then date (newest first)
   const sortedPosts = useMemo(() => {
-    return [...filteredPosts].sort((a, b) => 
+    const featured = filteredPosts.filter(post => post.featured)
+    const regular = filteredPosts.filter(post => !post.featured)
+
+    const sortByDateDesc = (a: BlogPost, b: BlogPost) =>
       new Date(b.date).getTime() - new Date(a.date).getTime()
-    )
+
+    return [...featured.sort(sortByDateDesc), ...regular.sort(sortByDateDesc)]
   }, [filteredPosts])
 
   return (
@@ -97,19 +101,26 @@ export default function BlogListing({ posts }: BlogListingProps) {
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute top-3 left-3">
-                      {post.category && (
-                        <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-700 shadow-sm border border-gray-200/50">
-                          {post.category}
-                        </span>
-                      )}
+                      <div className="flex flex-col gap-1">
+                        {post.category && (
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-white/95 backdrop-blur-sm text-gray-800 shadow-sm border border-gray-200/50">
+                            {post.category}
+                          </span>
+                        )}
+                        {post.featured && (
+                          <span className="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-semibold uppercase tracking-wide bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md border border-white/40">
+                            Featured
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                   
                   {/* Content */}
                   <div className="flex-1 p-5 sm:p-6 md:p-7 flex flex-col justify-between min-w-0 bg-white">
                     <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2.5 mb-3">
-                        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-500 font-medium">
+                      <div className="flex flex-wrap items-center gap-2 mb-2">
+                        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-400 font-medium">
                           <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
                           <time dateTime={post.date}>
                             {new Date(post.date).toLocaleDateString('en-US', {
@@ -119,17 +130,51 @@ export default function BlogListing({ posts }: BlogListingProps) {
                             })}
                           </time>
                         </div>
-                        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-500 font-medium">
+                        <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-gray-400 font-medium">
                           <Clock className="w-3.5 h-3.5 flex-shrink-0" />
                           <span>{readingTime} min read</span>
                         </div>
                       </div>
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
+                      <h2 className="text-2xl sm:text-3xl md:text-[1.9rem] font-extrabold text-gray-900 mb-3 group-hover:text-gray-700 transition-colors leading-tight">
                         {post.title}
                       </h2>
-                      <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2 sm:line-clamp-3">
-                        {post.excerpt}
-                      </p>
+                      {(() => {
+                        const content = typeof post.content === 'string' ? post.content : ''
+                        const firstParagraphMatch = content.match(/<p[^>]*>([\s\S]*?)<\/p>/i)
+                        const firstParagraphText = firstParagraphMatch
+                          ? firstParagraphMatch[1]
+                              .replace(/<[^>]+>/g, ' ')
+                              .replace(/\s+/g, ' ')
+                              .trim()
+                          : ''
+
+                        const summary = firstParagraphText || post.excerpt || ''
+
+                        const sentences = summary
+                          .split(/(?<=[.!?])\s+/)
+                          .map(s => s.trim())
+                          .filter(Boolean)
+
+                        const takeaways = sentences.length > 0 ? sentences.slice(0, 2) : []
+
+                        if (takeaways.length === 0) {
+                          return (
+                            <p className="text-sm sm:text-base text-gray-600 mb-5 leading-relaxed line-clamp-2 sm:line-clamp-3">
+                              {summary}
+                            </p>
+                          )
+                        }
+
+                        return (
+                          <ul className="list-disc pl-5 space-y-1.5 text-sm sm:text-base text-gray-700 mb-5 leading-relaxed">
+                            {takeaways.map(point => (
+                              <li key={point} className="line-clamp-2">
+                                {/[.!?]$/.test(point) ? point : `${point}.`}
+                              </li>
+                            ))}
+                          </ul>
+                        )
+                      })()}
                     </div>
                     
                     <div className="flex items-center justify-between pt-4 border-t border-gray-100">

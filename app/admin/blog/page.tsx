@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, Edit, Trash2, Save, X, Image as ImageIcon } from 'lucide-react'
+import { Plus, Edit, Trash2, Save, X, Image as ImageIcon, Sparkles } from 'lucide-react'
 import { BlogPost } from '@/lib/blog-data'
 import Image from 'next/image'
 
@@ -13,6 +13,7 @@ export default function AdminBlogPage() {
   const [isCreating, setIsCreating] = useState(false)
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
+  const [aiGenerating, setAiGenerating] = useState(false)
   const [imagePreview, setImagePreview] = useState<string>('')
   const [imageFile, setImageFile] = useState<File | null>(null)
   const [uploadingImage, setUploadingImage] = useState(false)
@@ -87,6 +88,56 @@ export default function AdminBlogPage() {
       
       setImageFile(file)
       handleImageUpload(file)
+    }
+  }
+
+  const handleGenerateWithAI = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
+    const formEl = e.currentTarget.closest('form') as HTMLFormElement | null
+    if (!formEl) return
+
+    const fd = new FormData(formEl)
+    const title = (fd.get('title') as string | null)?.trim() || ''
+
+    if (!title) {
+      setMessage('Please enter a title first.')
+      return
+    }
+
+    setAiGenerating(true)
+    setMessage('')
+
+    try {
+      const res = await fetch('/api/blog/ai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title }),
+      })
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        setMessage(data?.error || 'AI generation failed')
+        return
+      }
+
+      const excerptEl = formEl.querySelector('textarea[name="excerpt"]') as HTMLTextAreaElement | null
+      const contentEl = formEl.querySelector('textarea[name="content"]') as HTMLTextAreaElement | null
+      const slugEl = formEl.querySelector('input[name="slug"]') as HTMLInputElement | null
+      const categoryEl = formEl.querySelector('input[name="category"]') as HTMLInputElement | null
+
+      if (excerptEl && typeof data.excerpt === 'string') excerptEl.value = data.excerpt
+      if (contentEl && typeof data.contentHtml === 'string') contentEl.value = data.contentHtml
+      if (slugEl && typeof data.slug === 'string') slugEl.value = data.slug
+      if (categoryEl && typeof data.category === 'string') categoryEl.value = data.category
+
+      setMessage('AI draft generated! Please review and then click Save.')
+    } catch (error) {
+      console.error('Error generating blog post:', error)
+      setMessage('Error generating blog post. Please try again.')
+    } finally {
+      setAiGenerating(false)
     }
   }
 
@@ -272,13 +323,24 @@ export default function AdminBlogPage() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Title *</label>
-                <input
-                  type="text"
-                  name="title"
-                  defaultValue={editingPost?.title}
-                  required
-                  className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                />
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input
+                    type="text"
+                    name="title"
+                    defaultValue={editingPost?.title}
+                    required
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleGenerateWithAI}
+                    disabled={aiGenerating}
+                    className="sm:w-auto flex items-center justify-center gap-2 px-4 py-2 rounded-lg font-semibold shadow-md transition-colors active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed bg-purple-600 text-white hover:bg-purple-700"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    {aiGenerating ? 'Generating...' : 'Generate with AI'}
+                  </button>
+                </div>
               </div>
 
               <div>

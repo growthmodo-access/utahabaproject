@@ -22,6 +22,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzd
 # Get your verification code from: https://search.google.com/search-console
 # This is the content value from the meta tag Google provides
 # NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=your_verification_code_here
+
+# OpenRouter (optional - AI blog generation in /admin/blog)
+# Get an API key from https://openrouter.ai/
+# OPENROUTER_API_KEY=your_openrouter_api_key_here
+# OPENROUTER_MODEL=openai/gpt-4o-mini
 ```
 
 ## Steps:

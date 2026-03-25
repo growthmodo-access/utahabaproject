@@ -19,6 +19,7 @@ export interface BlogPost {
   slug: string
   category?: string
   image?: string
+  featured?: boolean
 }
 
 const dataFilePath = path.join(process.cwd(), 'data', 'blog-posts.json')

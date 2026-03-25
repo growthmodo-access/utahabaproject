@@ -197,6 +197,41 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </div>
         )}
 
+        {/* Reader context intro */}
+        <section className="mb-8 sm:mb-10 md:mb-12">
+          <div className="rounded-2xl border border-blue-100 bg-blue-50/60 px-4 sm:px-6 py-5 sm:py-6 shadow-sm">
+            <p className="text-xs sm:text-sm font-semibold tracking-wide text-blue-800 uppercase mb-2">
+              You might be here because…
+            </p>
+            <p className="text-sm sm:text-base text-blue-900 mb-2">
+              you&apos;re a Utah parent, caregiver, or family member trying to make sense of ABA therapy and what it means for your child.
+            </p>
+            <p className="text-xs sm:text-sm text-blue-900/80">
+              This article is written for families who want clear, practical guidance—not jargon—so you can feel more confident in the next steps you take.
+            </p>
+          </div>
+        </section>
+
+        {/* Supportive callouts */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-10 md:mb-12">
+          <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 sm:px-5 py-4 sm:py-5 shadow-sm">
+            <p className="text-xs sm:text-sm font-semibold tracking-wide text-emerald-800 uppercase mb-1.5">
+              Parent Tip
+            </p>
+            <p className="text-sm sm:text-base text-emerald-900 leading-relaxed">
+              As you read, jot down 2–3 specific questions about your child. Use those to start a focused conversation with any ABA provider you contact.
+            </p>
+          </div>
+          <div className="rounded-2xl border border-purple-100 bg-purple-50/70 px-4 sm:px-5 py-4 sm:py-5 shadow-sm">
+            <p className="text-xs sm:text-sm font-semibold tracking-wide text-purple-800 uppercase mb-1.5">
+              Utah-Specific Note
+            </p>
+            <p className="text-sm sm:text-base text-purple-900 leading-relaxed">
+              Availability, waitlists, and insurance coverage can change from county to county in Utah. Keep your location in mind as you consider next steps.
+            </p>
+          </div>
+        </section>
+
         {/* Blog Content - Enhanced HTML Rendering */}
         <div className="bg-white border border-gray-200/80 rounded-2xl shadow-sm p-6 sm:p-8 md:p-10 lg:p-12 xl:p-16">
           <div
@@ -219,6 +254,52 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             }}
           />
         </div>
+
+        {/* Inline CTAs - contextual next steps */}
+        <section className="mt-8 sm:mt-10 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          <Link
+            href="/directory"
+            className="group rounded-2xl border border-gray-200 bg-gray-50/80 px-4 sm:px-5 py-4 sm:py-5 hover:border-gray-300 hover:bg-white transition-colors shadow-sm"
+          >
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wide text-gray-700 mb-1">
+              Next Step
+            </p>
+            <h3 className="text-sm sm:text-base font-semibold text-gray-900 mb-1.5">
+              Find ABA providers near you
+            </h3>
+            <p className="text-xs sm:text-sm text-gray-600">
+              Browse our Utah directory by county to see who&apos;s available in your area.
+            </p>
+          </Link>
+          <Link
+            href="/cost-estimator"
+            className="group rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 sm:px-5 py-4 sm:py-5 hover:border-emerald-200 hover:bg-white transition-colors shadow-sm"
+          >
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wide text-emerald-800 mb-1">
+              Wondering about cost?
+            </p>
+            <h3 className="text-sm sm:text-base font-semibold text-emerald-900 mb-1.5">
+              Estimate ABA therapy costs
+            </h3>
+            <p className="text-xs sm:text-sm text-emerald-900/90">
+              Use our AI-assisted estimator to see typical ranges for your situation.
+            </p>
+          </Link>
+          <Link
+            href="/quiz"
+            className="group rounded-2xl border border-purple-100 bg-purple-50/70 px-4 sm:px-5 py-4 sm:py-5 hover:border-purple-200 hover:bg-white transition-colors shadow-sm"
+          >
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-wide text-purple-800 mb-1">
+              Still unsure?
+            </p>
+            <h3 className="text-sm sm:text-base font-semibold text-purple-900 mb-1.5">
+              Take the “Is ABA right for us?” quiz
+            </h3>
+            <p className="text-xs sm:text-sm text-purple-900/90">
+              Answer a few questions to see whether ABA may be a good fit for your family.
+            </p>
+          </Link>
+        </section>
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
