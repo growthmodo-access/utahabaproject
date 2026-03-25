@@ -19,13 +19,9 @@ export default function BlogImage({ src, alt, className, fill = true, width, hei
 
   useEffect(() => {
     if (src && src.trim() !== '') {
-      // If the blog post references an image under /blog/ but that file
-      // does not exist, fall back to a shared placeholder that we know exists.
-      // This prevents blank grey boxes when content was imported without images.
-      const normalizedSrc =
-        src.startsWith('/blog/') ? '/P1.jpg' : src
-
-      setImageSrc(normalizedSrc)
+      // Use the real URL. Uploaded featured images live under /blog/... — do not
+      // rewrite them (that would break the admin upload + blog preview flow).
+      setImageSrc(src.trim())
       setImageError(false)
       setUseFallback(false)
     } else {
@@ -54,6 +50,10 @@ export default function BlogImage({ src, alt, className, fill = true, width, hei
   }
 
   const isExternal = imageSrc.startsWith('http') || imageSrc.startsWith('//')
+  // User uploads in public/blog can be large; skip the optimizer to avoid timeouts
+  // and body-size limits on some hosts (e.g. multi-MB JPEGs).
+  const isLocalBlogUpload = imageSrc.startsWith('/blog/')
+  const skipOptimization = isExternal || isLocalBlogUpload
 
   // If width and height are provided, use them instead of fill
   if (width && height) {
@@ -76,7 +76,7 @@ export default function BlogImage({ src, alt, className, fill = true, width, hei
         height={height}
         className={className}
         onError={handleError}
-        unoptimized={isExternal}
+        unoptimized={skipOptimization}
         priority={false}
       />
     )
@@ -103,7 +103,7 @@ export default function BlogImage({ src, alt, className, fill = true, width, hei
         fill
         className={className}
         onError={handleError}
-        unoptimized={isExternal}
+        unoptimized={skipOptimization}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
         priority={false}
       />

@@ -486,11 +486,6 @@ export default function AdminBlogPage() {
                         alt="Featured image preview"
                         fill
                         className="object-cover"
-                        onError={() => {
-                          if (!imagePreview.startsWith('http')) {
-                            setImagePreview('')
-                          }
-                        }}
                         unoptimized
                       />
                     </div>
