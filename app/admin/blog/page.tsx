@@ -132,7 +132,15 @@ export default function AdminBlogPage() {
       if (slugEl && typeof data.slug === 'string') slugEl.value = data.slug
       if (categoryEl && typeof data.category === 'string') categoryEl.value = data.category
 
-      setMessage('AI draft generated! Please review and then click Save.')
+      const wc =
+        typeof data.wordCount === 'number' && Number.isFinite(data.wordCount)
+          ? data.wordCount
+          : null
+      setMessage(
+        wc != null
+          ? `AI draft generated (~${wc} words, target 900–1500). Please review and then click Save.`
+          : 'AI draft generated! Please review and then click Save.'
+      )
     } catch (error) {
       console.error('Error generating blog post:', error)
       setMessage('Error generating blog post. Please try again.')

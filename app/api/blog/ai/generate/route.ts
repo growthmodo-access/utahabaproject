@@ -64,6 +64,24 @@ function extractJsonFromModelText(text: string) {
   return JSON.parse(candidate)
 }
 
+function stripHtmlToText(html: string) {
+  return html
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function countWords(text: string) {
+  if (!text) return 0
+  return text.split(/\s+/).filter(Boolean).length
+}
+
+const TARGET_MIN_WORDS = 900
+const TARGET_MAX_WORDS = 1500
+/** Retry if outside this band (slightly wider than target to allow one correction pass) */
+const RETRY_BELOW = 850
+const RETRY_ABOVE = 1550
+
 export async function POST(request: NextRequest) {
   const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY
   const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL || 'openai/gpt-4o-mini'
@@ -80,7 +98,6 @@ export async function POST(request: NextRequest) {
   }
 
   const audience = payload.audience || 'utah-parents'
-  const length = payload.length || 'medium'
 
   // Fetch existing slugs so we can avoid collisions
   const existingPosts = await getBlogPosts()
@@ -96,61 +113,81 @@ export async function POST(request: NextRequest) {
   }
 
   const system = [
-    'You are an SEO-focused blog writer for ABA Therapy Utah.',
-    'Generate a single blog post from the given title.',
+    'You are a senior health-education writer and SEO editor for "ABA Therapy Utah" — a resource for Utah families seeking trustworthy ABA therapy information.',
+    'Your writing must be accurate, empathetic, and genuinely helpful (not keyword-stuffed). Prioritize clarity, usefulness, and E-E-A-T (experience, expertise, authoritativeness, trust).',
+    'Generate ONE complete blog article from the given title.',
     'Return ONLY valid JSON (no markdown, no code fences).',
+    '',
+    'WORD COUNT (STRICT): The article body in contentHtml must be between 900 and 1500 words inclusive when measured as plain text (strip HTML tags). Aim for ~1100–1300 words.',
+    'If you are short, add substantive sections: practical guidance, Utah-specific context where relevant, common misconceptions, what to ask providers, or how to take next steps — not filler.',
+    'If you are long, tighten redundant sentences; do not cut required sections.',
+    '',
     'contentHtml MUST be HTML (not markdown) using only these tags: p, h2, h3, ul, ol, li, blockquote, strong, em, a, br.',
     'Do NOT include <h1> (the page title is rendered outside content).',
     'Do NOT include <script>, <style>, or any JS/event handlers.',
-    'The first element in contentHtml MUST be a <p> tag containing the key introductory paragraph.',
-    'Include sections with h2/h3, plus: "Key Takeaways" and a "Next Steps" section with internal links to /directory, /cost-estimator, and /quiz.',
-    'Optionally include a short FAQ section toward the end of the article.'
-  ].join('\n')
-
-  const userPrompt = [
-    `Title: ${title}`,
-    `Audience: ${audience}`,
-    `Desired length: ${length} (short/medium/long)`,
-    payload.category ? `Preferred category hint: ${payload.category}` : `Preferred category hint: (infer from title)`,
+    'The first element in contentHtml MUST be a <p> tag with a strong opening paragraph that states who the article helps and what they will learn.',
     '',
-    'Return JSON with exactly these keys:',
-    '- excerpt: a plain-text meta description, 150-170 characters, no HTML',
-    '- category: one short category label (e.g., Education, Guide, Insurance, Finance, Research, Stories)',
-    '- slug: kebab-case URL slug (you may use the suggested base slug if appropriate)',
-    '- contentHtml: HTML string as described above'
+    'Structure contentHtml with:',
+    '- Multiple <h2> sections (and <h3> subsections where helpful)',
+    '- At least one <ul> or <ol> list for scannable takeaways',
+    '- A section titled "Key Takeaways" (h2) with concise bullets',
+    '- A section titled "Next Steps" (h2) with internal links using descriptive anchor text to: /directory, /cost-estimator, /quiz',
+    '- A short FAQ section (h2) with 3–5 practical Q&As (each Q as h3 or bold in a paragraph, answer in following <p>)',
+    '',
+    'Voice: supportive, plain language, respectful of families. Avoid hype, fear-mongering, or guarantees. Do not claim medical outcomes.',
+    'Utah: when relevant, mention Utah context naturally (e.g., navigating providers, insurance considerations) without inventing specific laws or numbers you are unsure of.',
   ].join('\n')
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${OPENROUTER_API_KEY}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      model: OPENROUTER_MODEL,
-      temperature: 0.7,
-      messages: [
-        { role: 'system', content: system },
-        { role: 'user', content: userPrompt },
-      ],
-      // Encourage JSON-only output; still validate/parse server-side.
-      response_format: { type: 'json_object' },
-    }),
-  })
+  const buildUserPrompt = (extra?: string) =>
+    [
+      `Title: ${title}`,
+      `Primary audience: ${audience}`,
+      payload.category ? `Preferred category hint: ${payload.category}` : 'Preferred category hint: infer from the title',
+      '',
+      'Requirements:',
+      `- Article length: ${TARGET_MIN_WORDS}–${TARGET_MAX_WORDS} words in contentHtml (plain text word count).`,
+      '- excerpt: plain-text meta description, 150–170 characters, no HTML, compelling and specific to the title',
+      '- category: one label (e.g., Education, Guide, Insurance, Finance, Research, Stories)',
+      '- slug: kebab-case, descriptive, no stopwords spam',
+      '- contentHtml: full article as specified in system instructions',
+      extra || '',
+      '',
+      'Return JSON with exactly these keys:',
+      '- excerpt',
+      '- category',
+      '- slug',
+      '- contentHtml',
+    ].join('\n')
 
-  if (!response.ok) {
-    const text = await response.text().catch(() => '')
-    return NextResponse.json(
-      { error: 'OpenRouter request failed', details: text.slice(0, 500) },
-      { status: 500 }
-    )
+  async function callModel(userContent: string) {
+    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${OPENROUTER_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: OPENROUTER_MODEL,
+        temperature: 0.55,
+        max_tokens: 6000,
+        messages: [
+          { role: 'system', content: system },
+          { role: 'user', content: userContent },
+        ],
+        response_format: { type: 'json_object' },
+      }),
+    })
+    if (!res.ok) {
+      const text = await res.text().catch(() => '')
+      throw new Error(text.slice(0, 500) || `HTTP ${res.status}`)
+    }
+    const data = await res.json()
+    const modelText =
+      data?.choices?.[0]?.message?.content ||
+      data?.choices?.[0]?.text ||
+      ''
+    return extractJsonFromModelText(modelText)
   }
-
-  const data = await response.json()
-  const modelText =
-    data?.choices?.[0]?.message?.content ||
-    data?.choices?.[0]?.text ||
-    ''
 
   let generated: {
     excerpt?: string
@@ -160,18 +197,42 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    generated = extractJsonFromModelText(modelText)
+    generated = await callModel(buildUserPrompt())
   } catch (err) {
     return NextResponse.json(
-      { error: 'Failed to parse AI output as JSON', details: String(err) },
+      { error: 'OpenRouter request failed', details: String(err) },
       { status: 500 }
     )
   }
 
-  const excerpt = typeof generated?.excerpt === 'string' ? generated.excerpt.trim() : ''
-  const category = typeof generated?.category === 'string' ? generated.category.trim() : undefined
-  const contentHtmlRaw = typeof generated?.contentHtml === 'string' ? generated.contentHtml : ''
-  const contentHtml = sanitizeHtml(contentHtmlRaw)
+  let excerpt = typeof generated?.excerpt === 'string' ? generated.excerpt.trim() : ''
+  let category = typeof generated?.category === 'string' ? generated.category.trim() : undefined
+  let contentHtmlRaw = typeof generated?.contentHtml === 'string' ? generated.contentHtml : ''
+  let contentHtml = sanitizeHtml(contentHtmlRaw)
+
+  let wc = countWords(stripHtmlToText(contentHtml))
+
+  if (wc < RETRY_BELOW || wc > RETRY_ABOVE) {
+    try {
+      const correction = [
+        `Your previous JSON had approximately ${wc} words in contentHtml (plain text).`,
+        `You MUST return revised JSON where contentHtml is between ${TARGET_MIN_WORDS} and ${TARGET_MAX_WORDS} words inclusive.`,
+        wc < TARGET_MIN_WORDS
+          ? 'Expand with substantive sections: practical steps, Utah-relevant guidance where appropriate, FAQs, and what families should ask providers — avoid padding and repetition.'
+          : 'Shorten by removing redundancy while keeping Key Takeaways, Next Steps (with internal links), and FAQ.',
+        'Keep excerpt 150–170 characters. Keep slug sensible.',
+      ].join('\n')
+      generated = await callModel(buildUserPrompt(correction))
+      excerpt = typeof generated?.excerpt === 'string' ? generated.excerpt.trim() : excerpt
+      category =
+        typeof generated?.category === 'string' ? generated.category.trim() : category
+      contentHtmlRaw = typeof generated?.contentHtml === 'string' ? generated.contentHtml : ''
+      contentHtml = sanitizeHtml(contentHtmlRaw)
+      wc = countWords(stripHtmlToText(contentHtml))
+    } catch {
+      // keep first draft if retry fails
+    }
+  }
 
   if (!contentHtml) {
     return NextResponse.json({ error: 'AI did not return contentHtml' }, { status: 500 })
@@ -198,6 +259,7 @@ export async function POST(request: NextRequest) {
     category,
     slug: finalSlug,
     contentHtml,
+    wordCount: wc,
   })
 }
 
