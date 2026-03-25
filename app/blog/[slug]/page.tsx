@@ -100,7 +100,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     <div className="min-h-screen bg-gradient-to-b from-white via-gray-50/30 to-white">
       {/* Hero Section with Featured Image */}
       {post.image && post.image.trim() !== '' && (
-        <section className="relative w-full h-72 sm:h-96 md:h-[500px] lg:h-[600px] -mt-16 mb-8 sm:mb-12 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+        <section className="relative w-full min-h-[24rem] h-72 sm:min-h-0 sm:h-96 md:h-[500px] lg:h-[600px] -mt-16 mb-8 sm:mb-12 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
           <div className="absolute inset-0 w-full h-full">
             <BlogImage
               src={post.image}
@@ -110,7 +110,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
           </div>
-          <div className="relative h-full flex items-end z-20">
+          {/* pt matches header (h-16) so title/meta never sit under the sticky nav; same idea as /blog */}
+          <div className="relative flex h-full min-h-[inherit] flex-col justify-end z-20 pt-16 sm:pt-20">
             <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12">
               <Link
                 href="/blog"
